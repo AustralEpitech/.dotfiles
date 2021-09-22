@@ -761,9 +761,7 @@ apps = {
     "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1",
     "picom",
     "redshift",
-    "xfce4-power-manager",
     "nm-applet",
-    "/usr/lib/kdeconnectd",
     "pasystray",
     "flameshot",
     terminal
