@@ -55,10 +55,10 @@ mytags = {
     {name = "TTY"                                   },
     {name = "WEB",  layout = awful.layout.suit.max  },
     {name = "DEV"                                   },
-    {name = "CHAT", layout = awful.layout.suit.max  },
-    {name = "VM",   layout = awful.layout.suit.max  },
+    {name = "SBX",   layout = awful.layout.suit.max  },
     {name = "GAM",  layout = awful.layout.suit.max  },
     {name = "MED",  layout = awful.layout.suit.max  },
+    {name = "DOC",  layout = awful.layout.suit.max  },
     {name = "GFX",  layout = awful.layout.suit.max  },
     {name = "ETC"                                   }
 }
@@ -66,7 +66,7 @@ mytags = {
 terminal = "alacritty"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
-browser = "qutebrowser"
+browser = "brave"
 files = "thunar"
 wallpaper = "landscape.png"
 lock = "i3lock -fti" .. wallpaper_dir .. "lock.png && sleep 600 && systemctl suspend"
@@ -94,9 +94,6 @@ awful.layout.layouts = {
     -- awful.layout.suit.corner.se,
 }
 -- }}}
-
--- Keyboard map indicator and switcher
-mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 
@@ -274,7 +271,6 @@ awful.screen.connect_for_each_screen(
             s.mytasklist, -- Middle widget
             { -- Right widgets
                 layout = wibox.layout.fixed.horizontal,
-                mykeyboardlayout,
                 wibox.widget.systray(),
                 s.mytextclock,
                 s.mylayoutbox,
@@ -715,11 +711,11 @@ awful.rules.rules = {
         properties = {floating = true}
     },
 
-    {rule_any = {class = {"Brave-browser", "qutebrowser"}}, properties = {tag = "WEB",  switch_to_tags = true}},
+    {rule_any = {class = {"Brave-browser"}},                properties = {tag = "WEB",  switch_to_tags = true}},
     {rule_any = {class = {"code-oss"}},                     properties = {tag = "DEV",  switch_to_tags = true}},
     {rule_any = {class = {"Steam", "Lutris", "Minecraft"}}, properties = {tag = "GAM",  switch_to_tags = true}},
-    {rule_any = {class = {"Virt-manager"}},                 properties = {tag = "VM",   switch_to_tags = true}},
-    {rule_any = {class = {"lightcord", "discord"}},                      properties = {tag = "CHAT", switch_to_tags = true}},
+    {rule_any = {class = {"Virt-manager"}},                 properties = {tag = "SBX",  switch_to_tags = true}},
+    {rule_any = {class = {"libreoffice"}},                  properties = {tag = "DOC",  switch_to_tags = true}},
     {rule_any = {class = {"vlc"}},                          properties = {tag = "MED",  switch_to_tags = true}},
     {rule_any = {class = {"Gimp"}},                         properties = {tag = "GFX",  switch_to_tags = true}}
 }
