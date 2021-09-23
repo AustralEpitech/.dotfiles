@@ -55,7 +55,7 @@ mytags = {
     {name = "TTY"                                   },
     {name = "WEB",  layout = awful.layout.suit.max  },
     {name = "DEV"                                   },
-    {name = "SBX",   layout = awful.layout.suit.max  },
+    {name = "SBX",  layout = awful.layout.suit.max  },
     {name = "GAM",  layout = awful.layout.suit.max  },
     {name = "MED",  layout = awful.layout.suit.max  },
     {name = "DOC",  layout = awful.layout.suit.max  },
@@ -67,7 +67,7 @@ terminal = "alacritty"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 browser = "brave"
-files = "thunar"
+files = "pcmanfm"
 wallpaper = "landscape.png"
 lock = "i3lock -fti" .. wallpaper_dir .. "lock.png && sleep 600 && systemctl suspend"
 screenshot = "flameshot full -c"
