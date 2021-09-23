@@ -103,6 +103,6 @@ source $ZSH/oh-my-zsh.sh
 alias pls="sudo"
 alias -g G="|grep -i"
 alias parupdate="sudo systemctl start reflector && paru -Syu"
-alias config="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+alias config="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 
 neofetch

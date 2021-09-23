@@ -11,9 +11,11 @@ set ttymouse=sgr
 set ignorecase  " case insensitive searching
 set smartcase   " but caps
 set smartindent
+set hlsearch
 
 " packages
-packadd! nerdtree 
+packadd! nerdtree
 
 " packages keybindings
-nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <F8> :NERDTreeToggle<CR>
+nnoremap <F9> :/\s\+$<CR>
