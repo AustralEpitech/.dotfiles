@@ -69,7 +69,7 @@ editor_cmd = terminal .. " -e " .. editor
 browser = "brave"
 files = "pcmanfm"
 wallpaper = "landscape.png"
-lock = "i3lock -fti" .. wallpaper_dir .. "lock.png && sleep 600 && systemctl suspend"
+lock = "i3lock -fti" .. wallpaper_dir .. "lock.png"
 screenshot = "flameshot full -c"
 screenshot_gui = "flameshot gui"
 
@@ -469,14 +469,14 @@ globalkeys = gears.table.join(
         function()
             awful.spawn.with_shell("pactl set-sink-mute 0 0 && pactl set-sink-volume 0 +5%")
         end,
-        {description = "increase volume up by 5%", group = "hotkeys"}
+        {description = "increase volume by 5%", group = "hotkeys"}
     ),
     awful.key(
         {}, "XF86AudioLowerVolume",
         function()
             awful.spawn.with_shell("pactl set-sink-mute 0 0 && pactl set-sink-volume 0 -5%")
         end,
-        {description = "decrease volume up by 5%", group = "hotkeys"}
+        {description = "decrease volume by 5%", group = "hotkeys"}
     ),
     awful.key(
         {}, "XF86AudioMute",
@@ -519,6 +519,20 @@ globalkeys = gears.table.join(
             awful.spawn.with_shell("~/bin/toggle_touchpad")
         end,
         {description = "toggle touchpad", group = "hotkeys"}
+    ),
+    awful.key(
+        {}, "XF86MonBrightnessDown",
+        function()
+            awful.spawn("xbacklight -dec 10")
+        end,
+        {description = "decrease brightness by 10%", group = "hotkeys"}
+    ),
+    awful.key(
+        {}, "XF86MonBrightnessUp",
+        function()
+            awful.spawn("xbacklight -inc 10")
+        end,
+        {description = "increase brightness by 10 %", group = "hotkeys"}
     )
 )
 
@@ -742,10 +756,12 @@ client.connect_signal(
 
 apps = {
     "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1",
+    "xss-lock --transfer-sleep-lock -- " .. lock,
     "picom",
     "redshift",
     "nm-applet",
     "pasystray",
+    "cbatticon -i symbolic",
     "flameshot",
     terminal
 }
