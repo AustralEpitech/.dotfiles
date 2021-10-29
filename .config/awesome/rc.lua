@@ -467,16 +467,16 @@ globalkeys = gears.table.join(
     awful.key(
         {}, "XF86AudioRaiseVolume",
         function()
-            awful.spawn.with_shell("pactl set-sink-mute 0 0 && pactl set-sink-volume 0 +5%")
+            awful.spawn.with_shell("pactl set-sink-mute 0 0 && pactl set-sink-volume 0 +2%")
         end,
-        {description = "increase volume by 5%", group = "hotkeys"}
+        {description = "increase volume by 2%", group = "hotkeys"}
     ),
     awful.key(
         {}, "XF86AudioLowerVolume",
         function()
-            awful.spawn.with_shell("pactl set-sink-mute 0 0 && pactl set-sink-volume 0 -5%")
+            awful.spawn.with_shell("pactl set-sink-mute 0 0 && pactl set-sink-volume 0 -2%")
         end,
-        {description = "decrease volume by 5%", group = "hotkeys"}
+        {description = "decrease volume by 2%", group = "hotkeys"}
     ),
     awful.key(
         {}, "XF86AudioMute",
@@ -714,8 +714,8 @@ awful.rules.rules = {
 
     {rule_any = {class = {"Brave-browser"}},                properties = {tag = "WEB",  switch_to_tags = true}},
     {rule_any = {class = {"code-oss"}},                     properties = {tag = "DEV",  switch_to_tags = true}},
-    {rule_any = {class = {"Steam", "Lutris", "Minecraft"}}, properties = {tag = "GAM",  switch_to_tags = true}},
-    {rule_any = {class = {"Virt-manager"}},                 properties = {tag = "SBX",  switch_to_tags = true}},
+    {rule_any = {class = {"Steam", "Lutris", "Minecraft"}}, properties = {tag = "GAM"}},
+    {rule_any = {class = {"Virt-manager"}},                 properties = {tag = "SBX"}},
     {rule_any = {class = {"libreoffice"}},                  properties = {tag = "DOC",  switch_to_tags = true}},
     {rule_any = {class = {"vlc"}},                          properties = {tag = "MED",  switch_to_tags = true}},
     {rule_any = {class = {"Gimp"}},                         properties = {tag = "GFX",  switch_to_tags = true}}
@@ -758,6 +758,7 @@ apps = {
     "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1",
     "xss-lock --transfer-sleep-lock -- " .. lock,
     "picom",
+    "/usr/lib/kdeconnectd",
     "redshift",
     "nm-applet",
     "pasystray",
