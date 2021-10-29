@@ -7,3 +7,4 @@ fi
 
 systemctl start docker
 docker run -it --rm --name epitest -v "$PWD":/tmp epitechcontent/epitest-docker:latest /bin/bash
+systemctl stop docker
