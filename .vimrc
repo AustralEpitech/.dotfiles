@@ -1,20 +1,21 @@
-" load default config
+""" load default config \"""
 unlet! skip_defaults_vim
 source $VIMRUNTIME/defaults.vim
 
-" settings
-set number relativenumber
+""" variables \"""
+let &path = &path . ',' . getcwd() . '/**'
+let g:netrw_liststyle=3 " tree style file explorer
 set expandtab
+set hlsearch
+set ignorecase
+set number relativenumber
 set shiftwidth=4
+set smartcase
+set smartindent
 set tabstop=4
 set ttymouse=sgr
-set ignorecase  " case insensitive searching
-set smartcase   " but caps
-set smartindent
-set hlsearch
 
-" packages
-packadd! nerdtree
+""" packages \"""
 packadd! vim-better-whitespace
 
 function! EpitechHeader()
@@ -26,22 +27,26 @@ function! EpitechHeader()
     let top = com_arr[&filetype]['top']
     let mid = com_arr[&filetype]['mid']
     let bot = com_arr[&filetype]['bot']
-    let proj_name = input('Enter project name: ')
-    let file_desc = input('Enter file description: ')
+    let dir_name = fnamemodify(getcwd(), ':t')
+    let proj_name = input('Enter project name (default ' . dir_name . '): ')
+    let file_name = expand('%:t:r')
+    let file_desc = input('Enter file description (default ' . file_name . '): ')
 
     if file_desc == ''
-        let file_desc = expand('%:t:r')
+        let file_desc = file_name
+    endif
+    if proj_name == ''
+        let proj_name = dir_name
     endif
     call append(0, top)
-    call append(1, mid . " EPITECH PROJECT, " . strftime("%Y"))
-    call append(2, mid . " " . proj_name)
-    call append(3, mid . " File description:")
-    call append(4, mid . " " . file_desc)
+    call append(1, mid . ' EPITECH PROJECT, ' . strftime('%Y'))
+    call append(2, mid . ' ' . proj_name)
+    call append(3, mid . ' File description:')
+    call append(4, mid . ' ' . file_desc)
     call append(5, bot)
 endfunction
 
 command EpiHeader call EpitechHeader()
 
-" keybindings
-nnoremap <F8> :NERDTreeToggle<CR>
+""" keybindings \"""
 nnoremap <C-c><C-h> :EpiHeader<CR>
