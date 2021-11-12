@@ -758,7 +758,6 @@ apps = {
     "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1",
     "xss-lock --transfer-sleep-lock -- " .. lock,
     "picom",
-    "/usr/lib/kdeconnectd",
     "redshift",
     "nm-applet",
     "pasystray",
