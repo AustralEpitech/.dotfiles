@@ -1,18 +1,16 @@
 #!/usr/bin/bash
 
-if [ "$EUID" != '0' ]; then
-    echo 'error: you cannot perform this operation unless you are root.'
+set -e
+
+if [ "$EUID" == 0 ]; then
+    echo 'error: cannot be root.'
     exit 1
 fi
 
-systemctl start libvirtd
-virsh net-start default
+sudo systemctl start libvirtd
+sudo virsh net-start default
 
-if [ -n "$SUDO_USER" ]; then
-    su "$SUDO_USER" -c 'virt-manager --no-fork'
-else
-    virt-manager --no-fork
-fi
+virt-manager --no-fork
 
-virsh net-destroy default
-systemctl stop libvirtd
+sudo virsh net-destroy default
+sudo systemctl stop libvirtd

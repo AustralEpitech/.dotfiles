@@ -4,5 +4,5 @@
 
 sleep 3
 for _ in {0..1023}; do
-    xdotool mousemove_relative 8 0 
+    xdotool mousemove_relative 8 0
 done
