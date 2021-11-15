@@ -2,8 +2,8 @@
 
 set -e
 
-if [ "$EUID" == 0 ]; then
-    echo 'error: cannot be root.'
+if [ "$EUID" -eq 0 ]; then
+    echo "error: cannot be root."
     exit 1
 fi
 
