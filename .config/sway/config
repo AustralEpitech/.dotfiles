@@ -1,0 +1,9 @@
+# Config for sway
+# Read `man 5 sway` for a complete reference.
+
+include "$HOME"/.config/sway/config.d/variables.conf
+include "$HOME"/.config/sway/config.d/output.conf
+include "$HOME"/.config/sway/config.d/startup.conf
+include "$HOME"/.config/sway/config.d/input.conf
+include "$HOME"/.config/sway/config.d/hotkeys.conf
+#include "$HOME"/.config/sway/config.d/bar.conf
