@@ -47,7 +47,7 @@ end
 
 -- {{{ Variable definitions
 config_dir = gears.filesystem.get_configuration_dir()
-wallpaper_dir = config_dir .. "wallpapers/"
+wallpaper_dir = gears.filesystem.get_xdg_config_home() .. "wallpapers/"
 
 beautiful.init(config_dir .. "theme.lua")
 
@@ -64,7 +64,7 @@ mytags = {
 }
 
 terminal = "alacritty"
-editor = os.getenv("EDITOR") or "vim"
+editor = "vim"
 editor_cmd = terminal .. " -e " .. editor
 browser = "brave"
 files = "pcmanfm"
@@ -79,19 +79,6 @@ awful.layout.layouts = {
     awful.layout.suit.tile,
     awful.layout.suit.max,
     awful.layout.suit.floating,
-    -- awful.layout.suit.tile.left,
-    -- awful.layout.suit.tile.bottom,
-    -- awful.layout.suit.tile.top,
-    -- awful.layout.suit.fair,
-    -- awful.layout.suit.fair.horizontal,
-    -- awful.layout.suit.spiral,
-    -- awful.layout.suit.spiral.dwindle,
-    -- awful.layout.suit.max.fullscreen,
-    -- awful.layout.suit.magnifier,
-    -- awful.layout.suit.corner.nw,
-    -- awful.layout.suit.corner.ne,
-    -- awful.layout.suit.corner.sw,
-    -- awful.layout.suit.corner.se,
 }
 -- }}}
 
