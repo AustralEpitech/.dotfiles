@@ -14,6 +14,8 @@ set smartcase
 set smartindent
 set tabstop=4
 set ttymouse=sgr
+au BufNewFile,BufRead *.c set cc=81
+au BufNewFile,BufRead *.h set cc=81
 
 """ packages \"""
 packadd! vim-better-whitespace
