@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/sh
 
 if [ "$EUID" -ne 0 ]; then
     echo "error: you cannot perform this operation unless you are root."

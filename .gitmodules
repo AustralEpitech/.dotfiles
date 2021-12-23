@@ -1,6 +1,3 @@
-[submodule ".config/suckless"]
-	path = .config/suckless
-	url = git@github.com:AustralEpitech/suckless.git
 [submodule ".config/nvim/pack/plugins/opt/nvim-lspconfig"]
 	path = .config/nvim/pack/plugins/opt/nvim-lspconfig
 	url = https://github.com/neovim/nvim-lspconfig
