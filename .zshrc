@@ -6,7 +6,7 @@ typeset -U path
 export ZSH="$HOME/.oh-my-zsh"
 
 # Editor
-export EDITOR=vim
+export EDITOR=nvim
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -99,10 +99,8 @@ source $ZSH/oh-my-zsh.sh
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-
 alias pls="sudo"
 alias -g G="|grep -i"
-alias parupdate="sudo systemctl start reflector && paru -Syu"
 alias config="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 alias mkdebug="CFLAGS+=-ggdb make re"
-alias svim="vim $HOME/.config/sway"
+alias svim="$EDITOR $HOME/.config/sway"
