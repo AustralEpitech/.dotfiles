@@ -14,6 +14,7 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
+-- Widgets
 
 -- {{{ Error handling
 if awesome.startup_errors then
@@ -26,6 +27,7 @@ end
 
 do
     local in_error = false
+
     awesome.connect_signal(
         "debug::error",
         function(err)
@@ -64,11 +66,11 @@ mytags = {
 }
 
 terminal = "alacritty"
-editor = "vim"
+editor = os.getenv("EDITOR")
 editor_cmd = terminal .. " -e " .. editor
-browser = "brave"
+browser = "firefox"
 files = "pcmanfm"
-wallpaper = "landscape.png"
+wallpaper = "mount_cook.jpg"
 lock = "i3lock -fti" .. wallpaper_dir .. "lock.png"
 screenshot = "flameshot full -c"
 screenshot_gui = "flameshot gui"
@@ -78,7 +80,7 @@ modkey = "Mod4"
 awful.layout.layouts = {
     awful.layout.suit.tile,
     awful.layout.suit.max,
-    awful.layout.suit.floating,
+    --awful.layout.suit.floating,
 }
 -- }}}
 
@@ -281,22 +283,9 @@ globalkeys = gears.table.join(
         {description = "reload awesome", group = "awesome"}
     ),
     awful.key(
-        {modkey, "Control"}, "q",
+        {modkey, "Shift"}, "q",
         awesome.quit,
         {description = "quit awesome", group = "awesome"}
-    ),
-    awful.key(
-        {"Control", "Shift"}, "Escape",
-        function()
-            awful.spawn("xkill")
-        end,
-        {description = "kill an app", group = "awesome"}
-    ),
-
-    awful.key(
-        {modkey}, "Escape",
-        awful.tag.history.restore,
-        {description = "go back", group = "tag"}
     ),
 
     awful.key(
@@ -347,27 +336,6 @@ globalkeys = gears.table.join(
         {modkey}, "u",
         awful.client.urgent.jumpto,
         {description = "jump to urgent client", group = "client"}
-    ),
-    awful.key(
-        {modkey}, "Tab",
-        function()
-            awful.client.focus.history.previous()
-            if client.focus then
-                client.focus:raise()
-            end
-        end,
-        {description = "go back", group = "client"}
-    ),
-    awful.key(
-        {modkey, "Control"}, "n",
-        function()
-            local c = awful.client.restore()
-            -- Focus restored client
-            if c then
-                c:emit_signal("request::activate", "key.unminimize", {raise = true})
-            end
-        end,
-        {description = "restore minimized", group = "client"}
     ),
 
     -- Standard program
@@ -422,20 +390,6 @@ globalkeys = gears.table.join(
     ),
 
     awful.key(
-        {modkey, "Shift"}, "l",
-        function()
-            awful.tag.incmwfact(0.05)
-        end,
-        {description = "increase master width factor", group = "layout"}
-    ),
-    awful.key(
-        {modkey, "Shift"}, "h",
-        function()
-            awful.tag.incmwfact(-0.05)
-        end,
-        {description = "decrease master width factor", group = "layout"}
-    ),
-    awful.key(
         {modkey}, "space",
         function()
             awful.layout.inc(1)
@@ -487,7 +441,21 @@ globalkeys = gears.table.join(
         {description = "play / pause media", group = "hotkeys"}
     ),
     awful.key(
+        {"Control"}, "Insert",
+        function()
+            awful.spawn("playerctl play-pause")
+        end,
+        {description = "play / pause media", group = "hotkeys"}
+    ),
+    awful.key(
         {}, "XF86AudioPrev",
+        function()
+            awful.spawn("playerctl previous")
+        end,
+        {description = "play previous media", group = "hotkeys"}
+    ),
+    awful.key(
+        {"Control"}, "PageUP",
         function()
             awful.spawn("playerctl previous")
         end,
@@ -501,7 +469,14 @@ globalkeys = gears.table.join(
         {description = "play next media", group = "hotkeys"}
     ),
     awful.key(
-        {"Control"}, "F6",
+        {"Control"}, "PageDown",
+        function()
+            awful.spawn("playerctl next")
+        end,
+        {description = "play next media", group = "hotkeys"}
+    ),
+    awful.key(
+        {"Control"}, "F4",
         function()
             awful.spawn.with_shell("~/bin/toggle_touchpad")
         end,
@@ -512,14 +487,14 @@ globalkeys = gears.table.join(
         function()
             awful.spawn("xbacklight -dec 10")
         end,
-        {description = "decrease brightness by 10%", group = "hotkeys"}
+        {description = "decrease brightness", group = "hotkeys"}
     ),
     awful.key(
         {}, "XF86MonBrightnessUp",
         function()
             awful.spawn("xbacklight -inc 10")
         end,
-        {description = "increase brightness by 10 %", group = "hotkeys"}
+        {description = "increase brightness", group = "hotkeys"}
     )
 )
 
@@ -540,16 +515,9 @@ clientkeys = gears.table.join(
         {description = "close", group = "client"}
     ),
     awful.key(
-        {modkey, "Control"}, "space",
+        {modkey, "Shift"}, "space",
         awful.client.floating.toggle,
         {description = "toggle floating", group = "client"}
-    ),
-    awful.key(
-        {modkey, "Control"}, "Return",
-        function(c)
-            c:swap(awful.client.getmaster())
-        end,
-        {description = "move to master", group = "client"}
     ),
     awful.key(
         {modkey}, "o",
@@ -557,22 +525,6 @@ clientkeys = gears.table.join(
             c:move_to_screen()
         end,
         {description = "move to screen", group = "client"}
-    ),
-    awful.key(
-        {modkey}, "t",
-        function(c)
-            c.ontop = not c.ontop
-        end,
-        {description = "toggle keep on top", group = "client"}
-    ),
-    awful.key(
-        {modkey}, "n",
-        function(c)
-            -- The client currently has the input focus, so it cannot be
-            -- minimized, since minimized clients can't have the focus.
-            c.minimized = true
-        end,
-        {description = "minimize", group = "client"}
     ),
     awful.key(
         {modkey}, "m",
@@ -698,14 +650,6 @@ awful.rules.rules = {
         },
         properties = {floating = true}
     },
-
-    {rule_any = {class = {"Brave-browser"}},                properties = {tag = "WEB",  switch_to_tags = true}},
-    {rule_any = {class = {"code-oss"}},                     properties = {tag = "DEV",  switch_to_tags = true}},
-    {rule_any = {class = {"Steam", "Lutris", "Minecraft"}}, properties = {tag = "GAM"}},
-    {rule_any = {class = {"Virt-manager"}},                 properties = {tag = "SBX"}},
-    {rule_any = {class = {"libreoffice"}},                  properties = {tag = "DOC",  switch_to_tags = true}},
-    {rule_any = {class = {"vlc"}},                          properties = {tag = "MED",  switch_to_tags = true}},
-    {rule_any = {class = {"Gimp"}},                         properties = {tag = "GFX",  switch_to_tags = true}}
 }
 -- }}}
 
@@ -726,7 +670,12 @@ client.connect_signal(
         end
     end
 )
-
+client.connect_signal(
+    "mouse::enter",
+    function(c)
+    c:emit_signal("request::activate", "mouse_enter", {raise = false})
+    end
+)
 client.connect_signal(
     "focus",
     function(c)
@@ -747,8 +696,6 @@ apps = {
     "picom",
     "redshift",
     "nm-applet",
-    "pasystray",
-    "cbatticon -i symbolic",
     "flameshot",
     terminal
 }
