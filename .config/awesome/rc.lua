@@ -15,6 +15,9 @@ local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
 -- Widgets
+local battery_widget = require("awesome-wm-widgets.battery-widget.battery")
+local brightness_widget = require("awesome-wm-widgets.brightness-widget.brightness")
+local volume_widget = require('awesome-wm-widgets.volume-widget.volume')
 
 -- {{{ Error handling
 if awesome.startup_errors then
@@ -62,13 +65,13 @@ mytags = {
     {name = "MED",  layout = awful.layout.suit.max  },
     {name = "DOC",  layout = awful.layout.suit.max  },
     {name = "GFX",  layout = awful.layout.suit.max  },
-    {name = "ETC"                                   }
+    {name = "ETC"                                   },
 }
 
 terminal = "alacritty"
 editor = os.getenv("EDITOR")
 editor_cmd = terminal .. " -e " .. editor
-browser = "firefox"
+browser = "brave"
 files = "pcmanfm"
 wallpaper = "mount_cook.jpg"
 lock = "i3lock -fti" .. wallpaper_dir .. "lock.png"
@@ -80,7 +83,6 @@ modkey = "Mod4"
 awful.layout.layouts = {
     awful.layout.suit.tile,
     awful.layout.suit.max,
-    --awful.layout.suit.floating,
 }
 -- }}}
 
@@ -169,17 +171,7 @@ local function set_clock(s)
     local dpi = require("beautiful.xresources").apply_dpi
 
     s.mytextclock = wibox.widget.textclock()
-    s.month_calendar = awful.widget.calendar_popup.month({
-        screen = s,
-        style_year          = {border_width = dpi(1)},
-        style_month         = {border_width = dpi(1)},
-        style_yearheader    = {border_width = dpi(1)},
-        style_header        = {border_width = dpi(1)},
-        style_weekday       = {border_width = dpi(1)},
-        style_weeknumber    = {border_width = dpi(1)},
-        style_normal        = {border_width = dpi(1)},
-        style_focus         = {border_width = dpi(1)}
-    })
+    s.month_calendar = awful.widget.calendar_popup.month({screen = s})
     s.month_calendar:attach(s.mytextclock)
 end
 
@@ -195,8 +187,7 @@ awful.screen.connect_for_each_screen(
         -- Each screen has its own tag table.
         for i, tag in pairs(mytags) do
             awful.tag.add(
-                tag.name,
-                {
+                tag.name, {
                     layout = tag.layout or awful.layout.layouts[1],
                     screen = s,
                     selected = i == 1
@@ -261,6 +252,9 @@ awful.screen.connect_for_each_screen(
             { -- Right widgets
                 layout = wibox.layout.fixed.horizontal,
                 wibox.widget.systray(),
+                battery_widget{margin_left = 5, margin_right = 5, show_current_level = true},
+                brightness_widget{program = "xbacklight", step = 10},
+                volume_widget(),
                 s.mytextclock,
                 s.mylayoutbox,
             },
@@ -278,7 +272,7 @@ globalkeys = gears.table.join(
         {description="show help", group="awesome"}
     ),
     awful.key(
-        {modkey, "Control"}, "r",
+        {modkey, "Shift"}, "r",
         awesome.restart,
         {description = "reload awesome", group = "awesome"}
     ),
@@ -390,18 +384,18 @@ globalkeys = gears.table.join(
     ),
 
     awful.key(
-        {modkey}, "space",
-        function()
-            awful.layout.inc(1)
+        {modkey}, "m",
+        function(c)
+            awful.layout.set(awful.layout.suit.max)
         end,
-        {description = "select next", group = "layout"}
+        {description = "switch to max layout", group = "layout"}
     ),
     awful.key(
-        {modkey, "Shift"}, "space",
-        function()
-            awful.layout.inc(-1)
+        {modkey}, "t",
+        function(c)
+            awful.layout.set(awful.layout.suit.tile)
         end,
-        {description = "select previous", group = "layout"}
+        {description = "switch to tiling layout", group = "layout"}
     ),
 
     -- Hotkeys
@@ -410,14 +404,14 @@ globalkeys = gears.table.join(
         function()
             awful.spawn.with_shell("pactl set-sink-mute 0 0 && pactl set-sink-volume 0 +2%")
         end,
-        {description = "increase volume by 2%", group = "hotkeys"}
+        {description = "increase volume", group = "hotkeys"}
     ),
     awful.key(
         {}, "XF86AudioLowerVolume",
         function()
             awful.spawn.with_shell("pactl set-sink-mute 0 0 && pactl set-sink-volume 0 -2%")
         end,
-        {description = "decrease volume by 2%", group = "hotkeys"}
+        {description = "decrease volume", group = "hotkeys"}
     ),
     awful.key(
         {}, "XF86AudioMute",
@@ -448,20 +442,6 @@ globalkeys = gears.table.join(
         {description = "play / pause media", group = "hotkeys"}
     ),
     awful.key(
-        {}, "XF86AudioPrev",
-        function()
-            awful.spawn("playerctl previous")
-        end,
-        {description = "play previous media", group = "hotkeys"}
-    ),
-    awful.key(
-        {"Control"}, "PageUP",
-        function()
-            awful.spawn("playerctl previous")
-        end,
-        {description = "play previous media", group = "hotkeys"}
-    ),
-    awful.key(
         {}, "XF86AudioNext",
         function()
             awful.spawn("playerctl next")
@@ -469,11 +449,25 @@ globalkeys = gears.table.join(
         {description = "play next media", group = "hotkeys"}
     ),
     awful.key(
-        {"Control"}, "PageDown",
+        {"Control"}, "Next",
         function()
             awful.spawn("playerctl next")
         end,
         {description = "play next media", group = "hotkeys"}
+    ),
+    awful.key(
+        {}, "XF86AudioPrev",
+        function()
+            awful.spawn("playerctl previous")
+        end,
+        {description = "play previous media", group = "hotkeys"}
+    ),
+    awful.key(
+        {"Control"}, "Prior",
+        function()
+            awful.spawn("playerctl previous")
+        end,
+        {description = "play previous media", group = "hotkeys"}
     ),
     awful.key(
         {"Control"}, "F4",
@@ -483,18 +477,18 @@ globalkeys = gears.table.join(
         {description = "toggle touchpad", group = "hotkeys"}
     ),
     awful.key(
-        {}, "XF86MonBrightnessDown",
-        function()
-            awful.spawn("xbacklight -dec 10")
-        end,
-        {description = "decrease brightness", group = "hotkeys"}
-    ),
-    awful.key(
         {}, "XF86MonBrightnessUp",
         function()
-            awful.spawn("xbacklight -inc 10")
+            brightness_widget:inc()
         end,
         {description = "increase brightness", group = "hotkeys"}
+    ),
+    awful.key(
+        {}, "XF86MonBrightnessDown",
+        function()
+            brightness_widget:dec()
+        end,
+        {description = "decrease brightness", group = "hotkeys"}
     )
 )
 
@@ -515,7 +509,7 @@ clientkeys = gears.table.join(
         {description = "close", group = "client"}
     ),
     awful.key(
-        {modkey, "Shift"}, "space",
+        {modkey}, "space",
         awful.client.floating.toggle,
         {description = "toggle floating", group = "client"}
     ),
@@ -525,14 +519,6 @@ clientkeys = gears.table.join(
             c:move_to_screen()
         end,
         {description = "move to screen", group = "client"}
-    ),
-    awful.key(
-        {modkey}, "m",
-        function(c)
-            c.maximized = not c.maximized
-            c:raise()
-        end,
-        {description = "(un)maximize", group = "client"}
     )
 )
 
@@ -552,7 +538,7 @@ for i = 1, 9 do
                     tag:view_only()
                 end
             end,
-            {description = "view tag #"..i, group = "tag"}
+            {description = "view tag #" .. i, group = "tag"}
         ),
         -- Move client to tag.
         awful.key(
@@ -566,7 +552,7 @@ for i = 1, 9 do
                     end
                 end
             end,
-            {description = "move focused client to tag #"..i, group = "tag"}
+            {description = "move focused client to tag #" .. i, group = "tag"}
         )
     )
 end
@@ -697,7 +683,7 @@ apps = {
     "redshift",
     "nm-applet",
     "flameshot",
-    terminal
+    terminal,
 }
 
 for _, app in ipairs(apps) do
