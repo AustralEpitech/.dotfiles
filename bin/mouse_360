@@ -1,4 +1,5 @@
 #!/usr/bin/bash
+set -e
 
 # counts target = 8182 ~ 25cm
 

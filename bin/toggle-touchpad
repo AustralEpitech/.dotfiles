@@ -1,4 +1,5 @@
 #!/usr/bin/bash
+set -e
 
 device="PNP0C50:0e 06CB:7E7E Touchpad"
 
