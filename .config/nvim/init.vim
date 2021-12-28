@@ -16,7 +16,7 @@ au BufNewFile,BufRead *.h set cc=81
 " packages
 source ~/.config/nvim/epitech_header.vim
 packadd! nvim-treesitter
-lua require('nvim-treesitter.configs').setup {highlight = {enable = true}}
+lua require('nvim-treesitter.configs').setup{highlight = {enable = true}}
 
 "packadd! nvim-lspconfig
 

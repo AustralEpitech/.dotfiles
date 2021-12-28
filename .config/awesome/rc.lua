@@ -21,11 +21,11 @@ local volume_widget = require('awesome-wm-widgets.volume-widget.volume')
 
 -- {{{ Error handling
 if awesome.startup_errors then
-    naughty.notify({
+    naughty.notify{
         preset = naughty.config.presets.critical,
         title = "Oops, there were errors during startup!",
         text = awesome.startup_errors
-    })
+    }
 end
 
 do
@@ -39,11 +39,11 @@ do
             end
             in_error = true
 
-            naughty.notify({
+            naughty.notify{
                 preset = naughty.config.presets.critical,
                 title = "Oops, an error happened!",
                 text = tostring(err)
-            })
+            }
             in_error = false
         end
     )
@@ -129,7 +129,7 @@ local function set_clock(s)
     local dpi = require("beautiful.xresources").apply_dpi
 
     s.mytextclock = wibox.widget.textclock()
-    s.month_calendar = awful.widget.calendar_popup.month({screen = s})
+    s.month_calendar = awful.widget.calendar_popup.month{screen = s}
     s.month_calendar:attach(s.mytextclock)
 end
 
@@ -183,24 +183,24 @@ awful.screen.connect_for_each_screen(
             )
         ))
         -- Create a taglist widget
-        s.mytaglist = awful.widget.taglist {
+        s.mytaglist = awful.widget.taglist{
             screen  = s,
             filter  = awful.widget.taglist.filter.all,
             buttons = taglist_buttons
         }
 
         -- Create a tasklist widget
-        s.mytasklist = awful.widget.tasklist {
+        s.mytasklist = awful.widget.tasklist{
             screen  = s,
             filter  = awful.widget.tasklist.filter.currenttags,
             buttons = tasklist_buttons
         }
 
         -- Create the wibox
-        s.mywibox = awful.wibar({position = "top", screen = s})
+        s.mywibox = awful.wibar{position = "top", screen = s}
 
         -- Add widgets to the wibox
-        s.mywibox:setup {
+        s.mywibox:setup{
             layout = wibox.layout.align.horizontal,
             { -- Left widgets
                 layout = wibox.layout.fixed.horizontal,
