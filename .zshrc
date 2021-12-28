@@ -100,6 +100,7 @@ source $ZSH/oh-my-zsh.sh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 alias pls="sudo"
+alias cls="clear && ls -lh"
 alias -g G="|grep -i"
 alias config="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 alias mkdebug="CFLAGS+=-ggdb make re"
