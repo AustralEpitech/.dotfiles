@@ -15,7 +15,6 @@ local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
 -- Widgets
-local battery_widget = require("awesome-wm-widgets.battery-widget.battery")
 local brightness_widget = require("awesome-wm-widgets.brightness-widget.brightness")
 local volume_widget = require('awesome-wm-widgets.volume-widget.volume')
 
@@ -69,7 +68,7 @@ mytags = {
 }
 
 terminal = "alacritty"
-editor = os.getenv("EDITOR")
+editor = os.getenv("EDITOR") or "nvim"
 editor_cmd = terminal .. " -e " .. editor
 browser = "brave"
 files = "pcmanfm"
@@ -83,6 +82,7 @@ modkey = "Mod4"
 awful.layout.layouts = {
     awful.layout.suit.tile,
     awful.layout.suit.max,
+    awful.layout.suit.floating,
 }
 -- }}}
 
@@ -110,9 +110,7 @@ local tasklist_buttons = gears.table.join(
     awful.button(
         {}, 1,
         function(c)
-            if c == client.focus then
-                c.minimized = true
-            else
+            if c ~= client.focus then
                 c:emit_signal("request::activate", "tasklist", {raise = true})
             end
         end
@@ -210,7 +208,6 @@ awful.screen.connect_for_each_screen(
             { -- Right widgets
                 layout = wibox.layout.fixed.horizontal,
                 wibox.widget.systray(),
-                battery_widget{margin_left = 5, margin_right = 5, show_current_level = true},
                 brightness_widget{program = "xbacklight", step = 10},
                 volume_widget(),
                 s.mytextclock,
@@ -553,6 +550,7 @@ awful.rules.rules = {
             border_color = beautiful.border_normal,
             focus = awful.client.focus.filter,
             raise = true,
+            maximized = false,
             keys = clientkeys,
             buttons = clientbuttons,
             screen = awful.screen.preferred,
@@ -638,12 +636,15 @@ apps = {
     "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1",
     "xss-lock --transfer-sleep-lock -- " .. lock,
     "picom",
-    "redshift",
+    "redshift-gtk",
     "nm-applet",
     "flameshot",
-    terminal,
+    "cbatticon -i symbolic",
 }
 
+awful.spawn.with_shell("bash -c 'killall redshift; redshift -x'")
+awful.spawn.with_shell("killall cbatticon")
+
 for _, app in ipairs(apps) do
-    awful.spawn.once(app)
+    awful.spawn(app)
 end
