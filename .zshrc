@@ -99,9 +99,10 @@ source $ZSH/oh-my-zsh.sh
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-alias pls="sudo"
-alias cls="clear && ls -lh"
+alias pls="sudo "
+alias cls="clear && ll"
 alias -g G="|grep -i"
 alias config="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 alias wconfig="$EDITOR $HOME/.config/awesome"
 alias xcopy="xclip -selection clipboard"
+alias zshconf="$EDITOR $HOME/.zshrc && source $HOME/.zshrc"
