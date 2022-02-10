@@ -376,7 +376,7 @@ globalkeys = gears.table.join(
         {description = "toggle mute", group = "hotkeys"}
     ),
     awful.key(
-        {"Control"}, "XF86AudioMute",
+        {"Shift"}, "XF86AudioMute",
         function()
             awful.spawn("pactl set-source-mute 0 toggle")
         end,
@@ -388,6 +388,27 @@ globalkeys = gears.table.join(
             awful.spawn("playerctl play-pause")
         end,
         {description = "play / pause media", group = "hotkeys"}
+    ),
+    awful.key(
+        {"Control"}, "XF86AudioMute",
+        function()
+            awful.spawn.with_shell("pactl set-sink-volume 0 20%")
+        end,
+        {description = "set volume to 20%", group = "hotkeys"}
+    ),
+    awful.key(
+        {"Control"}, "XF86AudioLowerVolume",
+        function()
+            awful.spawn.with_shell("pactl set-sink-volume 0 50%")
+        end,
+        {description = "set volume to 50%", group = "hotkeys"}
+    ),
+    awful.key(
+        {"Control"}, "XF86AudioRaiseVolume",
+        function()
+            awful.spawn.with_shell("pactl set-sink-volume 0 100%")
+        end,
+        {description = "set volume to 100%", group = "hotkeys"}
     ),
     awful.key(
         {"Control"}, "Insert",
@@ -427,7 +448,7 @@ globalkeys = gears.table.join(
     awful.key(
         {"Control"}, "F4",
         function()
-            awful.spawn.with_shell("~/bin/toggle_touchpad")
+            awful.spawn.with_shell("toggle-touchpad")
         end,
         {description = "toggle touchpad", group = "hotkeys"}
     ),
@@ -642,7 +663,7 @@ apps = {
     "cbatticon -i symbolic",
 }
 
-awful.spawn.with_shell("bash -c 'killall redshift; redshift -x'")
+awful.spawn.with_shell("bash -c 'while killall redshift; do continue; done; redshift -x'")
 awful.spawn.with_shell("killall cbatticon")
 
 for _, app in ipairs(apps) do
