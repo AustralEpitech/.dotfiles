@@ -1,6 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-export PATH="$HOME/bin:$HOME/Applications:$PATH"
-typeset -U path
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -100,9 +99,11 @@ source $ZSH/oh-my-zsh.sh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 alias pls="sudo "
-alias cls="clear && ll"
+alias cls="clear && l"
 alias -g G="|grep -i"
 alias config="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
-alias wconfig="$EDITOR $HOME/.config/awesome"
-alias xcopy="xclip -selection clipboard"
+alias wconfig="$EDITOR $HOME/.config/sway"
 alias zshconf="$EDITOR $HOME/.zshrc && source $HOME/.zshrc"
+alias startgui="exec sway &> sway.log"
+alias minecraft="DRI_PRIME=1 minecraft-launcher"
+alias umnt="sudo umount /mnt -R"

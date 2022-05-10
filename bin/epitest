@@ -1,11 +1,4 @@
 #!/usr/bin/bash
 set -e
 
-if [ "$EUID" -ne 0 ]; then
-    echo "error: you cannot perform this operation unless you are root."
-    exit 1
-fi
-
-systemctl start docker
-docker run -it --rm --name epitest -v "$PWD":/tmp epitechcontent/epitest-docker:latest /bin/bash
-systemctl stop docker
+docker run -it --rm -v "$PWD":/tmp epitechcontent/epitest-docker:latest /bin/bash

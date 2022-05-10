@@ -1,8 +1,0 @@
-#!/usr/bin/bash
-set -e
-
-device="PNP0C50:0e 06CB:7E7E Touchpad"
-
-enabled=$(xinput list-props "$device" | awk -F ':' '$1 ~ "Device Enabled" {print $2}')
-
-xinput set-prop "$device" "Device Enabled" "$((1 - enabled))"

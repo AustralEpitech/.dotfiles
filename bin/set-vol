@@ -1,0 +1,24 @@
+#!/usr/bin/bash
+set -e
+
+CUR="$(pactl get-sink-volume 0 | awk '$1 == "Volume:" {print substr($5, 1, length($5) - 1)}')"
+SHIFT="${1}"
+
+case "${1:0:1}" in
+    "")
+        exit 1
+        ;;
+    "+"|"-")
+        NEW="$((CUR - CUR % SHIFT + SHIFT))"
+        ;;
+    *)
+        NEW="$1"
+        ;;
+esac
+
+[ "$NEW" -gt 100 ] && NEW=100
+
+pactl set-sink-volume 0 "$NEW"%
+pactl set-sink-mute 0 0
+
+echo "$NEW"

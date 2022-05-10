@@ -1,0 +1,4 @@
+# Config for sway
+# Read `man 5 sway` for a complete reference.
+
+include "config.d/*.conf
