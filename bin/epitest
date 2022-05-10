@@ -1,4 +1,2 @@
 #!/usr/bin/bash
-set -e
-
 docker run -it --rm -v "$PWD":/tmp epitechcontent/epitest-docker:latest /bin/bash
