@@ -6,6 +6,8 @@ if [ ! -w "$1" ]; then
 fi
 
 (
+set -e
+
 asciiquarium &
 cmatrix -ab &
 while [ 1 ]; do sl; done &
