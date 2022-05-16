@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 set -e
 
-CUR_LIGHT="$(set-light "$@")"
+CUR_LIGHT="$("$(dirname "$0")"/set-light "$@")"
 
 SCREENS="$(ddcutil detect | awk '$1 == "Display" {print $2}')"
 
