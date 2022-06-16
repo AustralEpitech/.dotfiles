@@ -2,17 +2,17 @@
 set -e
 
 usage() {
-    echo -e "USAGE: $0 FILE.pdf"
+    echo "USAGE: $0 FILE.pdf"
     exit 0
 }
-
-DEVICE='pixma:04A9178A_31A16C'
-FORMAT='png'
-RES=300
 
 if [ "$1" == '-h' ] || [[ "$1" != *.pdf ]]; then
     usage
 fi
+
+DEVICE='pixma:04A9178A_31A16C'
+FORMAT='png'
+RES=300
 
 scanimage -d "$DEVICE" --format="$FORMAT" --resolution "$RES" > "$1"
 convert "$1" "$1"

@@ -1,5 +1,5 @@
 " variables
-let &path = getcwd() . '/**' . ',' . &path
+set path+='**'
 set expandtab
 set smartindent
 set shiftwidth=4
@@ -9,7 +9,7 @@ set ignorecase
 set smartcase
 set list
 set mouse=a
-au FileType c,cpp,python set cc=81
+set cc=81
 
 " packages
 so ~/.config/nvim/epitech_header.vim
@@ -66,3 +66,8 @@ lua require('nvim-treesitter.configs').setup{highlight = {enable = true}}
 " keybindings
 nnoremap <C-c><C-h> :Header<CR>
 tnoremap <Esc> <C-\><C-n>
+
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l

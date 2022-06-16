@@ -1,10 +1,10 @@
 #!/usr/bin/bash
 set -e
 
-CUR_LIGHT="$("$(dirname "$0")"/set-light "$@")"
+CUR_LIGHT="$(set-light "$@")"
 
-SCREENS="$(ddcutil detect | awk '$1 == "Display" {print $2}')"
+SCREENS="$(sudo ddcutil detect | awk '$1 == "Display" {print $2}')"
 
 for i in $SCREENS; do
-    ddcutil -d "$i" setvcp 10 "$CUR_LIGHT"
+    sudo ddcutil -d "$i" setvcp 10 "$CUR_LIGHT"
 done

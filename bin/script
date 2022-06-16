@@ -1,8 +1,14 @@
 #!/usr/bin/bash
 
-if [ ! -w "$1" ]; then
+usage() {
     echo "Usage: $0 /dev/pts/{tty_nb}"
-    exit 1
+    exit 0
+}
+
+if [ -z "$1" ]; then
+    set "$(tty)"
+elif ! [ -w "$1" ]; then
+    usage
 fi
 
 (
@@ -10,5 +16,5 @@ set -e
 
 asciiquarium &
 cmatrix -ab &
-while [ 1 ]; do sl; done &
+while true; do sl; done &
 ) | lolcat > "$1"

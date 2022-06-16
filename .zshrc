@@ -5,13 +5,13 @@
 export ZSH="$HOME/.oh-my-zsh"
 
 # Editor
-export EDITOR=nvim
+export EDITOR='nvim'
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+ZSH_THEME='mytheme'
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -20,7 +20,7 @@ ZSH_THEME="robbyrussell"
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
-CASE_SENSITIVE="true"
+CASE_SENSITIVE='true'
 
 # Uncomment the following line to use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.
@@ -98,12 +98,12 @@ source $ZSH/oh-my-zsh.sh
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-alias pls="sudo "
-alias cls="clear && l"
-alias -g G="|grep -i"
+alias pls='sudo '
+alias cls='clear && l'
 alias config="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 alias wconfig="$EDITOR $HOME/.config/sway"
 alias zshconf="$EDITOR $HOME/.zshrc && source $HOME/.zshrc"
-alias startgui="exec sway &> sway.log"
-alias minecraft="DRI_PRIME=1 minecraft-launcher"
-alias umnt="sudo umount /mnt -R"
+alias startgui="exec sway 2> $HOME/sway.log"
+alias minecraft='DRI_PRIME=1 minecraft-launcher'
+alias umnt='sudo umount /mnt -R'
+alias vi="$EDITOR"
