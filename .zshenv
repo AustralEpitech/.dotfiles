@@ -1,8 +1,15 @@
-# Disable files
-export LESSHISTFILE=-
+path=(~/bin ~/.local/bin $path)
 
-## Make valgrind faster
-#unset DEBUGINFOD_URLS
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
+export XDG_CONFIG_DIRS="/etc/xdg"
+export XDG_DATA_DIRS="/usr/local/share/:/usr/share/"
 
-# sway env variable
-XDG_CURRENT_DESKTOP=sway
+export ZDOTDIR="$HOME"/.config/zsh
+export HISTFILE="$XDG_STATE_HOME"/zsh/history
+
+export MOZ_ENABLE_WAYLAND=1
+
+export EDITOR="nvim"

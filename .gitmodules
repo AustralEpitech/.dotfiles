@@ -4,3 +4,6 @@
 [submodule ".config/nvim/pack/plugins/opt/nvim-treesitter"]
 	path = .config/nvim/pack/plugins/opt/nvim-treesitter
 	url = https://github.com/nvim-treesitter/nvim-treesitter
+[submodule ".config/zsh/.oh-my-zsh"]
+	path = .config/zsh/.oh-my-zsh
+	url = https://github.com/ohmyzsh/ohmyzsh.git
