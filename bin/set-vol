@@ -25,4 +25,5 @@ esac
 pactl set-sink-volume 0 "$NEW"%
 pactl set-sink-mute 0 0
 
+echo "$NEW" > "$CUR_FILE"
 echo "$NEW"
