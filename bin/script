@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 usage() {
     echo "Usage: $0 /dev/pts/{tty_nb}"

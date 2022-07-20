@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 set -e
 
 CUR_LIGHT="$(set-light "$@")"
