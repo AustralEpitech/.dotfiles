@@ -1,3 +1,4 @@
+alias sudo='sudo '
 alias pls='sudo '
 alias cls='clear && l'
 alias config="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
