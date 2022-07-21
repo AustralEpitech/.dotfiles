@@ -14,5 +14,4 @@ DEVICE='pixma:04A9178A_31A16C'
 FORMAT='png'
 RES=300
 
-scanimage -d "$DEVICE" --format="$FORMAT" --resolution "$RES" > "$1"
-convert "$1" "$1"
+scanimage -d "$DEVICE" --format="$FORMAT" --resolution "$RES" | convert - "$1"
