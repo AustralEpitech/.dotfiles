@@ -7,3 +7,6 @@
 [submodule ".config/zsh/.oh-my-zsh"]
 	path = .config/zsh/.oh-my-zsh
 	url = https://github.com/ohmyzsh/ohmyzsh.git
+[submodule ".config/nvim/pack/plugins/opt/nvim-lsp-installer"]
+	path = .config/nvim/pack/plugins/opt/nvim-lsp-installer
+	url = https://github.com/williamboman/nvim-lsp-installer.git

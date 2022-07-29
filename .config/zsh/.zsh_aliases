@@ -8,6 +8,3 @@ alias startgui='startx'
 alias umnt='sudo umount /mnt -R'
 alias vi="$EDITOR"
 alias tmp="cd $(mktemp -d)"
-
-alias k="kubectl"
-alias dc=docker-compose

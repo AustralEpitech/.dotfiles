@@ -102,3 +102,4 @@ eval "$(pyenv init -)"
 pyenv shell 3.10.5
 . "$ZDOTDIR"/.zsh_aliases
 . "$ZDOTDIR"/.kubectl_aliases
+. "$ZDOTDIR"/.docker_aliases

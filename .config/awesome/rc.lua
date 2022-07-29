@@ -316,7 +316,7 @@ globalkeys = gears.table.join(
         {},
         "XF86AudioRaiseVolume",
         function()
-            awful.spawn("set-vol +2")
+            awful.spawn("set-vol +5")
         end,
         {description = "raise volume", group = "shortcut"}
     ),
@@ -324,7 +324,7 @@ globalkeys = gears.table.join(
         {},
         "XF86AudioLowerVolume",
         function()
-            awful.spawn("set-vol -2")
+            awful.spawn("set-vol -5")
         end,
         {description = "lower volume", group = "shortcut"}
     ),
