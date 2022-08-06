@@ -29,10 +29,6 @@ packadd! black
 
 packadd! nvim-lspconfig
 
-packadd! nvim-lsp-installer
-lua require("nvim-lsp-installer").setup{}
-
-
 " keybindings
 nnoremap <C-c><C-h> :Header<CR>
 tnoremap <Esc> <C-\><C-n>

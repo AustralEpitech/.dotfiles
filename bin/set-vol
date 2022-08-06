@@ -1,11 +1,8 @@
 #!/bin/bash
 set -e
 
-CUR_FILE=/var/tmp/current_volume
-
-set +e
-CUR="$(cat "$CUR_FILE" || echo 50)"
-set -e
+CUR="$(pactl get-sink-volume "@DEFAULT_SINK@" | awk '$1 == "Volume:" {print substr($5, 1, length($5) - 1)}')"
+CUR="$((CUR - CUR % "$1"))"
 
 case "${1:0:1}" in
     '')
@@ -22,7 +19,7 @@ esac
 [ "$NEW" -lt 0 ] && NEW=0
 [ "$NEW" -gt 100 ] && NEW=100
 
-pactl set-sink-volume 0 "$NEW"%
+pactl set-sink-volume 0 "$NEW%"
 pactl set-sink-mute 0 0
 
 echo "$NEW" > "$CUR_FILE"

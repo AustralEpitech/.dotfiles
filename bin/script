@@ -11,8 +11,7 @@ elif ! [ -w "$1" ]; then
     usage
 fi
 
-(
-set -e
+(set -e
 
 asciiquarium &
 cmatrix -ab &
