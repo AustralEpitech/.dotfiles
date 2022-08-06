@@ -1,5 +1,5 @@
 " variables
-set path+='**'
+set path+=**,
 set expandtab
 set smartindent
 set shiftwidth=4
@@ -9,7 +9,7 @@ set ignorecase
 set smartcase
 set list
 set mouse=a
-set cc=81
+set cc=80
 set suffixes+=.pyc
 set foldmethod=indent
 set nofoldenable
