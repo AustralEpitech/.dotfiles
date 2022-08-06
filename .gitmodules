@@ -10,3 +10,6 @@
 [submodule ".pyenv"]
 	path = .pyenv
 	url = https://github.com/pyenv/pyenv.git
+[submodule ".config/nvim/pack/plugins/opt/indent-blankline"]
+	path = .config/nvim/pack/plugins/opt/indent-blankline
+	url = https://github.com/lukas-reineke/indent-blankline.nvim.git
