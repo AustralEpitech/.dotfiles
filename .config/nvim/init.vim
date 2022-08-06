@@ -29,7 +29,6 @@ packadd! black
 
 packadd! nvim-lspconfig
 
-
 " keybindings
 nnoremap <C-c><C-h> :Header<CR>
 tnoremap <Esc> <C-\><C-n>
