@@ -7,3 +7,9 @@
 [submodule ".config/zsh/.oh-my-zsh"]
 	path = .config/zsh/.oh-my-zsh
 	url = https://github.com/ohmyzsh/ohmyzsh.git
+[submodule ".pyenv"]
+	path = .pyenv
+	url = https://github.com/pyenv/pyenv.git
+[submodule ".config/nvim/pack/plugins/opt/indent-blankline"]
+	path = .config/nvim/pack/plugins/opt/indent-blankline
+	url = https://github.com/lukas-reineke/indent-blankline.nvim.git

@@ -15,7 +15,7 @@ set foldmethod=indent
 set nofoldenable
 set foldlevel=99
 set grepprg=grep\ -rn\ $*
-set listchars=tab:>\ ,multispace:\|⋅⋅⋅,trail:⋅,nbsp:+
+set listchars+=lead:⋅
 
 au BufWrite * :%s/\s\+$//e
 
@@ -28,6 +28,9 @@ lua require('nvim-treesitter.configs').setup{highlight = {enable = true}}
 packadd! black
 
 packadd! nvim-lspconfig
+
+packadd! indent-blankline
+lua require("indent_blankline").setup{space_char_blankline = " ", show_current_context = true, show_current_context_start = true}
 
 " keybindings
 nnoremap <C-c><C-h> :Header<CR>
