@@ -7,3 +7,6 @@
 [submodule ".config/zsh/.oh-my-zsh"]
 	path = .config/zsh/.oh-my-zsh
 	url = https://github.com/ohmyzsh/ohmyzsh.git
+[submodule "/home/ange/.pyenv"]
+	path = /home/ange/.pyenv
+	url = https://github.com/pyenv/pyenv.git
