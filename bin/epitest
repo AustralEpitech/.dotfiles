@@ -1,2 +1,2 @@
-#!/usr/bin/bash
-docker run -it --rm -v "$PWD":/tmp epitechcontent/epitest-docker:latest /bin/bash
+#!/bin/bash
+docker run -it --rm -v "$PWD":/tmp epitechcontent/epitest-docker:latest bash

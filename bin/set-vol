@@ -1,24 +1,25 @@
-#!/usr/bin/bash
+#!/bin/bash
 set -e
 
-CUR="$(pactl get-sink-volume 0 | awk '$1 == "Volume:" {print substr($5, 1, length($5) - 1)}')"
-SHIFT="${1}"
+CUR="$(pactl get-sink-volume "@DEFAULT_SINK@" | awk '$1 == "Volume:" {print substr($5, 1, length($5) - 1)}')"
+CUR="$((CUR - CUR % "$1"))"
 
 case "${1:0:1}" in
     '')
         exit 1
         ;;
     '+'|'-')
-        NEW="$((CUR - CUR % SHIFT + SHIFT))"
+        NEW="$((CUR + "$1"))"
         ;;
     *)
         NEW="$1"
         ;;
 esac
 
+[ "$NEW" -lt 0 ] && NEW=0
 [ "$NEW" -gt 100 ] && NEW=100
 
-pactl set-sink-volume 0 "$NEW"%
+pactl set-sink-volume 0 "$NEW%"
 pactl set-sink-mute 0 0
 
 echo "$NEW"

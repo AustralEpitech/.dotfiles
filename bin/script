@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 usage() {
     echo "Usage: $0 /dev/pts/{tty_nb}"
@@ -11,8 +11,7 @@ elif ! [ -w "$1" ]; then
     usage
 fi
 
-(
-set -e
+(set -e
 
 asciiquarium &
 cmatrix -ab &
