@@ -9,3 +9,19 @@ alias minecraft='DRI_PRIME=1 minecraft-launcher'
 alias umnt='sudo umount /mnt -R'
 alias vi="$EDITOR"
 alias tmp="cd $(mktemp -d)"
+
+function watch() {
+    # alias alias_cmd='cmd'
+    cmd="$(alias "${1}")"
+
+    if [ -n "${cmd}" ]; then
+        # remove everything before and including the first =
+        cmd="${cmd#*=}"
+        # remove first and last char in this case, quotes
+        cmd="${cmd:1:-1}"
+    else
+        cmd="${1}"
+    fi
+
+    env watch "${cmd}" "${@:2}"
+}

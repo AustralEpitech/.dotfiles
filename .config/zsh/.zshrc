@@ -74,7 +74,7 @@ CASE_SENSITIVE="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git vi-mode)
 
 . $ZSH/oh-my-zsh.sh
 
@@ -99,7 +99,6 @@ plugins=(git)
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || . ~/.config/zsh/.p10k.zsh
 
 eval "$(pyenv init -)"
-pyenv shell 3.10.5
 . "$ZDOTDIR"/.zsh_aliases
 . "$ZDOTDIR"/.kubectl_aliases
 . "$ZDOTDIR"/.docker_aliases
