@@ -19,7 +19,7 @@ esac
 [ "$NEW" -lt 0 ] && NEW=0
 [ "$NEW" -gt 100 ] && NEW=100
 
-pactl set-sink-volume 0 "$NEW%"
-pactl set-sink-mute 0 0
+pactl set-sink-volume "${SINK}" "$NEW"%
+pactl set-sink-mute "${SINK}" 0
 
 echo "$NEW"

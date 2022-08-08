@@ -1,0 +1,33 @@
+# docker
+alias dk='docker'
+alias dkb='docker build .'
+alias dkc='docker create'
+alias dkex='docker exec -it'
+alias dki='docker image'
+alias dkic='docker image create'
+alias dkils='docker image ls'
+alias dkirm='docker image rm'
+alias dkl='docker pull'
+alias dklo='docker logs -f'
+alias dkp='docker push'
+alias dkps='docker ps'
+alias dkpsa='docker ps -a'
+alias dkrm='docker rm'
+alias dkt='docker tag'
+alias dkv='docker volume'
+alias dkvc='docker volume create'
+alias dkvls='docker volume ls'
+alias dkvrm='docker volume rm'
+
+function dkpurge() {
+    PS="$(docker ps -aq)"
+
+    echo "$PS" | xargs docker stop
+    echo "$PS" | xargs docker rm
+    docker image prune -f
+}
+
+# docker-compose
+alias dc='docker-compose'
+alias dcd='docker-compose down'
+alias dcup='docker-compose up -d --build'

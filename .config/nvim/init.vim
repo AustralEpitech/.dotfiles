@@ -15,7 +15,6 @@ set foldmethod=indent
 set nofoldenable
 set foldlevel=99
 set grepprg=grep\ -rn\ $*
-set listchars+=lead:⋅
 
 au BufWrite * :%s/\s\+$//e
 
@@ -23,14 +22,19 @@ au BufWrite * :%s/\s\+$//e
 so ~/.config/nvim/epitech_header.vim
 
 packadd! nvim-treesitter
-lua require('nvim-treesitter.configs').setup{highlight = {enable = true}}
+lua require'nvim-treesitter.configs'.setup {highlight = {enable = true}}
 
 packadd! black
 
-packadd! nvim-lspconfig
-
 packadd! indent-blankline
-lua require("indent_blankline").setup{space_char_blankline = " ", show_current_context = true, show_current_context_start = true}
+lua << EOF
+require'indent_blankline'.setup {
+    show_current_context = true,
+    show_current_context_start = true,
+}
+EOF
+
+packadd! nvim-lspconfig
 
 " keybindings
 nnoremap <C-c><C-h> :Header<CR>

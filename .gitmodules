@@ -1,3 +1,6 @@
+[submodule ".config/nvim/pack/plugins/opt/indent-blankline"]
+	path = .config/nvim/pack/plugins/opt/indent-blankline
+	url = https://github.com/lukas-reineke/indent-blankline.nvim.git
 [submodule ".config/nvim/pack/plugins/opt/nvim-lspconfig"]
 	path = .config/nvim/pack/plugins/opt/nvim-lspconfig
 	url = https://github.com/neovim/nvim-lspconfig
@@ -10,6 +13,3 @@
 [submodule ".pyenv"]
 	path = .pyenv
 	url = https://github.com/pyenv/pyenv.git
-[submodule ".config/nvim/pack/plugins/opt/indent-blankline"]
-	path = .config/nvim/pack/plugins/opt/indent-blankline
-	url = https://github.com/lukas-reineke/indent-blankline.nvim.git
