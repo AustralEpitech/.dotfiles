@@ -1,7 +1,7 @@
 " variables
 let g:black_linelength=79
 
-" plugins
+" packages
 lua require'lspconfig'.pyright.setup{}
 
 " keybindings
