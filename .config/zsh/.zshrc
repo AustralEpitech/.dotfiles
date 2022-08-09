@@ -1,4 +1,4 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
+# Enable Powerlevel10k instant prompt. Should stay close to the top of "$ZDOTDIR"/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
@@ -6,7 +6,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # Path to your oh-my-zsh installation.
-export ZSH="$ZDOTDIR/.oh-my-zsh"
+export ZSH="$ZDOTDIR/ohmyzsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -76,7 +76,7 @@ CASE_SENSITIVE="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git vi-mode)
 
-. $ZSH/oh-my-zsh.sh
+. "$ZSH"/oh-my-zsh.sh
 
 # User configuration
 
@@ -95,8 +95,8 @@ plugins=(git vi-mode)
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
-[[ ! -f ~/.config/zsh/.p10k.zsh ]] || . ~/.config/zsh/.p10k.zsh
+# To customize prompt, run `p10k configure` or edit "$ZDOTDIR"/.p10k.zsh.
+[[ ! -f "$ZDOTDIR"/.p10k.zsh ]] || . "$ZDOTDIR"/.p10k.zsh
 
 eval "$(pyenv init -)"
 . "$ZDOTDIR"/.zsh_aliases
