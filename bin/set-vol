@@ -2,7 +2,7 @@
 set -e
 
 SINK='@DEFAULT_SINK@'
-CUR="$(pactl get-sink-volume "$DEFAULT_SINK" | awk '$1 == "Volume:" {print substr($5, 1, length($5) - 1)}')"
+CUR="$(pactl get-sink-volume "$SINK" | awk '$1 == "Volume:" {print substr($5, 1, length($5) - 1)}')"
 CUR="$((CUR - CUR % "$1"))"
 
 case "${1:0:1}" in
