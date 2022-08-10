@@ -6,7 +6,7 @@
 	url = https://github.com/lukas-reineke/indent-blankline.nvim.git
 [submodule ".config/nvim/pack/plugins/opt/nvim-lspconfig"]
 	path = .config/nvim/pack/plugins/opt/nvim-lspconfig
-	url = https://github.com/neovim/nvim-lspconfig
+	url = https://github.com/neovim/nvim-lspconfig.git
 [submodule ".config/nvim/pack/plugins/opt/nvim-treesitter"]
 	path = .config/nvim/pack/plugins/opt/nvim-treesitter
 	url = https://github.com/nvim-treesitter/nvim-treesitter.git
