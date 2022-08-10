@@ -32,6 +32,8 @@ vim.o.foldlevel      = 99
 vim.o.grepprg        = "grep -rn $*"
 vim.wo.cc            = "80"
 
+vim.cmd("au BufWrite * :%s/\\s\\+$//e")
+
 -- keybindings
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
 
