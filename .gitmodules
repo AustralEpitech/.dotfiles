@@ -1,3 +1,6 @@
+[submodule ".config/nvim/pack/plugins/opt/black"]
+	path = .config/nvim/pack/plugins/opt/black
+	url = https://github.com/psf/black.git
 [submodule ".config/nvim/pack/plugins/opt/indent-blankline"]
 	path = .config/nvim/pack/plugins/opt/indent-blankline
 	url = https://github.com/lukas-reineke/indent-blankline.nvim.git
@@ -13,6 +16,3 @@
 [submodule ".pyenv"]
 	path = .pyenv
 	url = https://github.com/pyenv/pyenv.git
-[submodule ".config/nvim/pack/plugins/opt/black"]
-	path = .config/nvim/pack/plugins/opt/black
-	url = https://github.com/psf/black.git

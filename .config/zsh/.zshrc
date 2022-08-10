@@ -96,7 +96,7 @@ plugins=(git vi-mode)
 # export ARCHFLAGS="-arch x86_64"
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
-[[ ! -f ~/.config/zsh/.p10k.zsh ]] || . ~/.config/zsh/.p10k.zsh
+[[ ! -f "$ZDOTDIR/.p10k.zsh" ]] || . "$ZDOTDIR/.p10k.zsh"
 
 eval "$(pyenv init -)"
 . "$ZDOTDIR"/.zsh_aliases
