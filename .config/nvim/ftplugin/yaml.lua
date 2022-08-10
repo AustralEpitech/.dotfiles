@@ -1,5 +1,5 @@
 -- packages
-require'yamlls'.dockerls.setup {}
+require'lspconfig'.yamlls.setup {}
 
 -- variables
 vim.o.shiftwidth = 2
