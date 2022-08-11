@@ -1,5 +1,7 @@
 -- packages
-require'lspconfig'.dockerls.setup {}
+require'lspconfig'.dockerls.setup {
+    on_attach = require'lspbinds',
+}
 
 -- variables
 

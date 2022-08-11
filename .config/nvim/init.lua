@@ -43,5 +43,3 @@ vim.keymap.set("n", "<C-k>", "<C-w>k"     )
 vim.keymap.set("n", "<C-l>", "<C-w>l"     )
 
 vim.keymap.set("n", "gf",    "gF"         )
-
-vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)

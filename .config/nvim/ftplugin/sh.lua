@@ -1,5 +1,7 @@
 -- packages
-require'lspconfig'.bashls.setup{}
+require'lspconfig'.bashls.setup{
+    on_attach = require'lspbinds',
+}
 
 -- variables
 
