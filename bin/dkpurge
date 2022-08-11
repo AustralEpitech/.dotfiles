@@ -1,0 +1,60 @@
+#!/bin/bash
+
+function read_yn() {
+    local ANS
+
+    $ECHO -n "$1 [Y/n]"
+    read -r ANS
+
+    case "$ANS" in
+        'y'|'Y'|'Yes'|'')
+            return 0
+            ;;
+        *)
+            return 1
+            ;;
+    esac
+}
+
+NORMAL='\e[0m'
+RED='\e[31m'
+
+ECHO='echo -e'
+
+PS="$(docker ps -aq 2> /dev/null)"
+
+if [ "$?" ] && [ "$EUID" != 0 ]; then
+    sudo -- "$0" "$@"
+    exit
+fi
+
+VOL="$(docker volume ls -q 2> /dev/null)"
+IMG="$(docker images    -q 2> /dev/null)"
+
+
+if [ -n "$PS" ]; then
+    $ECHO "${RED}CONTAINERS${NORMAL}"
+    docker ps -a
+
+    read_yn "Clean Containers?"         && \
+        echo "$PS" | xargs docker rm -f
+fi
+
+if [ -n "$VOL" ]; then
+    $ECHO "${RED}VOLUMES${NORMAL}"
+    docker volume ls
+
+    read_yn  "Clean Volumes?"                   && \
+        echo "$VOL" | xargs docker volume rm -f
+fi
+
+if [ -n "$IMG" ]; then
+    $ECHO "${RED}IMAGES${NORMAL}"
+    docker images
+
+    if read_yn  "Clean Images?"; then
+        echo "$IMG" | xargs docker image rm -f
+    elif read_yn "Prune Images?"; then
+        docker image prune -f
+    fi
+fi
