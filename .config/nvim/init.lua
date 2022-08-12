@@ -32,6 +32,8 @@ vim.o.foldlevel      = 99
 vim.o.grepprg        = "grep -rn $*"
 vim.wo.cc            = "80"
 
+vim.cmd("au BufWrite * :%s/\\s\\+$//e")
+
 -- keybindings
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
 
@@ -41,5 +43,3 @@ vim.keymap.set("n", "<C-k>", "<C-w>k"     )
 vim.keymap.set("n", "<C-l>", "<C-w>l"     )
 
 vim.keymap.set("n", "gf",    "gF"         )
-
-vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)

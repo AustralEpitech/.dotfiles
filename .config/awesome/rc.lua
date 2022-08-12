@@ -647,6 +647,7 @@ apps = {
     "killall cbatticon",
     "cbatticon BAT0 -i symbolic",
     "numlockx",
+    "flameshot",
 }
 
 for _, app in ipairs(apps) do

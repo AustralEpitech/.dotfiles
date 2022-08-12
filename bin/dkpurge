@@ -1,0 +1,63 @@
+#!/bin/bash
+
+NORMAL='\e[0m'
+BOLD='\e[1m'
+RED='\e[31m'
+
+ECHO='echo -e'
+
+PS="$(docker ps -aq 2> /dev/null)"
+
+if [ "$?" ] && [ "$EUID" != 0 ]; then
+    sudo -- "$0" "$@"
+    exit
+fi
+
+VOL="$(docker volume ls -q 2> /dev/null)"
+IMG="$(docker images    -q 2> /dev/null)"
+
+
+if [ -n "$PS" ]; then
+    $ECHO "${BOLD}${RED}CONTAINERS${NORMAL}"
+    docker ps -a
+
+    $ECHO -n "Prune Containers? [Y/n/a] "
+    read -r ANS
+    case "${ANS,,}" in
+        'y'|'yes'|'')
+            echo "$PS" | xargs docker rm 2> /dev/null
+            ;;
+        'a'|'all')
+            echo "$PS" | xargs docker rm -f
+            ;;
+    esac
+fi
+
+if [ -n "$VOL" ]; then
+    $ECHO "${BOLD}${RED}VOLUMES${NORMAL}"
+    docker volume ls
+
+    $ECHO -n "Prune Volumes? [Y/n] "
+    read -r ANS
+    case "${ANS,,}" in
+        'y'|'yes'|'')
+            echo "$VOL" | xargs docker volume rm -f 2> /dev/null
+            ;;
+    esac
+fi
+
+if [ -n "$IMG" ]; then
+    $ECHO "${BOLD}${RED}IMAGES${NORMAL}"
+    docker images
+
+    $ECHO -n "Prune Images? [Y/n/a] "
+    read -r ANS
+    case "${ANS,,}" in
+        'y'|'yes'|'')
+            docker image prune -f
+            ;;
+        'a'|'all')
+            echo "$IMG" | xargs docker image rm -f 2> /dev/null
+            ;;
+    esac
+fi

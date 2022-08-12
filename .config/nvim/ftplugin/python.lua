@@ -1,5 +1,7 @@
 -- packages
-require'lspconfig'.pyright.setup {}
+require'lspconfig'.pyright.setup {
+    on_attach = require'lspbinds',
+}
 
 -- variables
 vim.cmd("let g:black_linelength=79")

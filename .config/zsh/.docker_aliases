@@ -1,31 +1,40 @@
-# docker
 alias dk='docker'
+
+# containers
+alias dkca='docker container ls -a'
+alias dkcaq='docker container ls -a -q'
+alias dkci='docker container inspect'
+alias dkcls='docker container ls'
+alias dkcq='docker container ls -q'
+alias dkcrm='docker container rm'
+alias dkcrmf='docker container rm -f'
+alias dkex='docker container exec -i -t'
+alias dklo='docker container logs -f'
+alias dkr='docker container run -i -t'
+
+# images
 alias dkb='docker build .'
-alias dkc='docker create'
-alias dkex='docker exec -it'
 alias dki='docker image'
 alias dkic='docker image create'
+alias dkii='docker image inspect'
 alias dkils='docker image ls'
+alias dkilsa='docker image ls -a'
+alias dkilsaq='docker image ls -a -q'
+alias dkilsq='docker image ls -q'
 alias dkirm='docker image rm'
+alias dkirmf='docker image rm -f'
 alias dkl='docker pull'
-alias dklo='docker logs -f'
 alias dkp='docker push'
-alias dkps='docker ps'
-alias dkpsa='docker ps -a'
-alias dkrm='docker rm'
 alias dkt='docker tag'
+
+# volumes
 alias dkv='docker volume'
 alias dkvc='docker volume create'
+alias dkvi='docker volume inspect'
 alias dkvls='docker volume ls'
+alias dkvlsq='docker volume ls -q'
 alias dkvrm='docker volume rm'
-
-function dkpurge() {
-    PS="$(docker ps -aq)"
-
-    echo "$PS" | xargs docker stop
-    echo "$PS" | xargs docker rm
-    docker image prune -f
-}
+alias dkvrmf='docker volume rm -f'
 
 # docker-compose
 alias dc='docker-compose'
