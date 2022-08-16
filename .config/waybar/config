@@ -54,8 +54,8 @@
             "default": ["", "", ""],
         },
         "on-click": "pavucontrol",
-        "on-scroll-up": "set-vol +2",
-        "on-scroll-down": "set-vol -2",
+        "on-scroll-up": "set-vol +5",
+        "on-scroll-down": "set-vol -5",
         "smooth-scrolling-threshold": 1,
     },
     "temperature": {
