@@ -57,7 +57,7 @@ editor = os.getenv("EDITOR") or "nvim"
 editor_cmd = terminal .. " -e " .. editor
 
 browser = "firefox"
-files = "thunar"
+files = "pcmanfm"
 
 lock = "i3lock -ftni" .. gears.filesystem.get_configuration_dir() .. "wallpapers/debian11.png"
 
@@ -375,7 +375,24 @@ globalkeys = gears.table.join(
             awful.spawn("set-light -10")
         end,
         {description = "lower brightness", group = "shortcut"}
+    ),
+    awful.key(
+        {},
+        "Print",
+        function()
+            awful.spawn("flameshot full -c")
+        end,
+        {description = "take a screenshot", group = "shortcut"}
+    ),
+    awful.key(
+        {"Shift"},
+        "Print",
+        function()
+            awful.spawn("flameshot gui")
+        end,
+        {description = "take a rectangular screenshot", group = "shortcut"}
     )
+
 )
 
 clientkeys =
@@ -646,7 +663,6 @@ apps = {
     "nm-applet",
     "killall cbatticon",
     "cbatticon BAT0 -i symbolic",
-    "numlockx",
     "flameshot",
 }
 
