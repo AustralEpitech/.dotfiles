@@ -5,8 +5,10 @@ shopt -s extglob nullglob
 set_brightness() {
     MAX="$(cat "$1"/max_brightness)"
     FILE="$1"/brightness
-    VAL="$(($2 * MAX / 100))"
+    VAL="$(($2 * MAX / 100 + 1))"
 
+    [ "$VAL" -lt 0 ] && VAL=0
+    [ "$VAL" -gt "$MAX" ] && VAL="$MAX"
     echo "$VAL" > "$FILE"
 }
 
