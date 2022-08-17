@@ -1,11 +1,11 @@
 alias dk='docker'
 
 # containers
-alias dkca='docker container ls -a'
-alias dkcaq='docker container ls -a -q'
 alias dkci='docker container inspect'
 alias dkcls='docker container ls'
-alias dkcq='docker container ls -q'
+alias dkclsa='docker container ls -a'
+alias dkclsaq='docker container ls -a -q'
+alias dkclsq='docker container ls -q'
 alias dkcrm='docker container rm'
 alias dkcrmf='docker container rm -f'
 alias dkex='docker container exec -i -t'
