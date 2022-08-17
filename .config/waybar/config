@@ -1,7 +1,8 @@
 {
     "modules-left": ["sway/workspaces"],
     "modules-center": ["sway/window"],
-    "modules-right": ["pulseaudio", "cpu", "memory", "temperature", "backlight", "battery", "tray", "clock"],
+    //"modules-right": ["pulseaudio", "cpu", "memory", "temperature", "backlight", "battery", "tray", "clock"],
+    "modules-right": ["pulseaudio", "cpu", "memory", "temperature", "backlight", "battery", "tray", "custom/clock"],
     "backlight": {
         "format": "{percent}% {icon}",
         "format-icons": ["", ""],
@@ -20,9 +21,13 @@
         "format-alt": "{time} {icon}",
         "format-icons": ["", "", "", "", ""],
     },
-    "clock": {
-        "format": "{:%a %b %d, %R}",
-        "tooltip-format": "<tt>{calendar}</tt>",
+    //"clock": {
+    //    "format": "{:%a %b %d, %R}",
+    //    "tooltip-format": "<tt>{calendar}</tt>",
+    //},
+    "custom/clock": {
+        "exec": "date '+%a %b %d, %R'",
+        "interval": 5,
     },
     "cpu": {
         "format": "{usage}% ",
@@ -54,8 +59,8 @@
             "default": ["", "", ""],
         },
         "on-click": "pavucontrol",
-        "on-scroll-up": "set-vol +2",
-        "on-scroll-down": "set-vol -2",
+        "on-scroll-up": "set-vol +5",
+        "on-scroll-down": "set-vol -5",
         "smooth-scrolling-threshold": 1,
     },
     "temperature": {
