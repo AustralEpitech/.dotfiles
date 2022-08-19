@@ -14,6 +14,8 @@ require'indent_blankline'.setup {
 
 vim.cmd("packadd nvim-lspconfig")
 
+vim.cmd("packadd vim-dirdiff")
+
 -- variables
 vim.o.path           = vim.o.path .. ",**"
 vim.o.expandtab      = true
