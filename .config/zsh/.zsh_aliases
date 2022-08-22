@@ -1,14 +1,15 @@
-alias sudo='sudo '
-alias pls='sudo '
 alias cls='clear && l'
 alias config="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
-alias wconfig="$EDITOR $HOME/.config/awesome"
-alias zshconf="$EDITOR $ZDOTDIR/.zshrc && . $ZDOTDIR/.zshrc"
-alias startgui='startx'
 alias minecraft='DRI_PRIME=1 minecraft-launcher'
+alias mount='udisksctl mount -b'
+alias pls='sudo '
+alias startgui='startx'
+alias sudo='sudo '
+alias tmp="cd $(mktemp -d)"
 alias umnt='sudo umount /mnt -R'
 alias vi="$EDITOR"
-alias tmp="cd $(mktemp -d)"
+alias wconf="$EDITOR $HOME/.config/awesome"
+alias zshconf="$EDITOR $ZDOTDIR/.zshrc && . $ZDOTDIR/.zshrc"
 
 function fnalias() {
     # alias alias_cmd='cmd'
