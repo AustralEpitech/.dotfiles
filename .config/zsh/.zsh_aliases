@@ -13,18 +13,18 @@ alias zshconf="$EDITOR $ZDOTDIR/.zshrc && . $ZDOTDIR/.zshrc"
 
 function fnalias() {
     # alias alias_cmd='cmd'
-    cmd="$(alias "${2}")"
+    cmd="$(alias "$2")"
 
-    if [ -n "${cmd}" ]; then
+    if [ -n "$cmd" ]; then
         # remove everything before and including the first =
         cmd="${cmd#*=}"
         # remove first and last char in this case, quotes
         cmd="${cmd:1:-1}"
     else
-        cmd="${2}"
+        cmd="$2"
     fi
 
-    env "${1}" "${cmd}" "${@:3}"
+    env "$1" "$cmd" "${@:3}"
 }
 
 alias watch='fnalias watch'

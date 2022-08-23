@@ -1,7 +1,5 @@
 #!/bin/bash
 
-NORMAL='\e[0m'
-
 PS="$(docker ps -aq 2> /dev/null)"
 
 if [ "$?" ] && [ "$EUID" != 0 ]; then

@@ -10,6 +10,9 @@
 [submodule ".config/nvim/pack/plugins/opt/nvim-treesitter"]
 	path = .config/nvim/pack/plugins/opt/nvim-treesitter
 	url = https://github.com/nvim-treesitter/nvim-treesitter.git
+[submodule ".config/nvim/pack/plugins/opt/nvim-treesitter-context"]
+	path = .config/nvim/pack/plugins/opt/nvim-treesitter-context
+	url = https://github.com/nvim-treesitter/nvim-treesitter-context.git
 [submodule ".config/nvim/pack/plugins/opt/vim-dirdiff"]
 	path = .config/nvim/pack/plugins/opt/vim-dirdiff
 	url = https://github.com/will133/vim-dirdiff.git
@@ -19,6 +22,3 @@
 [submodule ".pyenv"]
 	path = .pyenv
 	url = https://github.com/pyenv/pyenv.git
-[submodule ".config/nvim/pack/plugins/opt/nvim-treesitter-context"]
-	path = .config/nvim/pack/plugins/opt/nvim-treesitter-context
-	url = https://github.com/nvim-treesitter/nvim-treesitter-context.git
