@@ -8,7 +8,7 @@ alias sudo='sudo '
 alias tmp="cd $(mktemp -d)"
 alias umnt='sudo umount /mnt -R'
 alias vi="$EDITOR"
-alias wconfig="$EDITOR $HOME/.config/sway"
+alias wconf="$EDITOR $HOME/.config/sway"
 alias zshconf="$EDITOR $ZDOTDIR/.zshrc && . $ZDOTDIR/.zshrc"
 
 function fnalias() {
