@@ -16,12 +16,12 @@
 [submodule ".config/nvim/pack/plugins/opt/vim-dirdiff"]
 	path = .config/nvim/pack/plugins/opt/vim-dirdiff
 	url = https://github.com/will133/vim-dirdiff.git
+[submodule ".config/nvim/pack/plugins/opt/vim-easy-align"]
+	path = .config/nvim/pack/plugins/opt/vim-easy-align
+	url = https://github.com/junegunn/vim-easy-align.git
 [submodule ".config/zsh/ohmyzsh"]
 	path = .config/zsh/ohmyzsh
 	url = https://github.com/ohmyzsh/ohmyzsh.git
 [submodule ".pyenv"]
 	path = .pyenv
 	url = https://github.com/pyenv/pyenv.git
-[submodule ".config/nvim/pack/plugins/opt/vim-easy-align"]
-	path = .config/nvim/pack/plugins/opt/vim-easy-align
-	url = https://github.com/junegunn/vim-easy-align.git
