@@ -22,3 +22,6 @@
 [submodule ".pyenv"]
 	path = .pyenv
 	url = https://github.com/pyenv/pyenv.git
+[submodule ".config/nvim/pack/plugins/opt/vim-easy-align"]
+	path = .config/nvim/pack/plugins/opt/vim-easy-align
+	url = https://github.com/junegunn/vim-easy-align.git
