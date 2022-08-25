@@ -22,6 +22,10 @@ vim.cmd("packadd nvim-lspconfig")
 
 vim.cmd("packadd vim-dirdiff")
 
+vim.cmd("packadd vim-easy-align")
+vim.keymap.set("n", "ga", "<Plug>(EasyAlign)<C-x>")
+vim.keymap.set("x", "ga", "<Plug>(EasyAlign)<C-x>")
+
 -- variables
 vim.o.path           = vim.o.path .. ",**"
 vim.o.expandtab      = true
