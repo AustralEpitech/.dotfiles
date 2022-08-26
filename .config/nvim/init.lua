@@ -5,10 +5,6 @@ require'nvim-treesitter.configs'.setup {
     highlight = {enable = true},
     indent = {enable = true},
 }
-vim.cmd("packadd nvim-treesitter-context")
-require'treesitter-context'.setup {
-    enable = true,
-}
 
 vim.cmd("packadd black")
 
