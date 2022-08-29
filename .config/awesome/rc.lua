@@ -136,7 +136,7 @@ awful.screen.connect_for_each_screen(
 
         -- Each screen has its own tag table.
         awful.tag(
-            {"TTY", "WEB", "DEV", "SBX", "GAM", "DOC", "GFX", "SRV", "ETC"},
+            {"TTY", "WEB", "DEV", "SBX", "GAM", "MED", "SYS", "SRV", "ETC"},
             s,
             awful.layout.layouts[1]
         )
