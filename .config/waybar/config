@@ -1,8 +1,7 @@
 {
     "modules-left": ["sway/workspaces"],
     "modules-center": ["sway/window"],
-    //"modules-right": ["pulseaudio", "cpu", "memory", "temperature", "backlight", "battery", "tray", "clock"],
-    "modules-right": ["pulseaudio", "cpu", "memory", "temperature", "backlight", "battery", "tray", "custom/clock"],
+    "modules-right": ["pulseaudio", "cpu", "memory", "temperature", "backlight", "battery", "tray", "clock"],
     "backlight": {
         "format": "{percent}% {icon}",
         "format-icons": ["", ""],
@@ -21,13 +20,9 @@
         "format-alt": "{time} {icon}",
         "format-icons": ["", "", "", "", ""],
     },
-    //"clock": {
-    //    "format": "{:%a %b %d, %R}",
-    //    "tooltip-format": "<tt>{calendar}</tt>",
-    //},
-    "custom/clock": {
-        "exec": "date '+%a %b %d, %R'",
-        "interval": 5,
+    "clock": {
+        "format": "{:%a %b %d, %R}",
+        "tooltip-format": "<tt>{calendar}</tt>",
     },
     "cpu": {
         "format": "{usage}% ",

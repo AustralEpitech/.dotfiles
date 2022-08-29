@@ -52,7 +52,7 @@ end
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init(gears.filesystem.get_configuration_dir() .. "theme.lua")
 
-terminal = "kitty"
+terminal = "alacritty"
 editor = os.getenv("EDITOR") or "nvim"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -136,7 +136,7 @@ awful.screen.connect_for_each_screen(
 
         -- Each screen has its own tag table.
         awful.tag(
-            {"TTY", "WEB", "DEV", "SBX", "GAM", "DOC", "GFX", "SRV", "ETC"},
+            {"TTY", "WEB", "DEV", "SBX", "GAM", "MED", "SYS", "SRV", "ETC"},
             s,
             awful.layout.layouts[1]
         )

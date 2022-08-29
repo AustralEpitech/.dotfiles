@@ -7,4 +7,4 @@ xrandr                               \
 # fix touchscreen
 xinput --map-to-output 'Raydium Corporation Raydium Touch System' 'eDP-1'
 
-exec x-window-manager
+exec awesome
