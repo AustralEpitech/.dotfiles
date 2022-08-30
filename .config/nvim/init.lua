@@ -39,7 +39,6 @@ vim.o.foldmethod     = "indent"
 vim.o.foldlevel      = 99
 vim.wo.cc            = "80"
 
-
 -- keybindings
 --            (mode, key,         command             )
 
