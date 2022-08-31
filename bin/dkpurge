@@ -7,8 +7,9 @@ if [ "$?" != 0 ] && [ "$EUID" != 0 ]; then
     exit
 fi
 
-VOL="$(docker volume ls -q 2> /dev/null)"
-IMG="$(docker images    -q 2> /dev/null)"
+VOL="$(docker volume ls  -q 2> /dev/null)"
+IMG="$(docker images     -q 2> /dev/null)"
+NET="$(docker network ls -q 2> /dev/null)"
 
 
 if [ -n "$PS" ]; then
@@ -41,7 +42,7 @@ fi
 
 if [ -n "$IMG" ]; then
     echo
-    docker images
+    docker image ls
 
     echo -n "Prune Images? [Y/n/a] "
     read -r ANS
@@ -51,6 +52,19 @@ if [ -n "$IMG" ]; then
             ;;
         'a'|'all')
             echo "$IMG" | xargs docker image rm -f 2> /dev/null
+            ;;
+    esac
+fi
+
+if [ -n "$NET" ]; then
+    echo
+    docker network ls
+
+    echo -n "Prune Networks? [Y/n/a] "
+    read -r ANS
+    case "${ANS,,}" in
+        'y'|'yes'|'a'|'all'|'')
+            docker network prune -f
             ;;
     esac
 fi
