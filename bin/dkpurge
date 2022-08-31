@@ -60,7 +60,7 @@ if [ -n "$NET" ]; then
     echo
     docker network ls
 
-    echo -n "Prune Networks? [Y/n/a] "
+    echo -n "Prune Networks? [Ya/n] "
     read -r ANS
     case "${ANS,,}" in
         'y'|'yes'|'a'|'all'|'')
