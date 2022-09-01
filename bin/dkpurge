@@ -11,6 +11,8 @@ VOL="$(docker volume ls  -q 2> /dev/null)"
 IMG="$(docker images     -q 2> /dev/null)"
 NET="$(docker network ls -q 2> /dev/null)"
 
+DEFAULT_NET="$(docker network ls -q -f name=bridge -f name=host -f name=none)"
+
 
 if [ -n "$PS" ]; then
     docker ps -a
@@ -56,7 +58,7 @@ if [ -n "$IMG" ]; then
     esac
 fi
 
-if [ -n "$NET" ]; then
+if [ -n "$NET" ] && [ "$NET" != "$DEFAULT_NET" ]; then
     echo
     docker network ls
 
