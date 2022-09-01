@@ -37,6 +37,7 @@ vim.o.mouse          = "a"
 vim.o.suffixes       = vim.o.suffixes .. ",.pyc"
 vim.o.foldmethod     = "indent"
 vim.o.foldlevel      = 99
+vim.o.grepprg        = "grep -rn"
 vim.wo.cc            = "80"
 
 -- keybindings
