@@ -368,7 +368,6 @@ globalkeys = gears.table.join(
         end,
         {description = "take a rectangular screenshot", group = "shortcut"}
     )
-
 )
 
 clientkeys =
@@ -390,7 +389,10 @@ clientkeys =
     ),
     awful.key(
         {modkey}, "space",
-        awful.client.floating.toggle,
+        function (c)
+            c.floating = not c.floating
+            c.ontop = c.floating
+        end,
         {description = "toggle floating", group = "client"}
     ),
     awful.key(
