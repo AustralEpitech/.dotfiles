@@ -11,8 +11,8 @@ alias dkcpf='docker container prune -f'
 alias dkcrm='docker container rm'
 alias dkcrmf='docker container rm -f'
 alias dkex='docker container exec -i -t'
-alias dklo='docker container logs -f'
-alias dkr='docker container run -i -t'
+alias dklo='docker logs -f'
+alias dkr='docker run -i -t'
 
 # images
 alias dkb='docker build .'
