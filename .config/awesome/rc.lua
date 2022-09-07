@@ -621,7 +621,7 @@ client.connect_signal(
 -- }}}
 
 apps = {
-    "/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1",
+    "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1",
     "xset dpms 300 15", -- dim screen after 5 min and lock 15 sec after
     "xss-lock --  " .. lock,
     "picom",
