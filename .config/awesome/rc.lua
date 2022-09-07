@@ -332,7 +332,15 @@ globalkeys = gears.table.join(
         {},
         "XF86AudioMute",
         function()
-            awful.spawn("pactl set-sink-mute 0 toggle")
+            awful.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle")
+        end,
+        {description = "mute volume", group = "shortcut"}
+    ),
+    awful.key(
+        {"Control"},
+        "XF86AudioMute",
+        function()
+            awful.spawn("pactl set-source-mute @DEFAULT_SOURCE@ toggle")
         end,
         {description = "mute volume", group = "shortcut"}
     ),
