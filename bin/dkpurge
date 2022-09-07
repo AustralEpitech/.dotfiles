@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PS="$(docker ps -aq 2> /dev/null)"
+PS="$(docker container ls -aq 2> /dev/null)"
 
 if [ "$?" != 0 ] && [ "$EUID" != 0 ]; then
     sudo -- "$0" "$@"
@@ -15,7 +15,7 @@ DEFAULT_NET="$(docker network ls -q -f name=bridge -f name=host -f name=none)"
 
 
 if [ -n "$PS" ]; then
-    docker ps -a
+    docker container ls -a
 
     echo -n "Prune Containers? [Y/n/a] "
     read -r ANS
