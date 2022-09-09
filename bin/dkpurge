@@ -1,5 +1,35 @@
 #!/bin/bash
 
+if [ "$1" == '-h' ] || [ "$1" == '--help' ]; then
+    cat << EOF
+Usage: $0 [Default-answer]
+Clean all Docker ressources.
+root permission not necessary so the binary can be placed in
+$HOME/[.local/]bin.
+
+| Ressource  | Answer | Description                |
+| ---------- | ------ | -------------------------- |
+| Containers | [Y]es  | Remove stopped containers  |
+|            | [A]ll  | Remove all containers      |
+|            | [N]o   | Skip                       |
+|            |        |                            |
+| Volumes    | [Y]es  | Remove unused volumes      |
+|            | [A]ll  | Remove unused volumes      |
+|            | [N]o   | Skip                       |
+|            |        |                            |
+| Images     | [Y]es  | Remove unused local images |
+|            | [A]ll  | Remove all unused images   |
+|            | [N]o   | Skip                       |
+|            |        |                            |
+| Networks   | [Y]es  | Remove unused networks     |
+|            | [A]ll  | Remove unused networks     |
+|            | [N]o   | Skip                       |
+EOF
+    exit
+fi
+
+
+
 PS="$(docker container ls -aq 2> /dev/null)"
 
 if [ "$?" != 0 ] && [ "$EUID" != 0 ]; then
@@ -13,12 +43,14 @@ NET="$(docker network ls -q 2> /dev/null)"
 
 DEFAULT_NET="$(docker network ls -q -f name=bridge -f name=host -f name=none)"
 
+ANS="$1"
+[ -z "$1" ] && READ="read -r ANS"
 
 if [ -n "$PS" ]; then
     docker container ls -a
 
     echo -n "Prune Containers? [Y/n/a] "
-    read -r ANS
+    $READ
     case "${ANS,,}" in
         'y'|'yes'|'')
             echo "$PS" | xargs docker rm 2> /dev/null
@@ -34,7 +66,7 @@ if [ -n "$VOL" ]; then
     docker volume ls
 
     echo -n "Prune Volumes? [Ya/n] "
-    read -r ANS
+    $READ
     case "${ANS,,}" in
         'y'|'yes'|'a'|'all'|'')
             echo "$VOL" | xargs docker volume rm -f 2> /dev/null
@@ -47,10 +79,15 @@ if [ -n "$IMG" ]; then
     docker image ls
 
     echo -n "Prune Images? [Y/n/a] "
-    read -r ANS
+    $READ
     case "${ANS,,}" in
         'y'|'yes'|'')
-            docker image prune -f
+            for img in $IMG; do
+                if docker image inspect "$img" | grep '"RepoTags": \[]' &> /dev/null; then
+                    TO_CLEAN="$TO_CLEAN $img"
+                fi
+            done
+            echo "$TO_CLEAN" | xargs docker image rm -f 2> /dev/null
             ;;
         'a'|'all')
             echo "$IMG" | xargs docker image rm -f 2> /dev/null
@@ -63,7 +100,7 @@ if [ -n "$NET" ] && [ "$NET" != "$DEFAULT_NET" ]; then
     docker network ls
 
     echo -n "Prune Networks? [Ya/n] "
-    read -r ANS
+    $READ
     case "${ANS,,}" in
         'y'|'yes'|'a'|'all'|'')
             docker network prune -f
