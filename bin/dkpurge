@@ -3,7 +3,7 @@
 if [ "$1" == '-h' ] || [ "$1" == '--help' ]; then
     cat << EOF
 Usage: $0 [Default-answer]
-Clean all Docker ressources.
+Delete all Docker ressources.
 root permission not necessary so the binary can be placed in
 $HOME/[.local/]bin.
 
