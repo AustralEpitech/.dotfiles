@@ -1,6 +1,6 @@
 -- packages
 vim.cmd("packadd nvim-treesitter")
-require'nvim-treesitter.configs'.setup {
+require"nvim-treesitter.configs".setup {
     auto_install = true,
     highlight = {enable = true},
 }
@@ -8,12 +8,13 @@ require'nvim-treesitter.configs'.setup {
 vim.cmd("packadd black")
 
 vim.cmd("packadd indent-blankline")
-require'indent_blankline'.setup {
+require"indent_blankline".setup {
     show_current_context = true,
     show_current_context_start = true,
 }
 
 vim.cmd("packadd nvim-lspconfig")
+require"pack_lspconfig"
 
 vim.cmd("packadd vim-dirdiff")
 
