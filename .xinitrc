@@ -1,7 +1,7 @@
 #!/bin/sh
 
 xrandr                               \
-    --output HDMI-2 --auto --primary \
-    --output eDP-1 --left-of HDMI-2
+    --output eDP-1 --primary         \
+    --output HDMI-2 --right-of-eDP-1
 
 exec awesome

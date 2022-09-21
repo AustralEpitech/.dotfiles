@@ -1,26 +1,47 @@
 #!/bin/bash
 set -e
 
-SINK='@DEFAULT_SINK@'
-CUR="$(pactl get-sink-volume "$SINK" | awk '$1 == "Volume:" {print substr($5, 1, length($5) - 1)}')"
-CUR="$((CUR - CUR % "$1"))"
+PACTL_SINK='@DEFAULT_SINK@'
+SINK="$PACTL_SINK"
+
+function get_vol() {
+    VOL="$(pactl get-sink-volume "$SINK" 2> /dev/null)"
+
+    if [ -n "$VOL" ]; then
+        CMD='pactl set-sink-volume'
+    else
+        CMD='amixer sset'
+        SINK='Master'
+
+        VOL="$(amixer sget "$SINK")"
+    fi
+}
+
+set +e
+get_vol
+set -e
+
+VOL="$(echo "$VOL" | grep -o -E '[0-9]{,3}%' | head -n 1)"
+# Remove everything after first '%'
+VOL="${VOL%%%*}"
+VOL="$((VOL - VOL % "$1"))"
 
 case "${1:0:1}" in
     '')
         exit 1
         ;;
     '+'|'-')
-        NEW="$((CUR + "$1"))"
+        VOL="$((VOL + "$1"))"
         ;;
     *)
-        NEW="$1"
+        VOL="$1"
         ;;
 esac
 
-[ "$NEW" -lt 0 ] && NEW=0
-[ "$NEW" -gt 100 ] && NEW=100
+[ "$VOL" -lt 0 ] && VOL=0
+[ "$VOL" -gt 100 ] && VOL=100
 
-pactl set-sink-volume "$SINK" "$NEW%"
-pactl set-sink-mute "$SINK" 0
+$CMD "$SINK" "$VOL%" > /dev/null
+pactl set-sink-mute "$PACTL_SINK" 0
 
-echo "$NEW"
+echo "$VOL"
