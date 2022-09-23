@@ -1,21 +1,24 @@
 [submodule ".config/nvim/pack/plugins/opt/black"]
 	path = .config/nvim/pack/plugins/opt/black
 	url = https://github.com/psf/black.git
+[submodule ".config/nvim/pack/plugins/opt/dirdiff"]
+	path = .config/nvim/pack/plugins/opt/dirdiff
+	url = https://github.com/will133/vim-dirdiff.git
+[submodule ".config/nvim/pack/plugins/opt/easy-align"]
+	path = .config/nvim/pack/plugins/opt/easy-align
+	url = https://github.com/junegunn/vim-easy-align.git
 [submodule ".config/nvim/pack/plugins/opt/indent-blankline"]
 	path = .config/nvim/pack/plugins/opt/indent-blankline
 	url = https://github.com/lukas-reineke/indent-blankline.nvim.git
-[submodule ".config/nvim/pack/plugins/opt/nvim-lspconfig"]
-	path = .config/nvim/pack/plugins/opt/nvim-lspconfig
+[submodule ".config/nvim/pack/plugins/opt/lspconfig"]
+	path = .config/nvim/pack/plugins/opt/lspconfig
 	url = https://github.com/neovim/nvim-lspconfig.git
-[submodule ".config/nvim/pack/plugins/opt/nvim-treesitter"]
-	path = .config/nvim/pack/plugins/opt/nvim-treesitter
+[submodule ".config/nvim/pack/plugins/opt/treesitter"]
+	path = .config/nvim/pack/plugins/opt/treesitter
 	url = https://github.com/nvim-treesitter/nvim-treesitter.git
-[submodule ".config/nvim/pack/plugins/opt/vim-dirdiff"]
-	path = .config/nvim/pack/plugins/opt/vim-dirdiff
-	url = https://github.com/will133/vim-dirdiff.git
-[submodule ".config/nvim/pack/plugins/opt/vim-easy-align"]
-	path = .config/nvim/pack/plugins/opt/vim-easy-align
-	url = https://github.com/junegunn/vim-easy-align.git
+[submodule ".config/nvim/pack/plugins/opt/which-key"]
+	path = .config/nvim/pack/plugins/opt/which-key
+	url = https://github.com/folke/which-key.nvim.git
 [submodule ".config/zsh/ohmyzsh"]
 	path = .config/zsh/ohmyzsh
 	url = https://github.com/ohmyzsh/ohmyzsh.git

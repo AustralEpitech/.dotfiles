@@ -36,11 +36,12 @@ vim.wo.cc            = "80"
 --------------------
 
 require"pack-black"
+require"pack-dirdiff"
+require"pack-easy-align"
 require"pack-indent-blankline"
 require"pack-lspconfig"
-require"pack-nvim-treesitter"
-require"pack-vim-dirdiff"
-require"pack-vim-easy-align"
+require"pack-treesitter"
+require"pack-which-key"
 
 -----------------------
 ----- keybindings -----

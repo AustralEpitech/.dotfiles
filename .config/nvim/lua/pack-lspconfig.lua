@@ -1,4 +1,4 @@
-vim.cmd("packadd nvim-lspconfig")
+vim.cmd("packadd lspconfig")
 
 lspconfig = require"lspconfig"
 
