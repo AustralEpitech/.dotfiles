@@ -24,7 +24,8 @@ function fnalias() {
         cmd="$2"
     fi
 
-    env "$1" "$cmd" "${@:3}"
+    $1 -- $(echo "$cmd") "${@:3}"
 }
 
 alias watch='fnalias watch'
+alias xargs='fnalias xargs'
