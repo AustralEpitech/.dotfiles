@@ -12,8 +12,8 @@ alias wconf="$EDITOR $HOME/.config/awesome"
 alias zshconf="$EDITOR $ZDOTDIR/.zshrc && . $ZDOTDIR/.zshrc"
 
 function fnalias() {
-    # alias alias_cmd='cmd'
     cmd="$(alias "$2")"
+    shell="$(ps -q "$$" -o 'comm=')"
 
     if [ -n "$cmd" ]; then
         # remove everything before and including the first =
@@ -24,8 +24,8 @@ function fnalias() {
         cmd="$2"
     fi
 
-    $1 -- $(echo "$cmd") "${@:3}"
+    $shell -c "$1 $(echo "$cmd" | sed 's/--color=.\+/--color=force/') ${@:3}"
 }
 
-alias watch='fnalias watch'
+alias watch='fnalias "watch -c"'
 alias xargs='fnalias xargs'
