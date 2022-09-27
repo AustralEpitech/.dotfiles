@@ -55,3 +55,6 @@ vim.keymap.set("n", "<Leader>f", "<cmd>%s/\\s\\+$//e<CR>")
 
 -- copy entire file to graphical buffer
 vim.keymap.set("n", "<Leader>y", 'ggVG"+y<C-o>'          )
+
+-- copy selection to graphical buffer
+vim.keymap.set("v", "<Leader>y", '"+y'                   )
