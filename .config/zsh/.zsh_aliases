@@ -1,31 +1,19 @@
 alias cls='clear && l'
 alias config="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
-alias minecraft='DRI_PRIME=1 minecraft-launcher'
-alias mount='udisksctl mount -b'
-alias pls='sudo '
 alias startgui='startx'
-alias sudo='sudo '
 alias tmp="cd $(mktemp -d)"
 alias umnt='sudo umount /mnt -R'
 alias vi="$EDITOR"
+
 alias wconf="$EDITOR $HOME/.config/awesome"
 alias zshconf="$EDITOR $ZDOTDIR/.zshrc && . $ZDOTDIR/.zshrc"
 
+alias minecraft='DRI_PRIME=1 minecraft-launcher'
+
 function fnalias() {
-    cmd="$(alias "$2")"
-    shell="$(ps -q "$$" -o 'comm=')"
-
-    if [ -n "$cmd" ]; then
-        # remove everything before and including the first =
-        cmd="${cmd#*=}"
-        # remove first and last char in this case, quotes
-        cmd="${cmd:1:-1}"
-    else
-        cmd="$2"
-    fi
-
-    $shell -c "$1 $(echo "$cmd" | sed 's/--color=.\+/--color=force/') ${@:3}"
+    $1 $(sed 's/--color=.\+/--color=force/' <<< "${@:2}")
 }
 
-alias watch='fnalias "watch -c"'
-alias xargs='fnalias xargs'
+alias sudo='sudo '
+alias watch='fnalias watch -c '
+alias xargs='xargs '
