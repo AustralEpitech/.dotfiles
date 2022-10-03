@@ -13,7 +13,10 @@ export XDG_DATA_DIRS='/usr/local/share/:/usr/share/'
 export ZDOTDIR="$HOME"/.config/zsh
 export HISTFILE="$XDG_STATE_HOME"/zsh/history
 
-export MOZ_ENABLE_WAYLAND=1
 export LESSHISTFILE='-'
+
+export MOZ_ENABLE_WAYLAND=1
+# fix Java Windows
+export _JAVA_AWT_WM_NONREPARENTING=1
 
 export EDITOR='nvim'
