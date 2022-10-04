@@ -4,8 +4,6 @@
 
 vim.g.mapleader      = " "
 
-vim.o.path           = vim.o.path .. ",**"
-
 vim.o.expandtab      = true
 vim.o.shiftwidth     = 4
 vim.o.smartindent    = true
@@ -34,11 +32,14 @@ vim.wo.cc            = "80"
 ----- packages -----
 --------------------
 
+vim.cmd("packadd plenary")
+
 require"pack-black"
 require"pack-dirdiff"
 require"pack-easy-align"
 require"pack-indent-blankline"
 require"pack-lspconfig"
+require"pack-telescope"
 require"pack-treesitter"
 require"pack-which-key"
 

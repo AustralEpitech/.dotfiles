@@ -13,6 +13,12 @@
 [submodule ".config/nvim/pack/plugins/opt/lspconfig"]
 	path = .config/nvim/pack/plugins/opt/lspconfig
 	url = https://github.com/neovim/nvim-lspconfig.git
+[submodule ".config/nvim/pack/plugins/opt/plenary"]
+	path = .config/nvim/pack/plugins/opt/plenary
+	url = https://github.com/nvim-lua/plenary.nvim.git
+[submodule ".config/nvim/pack/plugins/opt/telescope"]
+	path = .config/nvim/pack/plugins/opt/telescope
+	url = https://github.com/nvim-telescope/telescope.nvim.git
 [submodule ".config/nvim/pack/plugins/opt/treesitter"]
 	path = .config/nvim/pack/plugins/opt/treesitter
 	url = https://github.com/nvim-treesitter/nvim-treesitter.git
