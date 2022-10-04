@@ -16,7 +16,6 @@ vim.o.relativenumber = true
 vim.o.ignorecase     = true
 vim.o.smartcase      = true
 
-vim.o.ch             = 0
 vim.o.guicursor      = ""
 
 vim.o.suffixes       = vim.o.suffixes .. ",.pyc"
@@ -27,7 +26,7 @@ vim.o.foldlevel      = 99
 vim.o.grepprg        = "grep -rn"
 
 vim.o.scrolloff      = 2
-vim.wo.cc            = "80"
+vim.wo.colorcolumn   = "80"
 
 --------------------
 ----- packages -----
