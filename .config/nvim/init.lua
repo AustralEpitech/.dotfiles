@@ -16,6 +16,7 @@ vim.o.relativenumber = true
 vim.o.ignorecase     = true
 vim.o.smartcase      = true
 
+vim.o.ch             = 0
 vim.o.guicursor      = ""
 
 vim.o.suffixes       = vim.o.suffixes .. ",.pyc"
