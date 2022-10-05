@@ -26,7 +26,7 @@ vim.o.foldlevel      = 99
 vim.o.grepprg        = "grep -rn"
 
 vim.o.scrolloff      = 2
-vim.wo.cc            = "80"
+vim.wo.colorcolumn   = "80"
 
 --------------------
 ----- packages -----
