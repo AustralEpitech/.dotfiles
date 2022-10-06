@@ -14,8 +14,6 @@
 
 alias kx='kubectx'
 alias kn='kubens'
-alias kx-='kubectx -'
-alias kn-='kubens -'
 alias k='kubectl'
 alias ksys='kubectl --namespace=kube-system'
 alias ka='kubectl apply --recursive -f'
