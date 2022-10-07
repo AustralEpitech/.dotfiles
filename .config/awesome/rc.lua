@@ -628,6 +628,7 @@ apps = {
     "xss-lock --  " .. lock,
     "picom",
     "nm-applet",
+    "numlockx",
     "killall cbatticon",
     "cbatticon BAT0 -i symbolic",
     "flameshot",
