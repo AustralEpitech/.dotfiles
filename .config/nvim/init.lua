@@ -47,8 +47,5 @@ require"pack-which-key"
 ----- keybindings -----
 -----------------------
 
--- terminal escape key
-vim.keymap.set("t", "<Esc>",     "<C-\\><C-n>"           )
-
 -- remove trailing whitespaces
 vim.keymap.set("n", "<Leader>f", "<cmd>%s/\\s\\+$//e<CR>")
