@@ -1,5 +1,4 @@
 export PYENV_ROOT="$HOME/.pyenv"
-export VIRTUAL_ENV="$PYENV_ROOT"
 
 path=(~/bin ~/.local/bin "$VIRTUAL_ENV"/bin $path)
 
