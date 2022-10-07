@@ -11,6 +11,7 @@ export XDG_DATA_DIRS='/usr/local/share/:/usr/share/'
 
 export ZDOTDIR="$HOME"/.config/zsh
 export HISTFILE="$XDG_STATE_HOME"/zsh/history
+export ZLE_RPROMPT_INDENT=0
 
 export LESSHISTFILE='-'
 
