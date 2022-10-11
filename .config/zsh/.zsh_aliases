@@ -5,7 +5,6 @@ alias tmp="cd $(mktemp -d)"
 alias umnt='sudo umount /mnt -R'
 alias vi="$EDITOR"
 alias epitest="docker run -it --rm -v $PWD:/usr/app/ epitechcontent/epitest-docker:latest bash"
-alias grep='grep -E'
 
 alias wconf="$EDITOR $HOME/.config/sway"
 alias zshconf="$EDITOR $ZDOTDIR/.zshrc && . $ZDOTDIR/.zshrc"

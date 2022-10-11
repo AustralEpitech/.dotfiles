@@ -12,8 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+function kn() {
+    (set -e
+
+        if [ -n "$2" ]; then
+            kubectx "${1:l}"
+            kubens "$2"
+        else
+            kubens "$@"
+        fi
+    )
+}
+compdef -e _kubens.zsh kn
+
 alias kx='kubectx'
-alias kn='kubens'
 alias k='kubectl'
 alias ksys='kubectl --namespace=kube-system'
 alias ka='kubectl apply --recursive -f'
