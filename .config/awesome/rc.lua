@@ -57,6 +57,7 @@ editor = os.getenv("EDITOR") or "nvim"
 editor_cmd = terminal .. " -e " .. editor
 
 browser = "firefox"
+private_browser = "firefox --private-window"
 files = "pcmanfm"
 
 lock = "i3lock -ftni" .. gears.filesystem.get_configuration_dir() .. "wallpapers/debian11.png"
@@ -250,6 +251,13 @@ globalkeys = gears.table.join(
             awful.spawn(browser, {tag = mouse.screen.selected_tag})
         end,
         {description = "open browser", group = "launcher"}
+    ),
+    awful.key(
+        {modkey, "Shift"}, "b",
+        function()
+            awful.spawn(private_browser, {tag = mouse.screen.selected_tag})
+        end,
+        {description = "open private browser", group = "launcher"}
     ),
     awful.key(
         {modkey}, "l",
