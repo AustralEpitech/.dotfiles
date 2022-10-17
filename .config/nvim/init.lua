@@ -5,11 +5,12 @@
 vim.g.mapleader      = " "
 
 vim.o.expandtab      = true
-vim.o.shiftwidth     = 4
 vim.o.smartindent    = true
+vim.o.shiftwidth     = 4
 vim.o.tabstop        = 4
 
 vim.o.list           = true
+
 vim.o.number         = true
 vim.o.relativenumber = true
 
@@ -27,6 +28,8 @@ vim.o.grepprg        = "grep -rn"
 
 vim.o.scrolloff      = 2
 vim.wo.colorcolumn   = "80"
+
+vim.g.netrw_banner   = 0
 
 --------------------
 ----- packages -----
