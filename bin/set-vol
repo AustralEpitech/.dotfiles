@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+# TODO: multiple fast invocation cause volume not to be updated
+
 PACTL_SINK='@DEFAULT_SINK@'
 SINK="$PACTL_SINK"
 
@@ -21,9 +23,7 @@ set +e
 get_vol
 set -e
 
-VOL="$(echo "$VOL" | grep -o -E '[0-9]{,3}%' | head -n 1)"
-# Remove everything after first '%'
-VOL="${VOL%%%*}"
+VOL="$(echo "$VOL" | grep -Po '\d+(?=%)' | head -n 1)"
 VOL="$((VOL - VOL % "$1"))"
 
 case "${1:0:1}" in
