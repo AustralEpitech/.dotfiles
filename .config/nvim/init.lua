@@ -31,6 +31,8 @@ vim.wo.colorcolumn   = "80"
 
 vim.g.netrw_banner   = 0
 
+vim.o.lazyredraw     = true
+
 --------------------
 ----- packages -----
 --------------------
