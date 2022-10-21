@@ -9,6 +9,8 @@ alias epitest="docker run -it --rm -v $PWD:/usr/app/ epitechcontent/epitest-dock
 alias wconf="$EDITOR $HOME/.config/awesome"
 alias zshconf="$EDITOR $ZDOTDIR/.zshrc && . $ZDOTDIR/.zshrc"
 
+alias ssh='TERM=linux ssh'
+
 alias minecraft='DRI_PRIME=1 minecraft-launcher'
 
 function fnalias() {
