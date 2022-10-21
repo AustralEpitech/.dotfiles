@@ -7,11 +7,11 @@ Options:
     -h  Show this help and exits
     -c  Remove stopped containers
     -C  Remove all containers
-    -v  Remove volumes not used by at least one container
-    -i  Remove all dangling images
+    -v  Remove unused volumes
+    -i  Remove unused images
     -I  Remove all images
-    -n  Remove networks not used by at least one container
-    -a  All of the above (-CvIn)
+    -n  Remove unused networks
+    -a  All of the above, equivalent of -CvIn
 EOF
     exit 0
 }
@@ -23,12 +23,14 @@ function add_opt() {
     for o in "$@"; do
         if [ "$((RESULT & o))" == 0 ]; then
             RESULT="$((RESULT + o))"
-        else
-            RESULT="$RESULT"
         fi
     done
     echo "$RESULT"
 }
+
+if ! docker container ls > /dev/null 2>&1 && [ "$EUID" != 0 ]; then
+    exec sudo -- "$0" "$@"
+fi
 
 c=1
 C=2
