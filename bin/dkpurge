@@ -1,0 +1,110 @@
+#!/bin/bash
+
+function usage() {
+    cat << EOF
+Usage: $0 -hcCviIna
+Options:
+    -h  Show this help and exits
+    -c  Remove stopped containers
+    -C  Remove all containers
+    -v  Remove volumes not used by at least one container
+    -i  Remove all dangling images
+    -I  Remove all images
+    -n  Remove networks not used by at least one container
+    -a  All of the above (-CvIn)
+EOF
+    exit 0
+}
+
+function add_opt() {
+    if [ "$(($1 & $2))" == 0 ]; then
+        echo "$(($1 + $2))"
+    else
+        echo "$1"
+    fi
+}
+
+CLEAN=0
+c=1
+C=2
+v=4
+i=8
+I=16
+n=32
+a="$((c + C + v + I + n))"
+
+
+while getopts hcCviIna o; do
+    case "$o" in
+        h)
+            usage
+            ;;
+        c)
+            CLEAN="$(add_opt "$CLEAN" "$c")"
+            ;;
+        C)
+            CLEAN="$(add_opt "$CLEAN" "$c")"
+            CLEAN="$(add_opt "$CLEAN" "$C")"
+            ;;
+        v)
+            CLEAN="$(add_opt "$CLEAN" "$v")"
+            ;;
+        i)
+            CLEAN="$(add_opt "$CLEAN" "$i")"
+            ;;
+        I)
+            CLEAN="$(add_opt "$CLEAN" "$I")"
+            ;;
+        n)
+            CLEAN="$(add_opt "$CLEAN" "$n")"
+            ;;
+        a)
+            CLEAN="$(add_opt "$CLEAN" "$c")"
+            CLEAN="$(add_opt "$CLEAN" "$C")"
+            CLEAN="$(add_opt "$CLEAN" "$v")"
+            CLEAN="$(add_opt "$CLEAN" "$I")"
+            CLEAN="$(add_opt "$CLEAN" "$n")"
+            ;;
+        *)
+            exit 1
+            ;;
+    esac
+done
+
+if [ "$((CLEAN & C))" == "$C" ]; then # C
+    docker container ls -aq | xargs docker stop
+fi
+
+if [ "$((CLEAN & c))" == "$c" ]; then # C
+    docker container prune -f
+fi
+
+PRUNE="docker system prune -f"
+case "$CLEAN" in
+    "$v")
+        docker volume prune -f
+        ;;
+    "$i")
+        docker image prune -f
+        ;;
+    "$I")
+        docker image prune -af
+        ;;
+    "$n")
+        docker network prune -f
+        ;;
+    "$((c + i + n))")
+        $PRUNE
+        ;;
+    "$((c + I + n))")
+        $PRUNE -a
+        ;;
+    "$((c + v + n))")
+        $PRUNE --volumes
+        ;;
+    "$a")
+        $PRUNE -a --volumes
+        ;;
+    *)
+        ;;
+esac
