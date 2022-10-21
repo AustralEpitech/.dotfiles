@@ -17,14 +17,19 @@ EOF
 }
 
 function add_opt() {
-    if [ "$(($1 & $2))" == 0 ]; then
-        echo "$(($1 + $2))"
-    else
-        echo "$1"
-    fi
+    local RESULT
+
+    RESULT="$(unset "1")"
+    for o in "$@"; do
+        if [ "$((RESULT & o))" == 0 ]; then
+            RESULT="$((RESULT + o))"
+        else
+            RESULT="$RESULT"
+        fi
+    done
+    echo "$RESULT"
 }
 
-CLEAN=0
 c=1
 C=2
 v=4
@@ -33,7 +38,7 @@ I=16
 n=32
 a="$((c + C + v + I + n))"
 
-
+CLEAN=0
 while getopts hcCviIna o; do
     case "$o" in
         h)
@@ -43,8 +48,7 @@ while getopts hcCviIna o; do
             CLEAN="$(add_opt "$CLEAN" "$c")"
             ;;
         C)
-            CLEAN="$(add_opt "$CLEAN" "$c")"
-            CLEAN="$(add_opt "$CLEAN" "$C")"
+            CLEAN="$(add_opt "$CLEAN" "$c" "$C")"
             ;;
         v)
             CLEAN="$(add_opt "$CLEAN" "$v")"
@@ -59,11 +63,7 @@ while getopts hcCviIna o; do
             CLEAN="$(add_opt "$CLEAN" "$n")"
             ;;
         a)
-            CLEAN="$(add_opt "$CLEAN" "$c")"
-            CLEAN="$(add_opt "$CLEAN" "$C")"
-            CLEAN="$(add_opt "$CLEAN" "$v")"
-            CLEAN="$(add_opt "$CLEAN" "$I")"
-            CLEAN="$(add_opt "$CLEAN" "$n")"
+            CLEAN="$(add_opt "$CLEAN" "$c" "$C" "$v" "$I" "$n")"
             ;;
         *)
             exit 1
