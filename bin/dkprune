@@ -29,7 +29,7 @@ function add_opt() {
 }
 
 if ! [ -w "/var/run/docker.sock" ] && [ "$EUID" != 0 ]; then
-    sudo -- "$0" "$@"
+    exec sudo -- "$0" "$@"
 fi
 
 c=1
