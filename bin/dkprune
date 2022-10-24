@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#TODO: group flags into one command
+# like -I == $i -a
+
 function usage() {
     cat << EOF
 Usage: $0 -hcCviIna
@@ -73,40 +76,46 @@ while getopts hcCviIna o; do
     esac
 done
 
-if [ "$((CLEAN & C))" == "$C" ]; then
-    docker container ls -aq | xargs docker stop
+
+VALUES=(
+    "$a"
+    "$((c + i + n))"
+    "$((c + I + n))"
+    "$((c + v + n))"
+    "$c"
+    "$v"
+    "$i"
+    "$I"
+    "$n"
+)
+
+SYS="docker system"
+CON="docker container"
+VOL="docker volume"
+IMG="docker image"
+NET="docker network"
+PRUNE="prune -f"
+COMMANDS=(
+    "$SYS $PRUNE -a --volumes"
+    "$SYS $PRUNE"
+    "$SYS $PRUNE -a"
+    "$SYS $PRUNE --volumes"
+    "$CON $PRUNE"
+    "$VOL $PRUNE"
+    "$IMG $PRUNE"
+    "$IMG $PRUNE -a"
+    "$NET $PRUNE"
+)
+
+if [ "$((CLEAN & "$C"))" == "$C" ]; then
+    $CON ls -aq | xargs $CON stop
 fi
 
-if [ "$((CLEAN & c))" == "$c" ]; then
-    docker container prune -f
-fi
 
-PRUNE="docker system prune -f"
-case "$CLEAN" in
-    "$v")
-        docker volume prune -f
-        ;;
-    "$i")
-        docker image prune -f
-        ;;
-    "$I")
-        docker image prune -af
-        ;;
-    "$n")
-        docker network prune -f
-        ;;
-    "$((c + i + n))")
-        $PRUNE
-        ;;
-    "$((c + I + n))")
-        $PRUNE -a
-        ;;
-    "$((c + v + n))")
-        $PRUNE --volumes
-        ;;
-    "$a")
-        $PRUNE -a --volumes
-        ;;
-    *)
-        ;;
-esac
+for idx in "${!VALUES[@]}"; do
+    mask="${VALUES[$idx]}"
+    if [ "$((CLEAN & mask))" == "$mask" ]; then
+        bash -c "${COMMANDS[$idx]}"
+        CLEAN="$((CLEAN - mask))"
+    fi
+done
