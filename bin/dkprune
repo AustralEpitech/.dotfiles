@@ -2,7 +2,9 @@
 
 function usage() {
     cat << EOF
-Usage: $0 -hcCviIna
+Usage: $0 [-hcCviIna]
+Prune Docker resources.
+If no option provided, defaults to -Cvn
 Options:
     -h  Show this help and exits
     -c  Remove stopped containers
@@ -36,9 +38,9 @@ c=1
 C=2
 v=4
 i=8
-I=16
+# I=16
 n=32
-a="$((c + C + v + I + n))"
+# a="$((c + C + v + I + n))"
 
 CLEAN=0
 while getopts hcCviIna o; do
@@ -59,13 +61,15 @@ while getopts hcCviIna o; do
             CLEAN="$(add_opt "$CLEAN" "$i")"
             ;;
         I)
-            CLEAN="$(add_opt "$CLEAN" "$I")"
+            CLEAN="$(add_opt "$CLEAN" "$i")"
+            IMG_OPT="-a"
             ;;
         n)
             CLEAN="$(add_opt "$CLEAN" "$n")"
             ;;
         a)
-            CLEAN="$(add_opt "$CLEAN" "$c" "$C" "$v" "$I" "$n")"
+            CLEAN="$(add_opt "$CLEAN" "$c" "$C" "$v" "$i" "$n")"
+            IMG_OPT="-a"
             ;;
         *)
             exit 1
@@ -73,40 +77,39 @@ while getopts hcCviIna o; do
     esac
 done
 
-if [ "$((CLEAN & C))" == "$C" ]; then
-    docker container ls -aq | xargs docker stop
+if [ "$CLEAN" == 0 ]; then
+    CLEAN="$((C + v + n))"
 fi
 
-if [ "$((CLEAN & c))" == "$c" ]; then
-    docker container prune -f
+VALUES=(
+    "$((c + i + v + n))"
+    "$((c + i + n))"
+    "$c"
+    "$v"
+    "$i"
+    "$n"
+)
+
+CON="container"
+PRUNE="prune -f"
+COMMANDS=(
+    "docker system  $PRUNE $IMG_OPT --volumes"
+    "docker system  $PRUNE $IMG_OPT"
+    "docker $CON    $PRUNE"
+    "docker volume  $PRUNE"
+    "docker image   $PRUNE $IMG_OPT"
+    "docker network $PRUNE"
+)
+
+if [ "$((CLEAN & "$C"))" == "$C" ]; then
+    docker "$CON" ls -aq | xargs docker "$CON" stop 2> /dev/null
 fi
 
-PRUNE="docker system prune -f"
-case "$CLEAN" in
-    "$v")
-        docker volume prune -f
-        ;;
-    "$i")
-        docker image prune -f
-        ;;
-    "$I")
-        docker image prune -af
-        ;;
-    "$n")
-        docker network prune -f
-        ;;
-    "$((c + i + n))")
-        $PRUNE
-        ;;
-    "$((c + I + n))")
-        $PRUNE -a
-        ;;
-    "$((c + v + n))")
-        $PRUNE --volumes
-        ;;
-    "$a")
-        $PRUNE -a --volumes
-        ;;
-    *)
-        ;;
-esac
+for idx in "${!VALUES[@]}"; do
+    mask="${VALUES[$idx]}"
+
+    if [ "$((CLEAN & mask))" == "$mask" ]; then
+        bash -c "${COMMANDS[$idx]}"
+        CLEAN="$((CLEAN - mask))"
+    fi
+done
