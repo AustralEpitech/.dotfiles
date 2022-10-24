@@ -1,5 +1,11 @@
 vim.cmd("packadd telescope")
-require"telescope".setup {}
+require"telescope".setup {
+    pickers = {
+        find_files = {
+            find_command = {"find", ".", "-type", "f"}
+        }
+    }
+}
 
 local builtin = require("telescope.builtin")
 
