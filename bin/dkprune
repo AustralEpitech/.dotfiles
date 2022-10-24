@@ -5,7 +5,9 @@
 
 function usage() {
     cat << EOF
-Usage: $0 -hcCviIna
+Usage: $0 [-hcCviIna]
+Prune Docker resources.
+If no option provided, defaults to -Cvn
 Options:
     -h  Show this help and exits
     -c  Remove stopped containers
@@ -76,6 +78,9 @@ while getopts hcCviIna o; do
     esac
 done
 
+if [ "$CLEAN" == 0 ]; then
+    CLEAN="$((C + v + n))"
+fi
 
 VALUES=(
     "$a"
