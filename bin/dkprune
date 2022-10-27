@@ -21,7 +21,7 @@ EOF
 function add_opt() {
     local RESULT
 
-    RESULT="$(unset "1")"
+    RESULT="$1"
     for o in "$@"; do
         if [ "$((RESULT & o))" == 0 ]; then
             RESULT="$((RESULT + o))"
@@ -52,7 +52,7 @@ while getopts hcCviIna o; do
             CLEAN="$(add_opt "$CLEAN" "$c")"
             ;;
         C)
-            CLEAN="$(add_opt "$CLEAN" "$c" "$C")"
+            CLEAN="$(add_opt "$CLEAN" "$C")"
             ;;
         v)
             CLEAN="$(add_opt "$CLEAN" "$v")"
@@ -103,6 +103,7 @@ COMMANDS=(
 
 if [ "$((CLEAN & "$C"))" == "$C" ]; then
     docker "$CON" ls -aq | xargs docker "$CON" stop 2> /dev/null
+    CLEAN="$(add_opt "$CLEAN" "$c")"
 fi
 
 for idx in "${!VALUES[@]}"; do
