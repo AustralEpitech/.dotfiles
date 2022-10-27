@@ -27,18 +27,19 @@ alias dkb='docker build .'
 alias dki='docker image'
 alias dkic='docker image create'
 alias dkii='docker image inspect'
+alias dkil='docker pull'
+alias dkila="docker image ls | grep -v none | awk '{print \"docker pull \" \$1 \":\" \$2}' | $SHELL"
 alias dkils='docker image ls'
 alias dkilsa='docker image ls -a'
 alias dkilsaq='docker image ls -a -q'
 alias dkilsq='docker image ls -q'
 alias dkip='docker image prune'
+alias dkip='docker image push'
 alias dkipf='docker image prune -f'
 alias dkirm='docker image rm'
 alias dkirmf='docker image rm -f'
-alias dkl='docker pull'
-alias dkla="docker image ls | awk '{print \"docker pull \" \$1 \":\" \$2}' | $SHELL"
-alias dkp='docker push'
-alias dkt='docker tag'
+alias dkis='docker image save'
+alias dkit='docker image tag'
 
 # volumes
 alias dkv='docker volume'
