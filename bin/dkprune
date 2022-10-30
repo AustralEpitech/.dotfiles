@@ -10,8 +10,8 @@ Options:
     -c  Remove stopped containers
     -C  Remove all containers
     -v  Remove unused volumes
-    -i  Remove unused images
-    -I  Remove all images
+    -i  Remove build images
+    -I  Remove unused images
     -n  Remove unused networks
     -a  All of the above, equivalent of -CvIn
 EOF
