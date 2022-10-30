@@ -1,4 +1,4 @@
-if [ ! -w '/var/run/docker.sock' ]; then
+if ! [ -w '/var/run/docker.sock' ]; then
     alias docker='sudo docker'
     alias docker-compose='sudo docker-compose'
 fi
