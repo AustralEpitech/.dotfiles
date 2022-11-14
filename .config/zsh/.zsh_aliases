@@ -18,6 +18,7 @@ function fnalias() {
     $1 $(sed 's/--color=.\+/--color=force/' <<< "${@:2}")
 }
 
+alias man='man '
 alias sudo='sudo '
 alias watch='fnalias watch -c '
 alias xargs='xargs '
