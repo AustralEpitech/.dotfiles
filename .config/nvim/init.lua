@@ -35,6 +35,8 @@ vim.o.lazyredraw     = true
 
 vim.o.complete       = vim.o.complete .. ",i"
 
+vim.o.mousemodel     = extend
+
 --------------------
 ----- packages -----
 --------------------
@@ -57,6 +59,3 @@ require"pack-which-key"
 -- remove trailing whitespaces
 vim.keymap.set("n", "<Leader>e", "<cmd>exe getline(line('.'))<CR>")
 vim.keymap.set("n", "<Leader>f", "<cmd>%s/\\s\\+$//e<CR>")
-vim.keymap.set("n", "s",         '"_d')
-vim.keymap.set("n", "ss",        '"_dd')
-vim.keymap.set("n", "S",         '"_D')
