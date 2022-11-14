@@ -1,85 +1,101 @@
 if ! [ -w '/var/run/docker.sock' ]; then
-    local DOCKER='sudo docker'
-else
-    local DOCKER='docker'
+    alias docker='sudo docker'
+    alias docker-compose='sudo docker-compose'
 fi
 
-alias dk="$DOCKER"
+# docker
+alias dk='docker'
 
-# containers
-alias dkcc="$DOCKER container create"
-alias dkci="$DOCKER container inspect"
-alias dkcls="$DOCKER container ls"
-alias dkclsa="$DOCKER container ls -a"
-alias dkclsaq="$DOCKER container ls -a -q"
-alias dkclsq="$DOCKER container ls -q"
-alias dkcp="$DOCKER container prune"
-alias dkcpf="$DOCKER container prune -f"
-alias dkcrm="$DOCKER container rm"
-alias dkcrmf="$DOCKER container rm -f"
-alias dkcsp="$DOCKER container stop"
-alias dkcst="$DOCKER container start"
-alias dkex="$DOCKER container exec -i -t"
-alias dklo="$DOCKER logs -f"
-alias dkr="$DOCKER run -i -t"
+## container
+alias dkcc='docker container create'
+alias dkci='docker container inspect'
+alias dkcls='docker container ls'
+alias dkclsa='docker container ls -a'
+alias dkclsaq='docker container ls -a -q'
+alias dkclsq='docker container ls -q'
+alias dkcp='docker container prune'
+alias dkcp!='docker container prune -f'
+alias dkcrm='docker container rm'
+alias dkcrm!='docker container rm -f'
+alias dkcsp='docker container stop'
+alias dkcst='docker container restart'
+alias dkex='docker container exec -i -t'
+alias dklo='docker logs -f'
+alias dkr='docker run -i -t'
 
-# images
-alias dkb="$DOCKER build ."
-alias dki="$DOCKER image"
-alias dkic="$DOCKER image create"
-alias dkii="$DOCKER image inspect"
-alias dkil="$DOCKER pull"
-alias dkila="$DOCKER image ls | grep -v none | awk '{print \"$DOCKER pull \" \$1 \":\" \$2}' | $SHELL"
-alias dkils="$DOCKER image ls"
-alias dkilsa="$DOCKER image ls -a"
-alias dkilsaq="$DOCKER image ls -a -q"
-alias dkilsq="$DOCKER image ls -q"
-alias dkip="$DOCKER image prune"
-alias dkip="$DOCKER image push"
-alias dkipf="$DOCKER image prune -f"
-alias dkirm="$DOCKER image rm"
-alias dkirmf="$DOCKER image rm -f"
-alias dkis="$DOCKER image save"
-alias dkit="$DOCKER image tag"
+## image
+alias dkb='docker build .'
+alias dki='docker image'
+alias dkic='docker image create'
+alias dkii='docker image inspect'
+alias dkil='docker pull'
+alias dkila="docker image ls | grep -v none | awk '{print \"docker pull \" \$1 \":\" \$2}' | $SHELL"
+alias dkils='docker image ls'
+alias dkilsa='docker image ls -a'
+alias dkilsaq='docker image ls -a -q'
+alias dkilsq='docker image ls -q'
+alias dkip='docker image prune'
+alias dkip='docker image push'
+alias dkip!='docker image prune -f'
+alias dkirm='docker image rm'
+alias dkirm!='docker image rm -f'
+alias dkis='docker image save'
+alias dkit='docker image tag'
 
-# volumes
-alias dkv="$DOCKER volume"
-alias dkvc="$DOCKER volume create"
-alias dkvi="$DOCKER volume inspect"
-alias dkvls="$DOCKER volume ls"
-alias dkvlsq="$DOCKER volume ls -q"
-alias dkvp="$DOCKER volume prune"
-alias dkvpf="$DOCKER volume prune -f"
-alias dkvrm="$DOCKER volume rm"
-alias dkvrmf="$DOCKER volume rm -f"
+## volume
+alias dkv='docker volume'
+alias dkvc='docker volume create'
+alias dkvi='docker volume inspect'
+alias dkvls='docker volume ls'
+alias dkvlsq='docker volume ls -q'
+alias dkvp='docker volume prune'
+alias dkvp!='docker volume prune -f'
+alias dkvrm='docker volume rm'
+alias dkvrm!='docker volume rm -f'
 
-# networks
-alias dkn="$DOCKER network"
-alias dknc="$DOCKER network create"
-alias dkni="$DOCKER network inspect"
-alias dknls="$DOCKER network ls"
-alias dknlsq="$DOCKER network ls -q"
-alias dknp="$DOCKER network prune"
-alias dknpf="$DOCKER network prune -f"
-alias dknrm="$DOCKER network rm"
-alias dknrmf="$DOCKER network rm -f"
+## network
+alias dkn='docker network'
+alias dknc='docker network create'
+alias dkni='docker network inspect'
+alias dknls='docker network ls'
+alias dknlsq='docker network ls -q'
+alias dknp='docker network prune'
+alias dknpf='docker network prune -f'
+alias dknrm='docker network rm'
+alias dknrm!='docker network rm -f'
 
-# system
-alias dks="$DOCKER system"
-alias dksdf="$DOCKER system df"
-alias dksp="$DOCKER system prune"
-alias dkspa="$DOCKER system prune -a"
-alias dkspaf="$DOCKER system prune -af"
-alias dkspf="$DOCKER system prune -f"
-alias dkspv="$DOCKER system prune --volumes"
-alias dkspva="$DOCKER system prune --volumes -a"
-alias dkspvaf="$DOCKER system prune --volumes -af"
-alias dkspvf="$DOCKER system prune --volumes -f"
+## system
+alias dks='docker system'
+alias dksdf='docker system df'
+alias dksp!='docker system prune -f'
+alias dksp='docker system prune'
+alias dkspa='docker system prune -a'
+alias dkspaf='docker system prune -a -f'
+alias dkspv!='docker system prune --volumes -f'
+alias dkspv='docker system prune --volumes'
+alias dkspva='docker system prune --volumes -a'
+alias dkspvaf='docker system prune --volumes -a -f'
 
 # docker-compose
-alias dc="$DOCKER-compose"
-alias dcd="$DOCKER-compose down"
-alias dcup="$DOCKER-compose up -d"
-alias dcupb="$DOCKER-compose up -d --build"
+alias dc='docker-compose'
+alias dcd='docker-compose down'
+alias dcup='docker-compose up -d'
+alias dcupb='docker-compose up -d --build'
 
-unset DOCKER
+## container
+alias dccls='docker-compose ps'
+alias dcclsq='docker-compose ps -q'
+alias dcex='docker-compose exec'
+alias dcr='docker-compose run --rm'
+alias dcrd='docker-compose run -d --rm'
+alias dcrm!='docker-compose rm -f'
+alias dcrm='docker-compose rm'
+alias dcrmv!='docker-compose rm -v -f'
+alias dcrmv='docker-compose rm -v'
+alias dcsp='docker-compose stop'
+alias dcst='docker-compose restart'
+
+## image
+alias dcb!='docker-compose build --no-cache'
+alias dcb='docker-compose build'
+alias dcl='docker-compose pull'
