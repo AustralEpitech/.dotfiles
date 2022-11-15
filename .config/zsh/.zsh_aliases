@@ -5,7 +5,8 @@ alias tmp='cd $(mktemp -d)'
 alias umnt='sudo umount /mnt -R'
 alias vi='$EDITOR'
 alias epitest='docker run -it --rm -v $PWD:/usr/app/ epitechcontent/epitest-docker bash'
-alias automount='D=$(udisksctl mount -b /dev/sda1 2> /dev/null || udisksctl mount -b /dev/sdb1) && cd ${D/* }'
+alias automount='MNT=$(udisksctl mount -b /dev/sda1 2> /dev/null || udisksctl mount -b /dev/sdb1) && cd ${MNT/* }'
+alias update="paru -Syu; sudo npm update -g; pip freeze | cut -f1 -d= | xargs pip install -U; config submodule update --remote --recursive --init"
 
 alias wconf='$EDITOR $HOME/.config/sway'
 alias zshconf='$EDITOR $ZDOTDIR/.zshrc && . $ZDOTDIR/.zshrc'
