@@ -99,6 +99,6 @@ plugins=(git vi-mode colored-man-pages gitignore)
 [[ ! -f "$ZDOTDIR"/.p10k.zsh ]] || . "$ZDOTDIR"/.p10k.zsh
 
 eval "$(pyenv init -)"
-. "$ZDOTDIR"/.kubectl_aliases
 . "$ZDOTDIR"/.docker_aliases
+. "$ZDOTDIR"/.kubectl_aliases
 . "$ZDOTDIR"/.zsh_aliases
