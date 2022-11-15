@@ -30,12 +30,12 @@ function add_opt() {
     echo "$RESULT"
 }
 
-if ! [ -w "/var/run/docker.sock" ] && [ "$EUID" != 0 ]; then
+if ! [ -w '/var/run/docker.sock' ] && [ "$EUID" != 0 ]; then
     exec sudo -- "$0" "$@"
 fi
 
 c=1
-C=2
+# C=2
 v=4
 i=8
 # I=16
@@ -52,7 +52,8 @@ while getopts hcCviIna o; do
             CLEAN="$(add_opt "$CLEAN" "$c")"
             ;;
         C)
-            CLEAN="$(add_opt "$CLEAN" "$C")"
+            CLEAN="$(add_opt "$CLEAN" "$c")"
+            CON_OPT="-f"
             ;;
         v)
             CLEAN="$(add_opt "$CLEAN" "$v")"
@@ -62,14 +63,15 @@ while getopts hcCviIna o; do
             ;;
         I)
             CLEAN="$(add_opt "$CLEAN" "$i")"
-            IMG_OPT="-a"
+            IMG_OPT='-a'
             ;;
         n)
             CLEAN="$(add_opt "$CLEAN" "$n")"
             ;;
         a)
-            CLEAN="$(add_opt "$CLEAN" "$c" "$C" "$v" "$i" "$n")"
-            IMG_OPT="-a"
+            CLEAN="$(add_opt "$CLEAN" "$c" "$v" "$i" "$n")"
+            CON_OPT="-f"
+            IMG_OPT='-a'
             ;;
         *)
             exit 1
@@ -78,32 +80,30 @@ while getopts hcCviIna o; do
 done
 
 if [ "$CLEAN" == 0 ]; then
-    CLEAN="$((C + v + n))"
+    CLEAN="$((c + v + n))"
+    CON_OPT="-f"
 fi
 
 VALUES=(
     "$((c + i + v + n))"
     "$((c + i + n))"
-    "$c"
     "$v"
     "$i"
     "$n"
 )
 
-CON="container"
-PRUNE="prune -f"
+CON='container'
+PRUNE='prune -f'
 COMMANDS=(
     "docker system  $PRUNE $IMG_OPT --volumes"
     "docker system  $PRUNE $IMG_OPT"
-    "docker $CON    $PRUNE"
     "docker volume  $PRUNE"
     "docker image   $PRUNE $IMG_OPT"
     "docker network $PRUNE"
 )
 
-if [ "$((CLEAN & "$C"))" == "$C" ]; then
-    docker "$CON" ls -aq | xargs docker "$CON" stop 2> /dev/null
-    CLEAN="$(add_opt "$CLEAN" "$c")"
+if [ "$((CLEAN & "$c"))" == "$c" ]; then
+    docker "$CON" ls -aq | xargs docker "$CON" rm "$CON_OPT" 2> /dev/null
 fi
 
 for idx in "${!VALUES[@]}"; do

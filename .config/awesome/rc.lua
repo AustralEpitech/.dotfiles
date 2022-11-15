@@ -635,6 +635,7 @@ apps = {
     "xset dpms 300 15", -- dim screen after 5 min and lock 15 sec after
     "xss-lock --  " .. lock,
     "picom",
+    "redshift",
     "nm-applet",
     "numlockx",
     "killall cbatticon",
