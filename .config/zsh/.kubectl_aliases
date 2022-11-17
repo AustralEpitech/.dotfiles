@@ -14,13 +14,18 @@
 
 function kn() {
     (set -e
+        local ctx="${1%/*}"
+        local ns="$2"
 
-        if [ -n "$2" ]; then
-            kubectx "${1:l}"
-            kubens "$2"
-        else
-            kubens "$@"
+        if [ -z "$ns" ] && [ "$ctx" != "$1" ]; then
+            ns="${1#*/}"
         fi
+        if [ -n "$ns" ]; then
+            kubectx "${ctx:l}"
+        else
+            ns="$ctx"
+        fi
+        kubens "${ns:l}"
     )
 }
 compdef -e _kubens.zsh kn
