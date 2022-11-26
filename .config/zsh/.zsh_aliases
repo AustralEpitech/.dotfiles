@@ -6,6 +6,7 @@ alias umnt='sudo umount /mnt -R'
 alias vi='$EDITOR'
 alias epitest='docker run -it --rm -v $PWD:/usr/app/ epitechcontent/epitest-docker bash'
 alias automount='MNT=$(udisksctl mount -b /dev/sda1 2> /dev/null || udisksctl mount -b /dev/sdb1) && cd ${MNT/* }'
+alias autoumount='umount /media/*/* /run/media/*/*'
 alias update="paru -Syu; sudo npm update -g; pip freeze | cut -f1 -d= | xargs pip install -U; config submodule update --remote --recursive --init"
 
 alias wconf='$EDITOR $HOME/.config/sway'
@@ -19,7 +20,6 @@ function fnalias() {
     $1 $(sed 's/--color=.\+/--color=force/' <<< "${@:2}")
 }
 
-alias man='man '
 alias sudo='sudo '
 alias watch='fnalias watch -c '
 alias xargs='xargs '
