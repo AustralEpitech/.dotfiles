@@ -98,7 +98,6 @@ plugins=(git vi-mode colored-man-pages gitignore)
 # To customize prompt, run `p10k configure` or edit "$ZDOTDIR"/.p10k.zsh.
 [[ ! -f "$ZDOTDIR"/.p10k.zsh ]] || . "$ZDOTDIR"/.p10k.zsh
 
-eval "$(pyenv init -)"
 . "$ZDOTDIR"/.docker_aliases
 . "$ZDOTDIR"/.kubectl_aliases
 . "$ZDOTDIR"/.zsh_aliases

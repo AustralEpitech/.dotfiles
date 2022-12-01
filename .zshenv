@@ -1,6 +1,4 @@
-export PYENV_ROOT="$HOME/.pyenv"
-
-path=("$HOME/bin" "$HOME/.local/bin" "$PYENV_ROOT/bin" $path)
+path=("$HOME/bin" "$HOME/.local/bin" $path)
 
 export XDG_CACHE_HOME="$HOME"/.cache
 export XDG_CONFIG_HOME="$HOME"/.config
