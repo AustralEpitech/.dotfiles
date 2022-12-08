@@ -12,25 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-function kn() {
-    (set -e
-        local ctx="${1%/*}"
-        local ns="$2"
+function kx() {
+    1="$(echo - "$1" | tr -c '[:alnum:]-_' '[ *]')"
+    local ctx="$(echo - "$1" | awk '{print $1}')"
+    local ns="${2-$(echo - "$1" | awk '{print $2}')}"
 
-        if [ -z "$ns" ] && [ "$ctx" != "$1" ]; then
-            ns="${1#*/}"
-        fi
-        if [ -n "$ns" ]; then
-            kubectx "${ctx:l}"
-        else
-            ns="$ctx"
-        fi
-        kubens "${ns:l}"
-    )
+    kubectx ${ctx:l}
+    [ -n "$ns" ] && kubens "${ns:l}"
 }
-compdef -e _kubens.zsh kn
+compdef -e _kubectx.zsh kx
 
-alias kx='kubectx'
+alias kn='kubens'
 alias k='kubectl'
 alias ksys='kubectl --namespace=kube-system'
 alias ka='kubectl apply --recursive -f'

@@ -1,12 +1,12 @@
-[submodule ".config/nvim/pack/plugins/opt/black"]
-	path = .config/nvim/pack/plugins/opt/black
-	url = https://github.com/psf/black.git
 [submodule ".config/nvim/pack/plugins/opt/dirdiff"]
 	path = .config/nvim/pack/plugins/opt/dirdiff
 	url = https://github.com/will133/vim-dirdiff.git
 [submodule ".config/nvim/pack/plugins/opt/easy-align"]
 	path = .config/nvim/pack/plugins/opt/easy-align
 	url = https://github.com/junegunn/vim-easy-align.git
+[submodule ".config/nvim/pack/plugins/opt/impatient"]
+	path = .config/nvim/pack/plugins/opt/impatient
+	url = https://github.com/lewis6991/impatient.nvim.git
 [submodule ".config/nvim/pack/plugins/opt/indent-blankline"]
 	path = .config/nvim/pack/plugins/opt/indent-blankline
 	url = https://github.com/lukas-reineke/indent-blankline.nvim.git
