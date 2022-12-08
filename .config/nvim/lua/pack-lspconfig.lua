@@ -12,9 +12,7 @@ vim.keymap.set("n", "<Leader>q", vim.diagnostic.setloclist, opts)
 
 local servers = {
     "bashls",
-    "dockerls",
     "pyright",
-    "yamlls",
 }
 
 for _, server in ipairs(servers) do
