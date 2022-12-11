@@ -13,6 +13,7 @@ vim.o.list           = true
 
 vim.o.number         = true
 vim.o.relativenumber = true
+vim.o.laststatus     = 3
 
 vim.o.ignorecase     = true
 vim.o.smartcase      = true
@@ -44,6 +45,7 @@ vim.o.mousemodel     = extend
 require"pack-impatient"
 vim.cmd("packadd plenary")
 
+require"pack-onedark"
 require"pack-dirdiff"
 require"pack-easy-align"
 require"pack-indent-blankline"

@@ -28,6 +28,3 @@
 [submodule ".config/zsh/ohmyzsh"]
 	path = .config/zsh/ohmyzsh
 	url = https://github.com/ohmyzsh/ohmyzsh.git
-[submodule ".pyenv"]
-	path = .pyenv
-	url = https://github.com/pyenv/pyenv.git
