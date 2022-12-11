@@ -8,6 +8,7 @@ export XDG_CONFIG_DIRS=/etc/xdg
 export XDG_DATA_DIRS='/usr/local/share/:/usr/share/'
 
 export ZDOTDIR="$HOME"/.config/zsh
+export ZSH_CUSTOM="$ZDOTDIR/custom"
 export HISTFILE="$XDG_STATE_HOME"/zsh/history
 export ZLE_RPROMPT_INDENT=0
 
