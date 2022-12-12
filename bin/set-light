@@ -12,7 +12,7 @@ set_brightness() {
     echo "$VAL" > "$FILE"
 }
 
-CUR_FILE=/var/tmp/current_brightness
+CUR_FILE="${XDG_CACHE_HOME:-$HOME/.cache}/current_brightness"
 
 set +e
 CUR="$(cat "$CUR_FILE" || echo 50)"
