@@ -70,7 +70,7 @@ zstyle ':omz:update' mode disabled  # disable automatic updates
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(vi-mode colored-man-pages kube-ps1 timer git gitignore)
+plugins=(vi-mode colored-man-pages git gitignore)
 
 . "$ZSH"/oh-my-zsh.sh
 
