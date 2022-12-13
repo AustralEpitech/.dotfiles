@@ -13,6 +13,9 @@
 [submodule ".config/nvim/pack/plugins/opt/lspconfig"]
 	path = .config/nvim/pack/plugins/opt/lspconfig
 	url = https://github.com/neovim/nvim-lspconfig.git
+[submodule ".config/nvim/pack/plugins/opt/onedark"]
+	path = .config/nvim/pack/plugins/opt/onedark
+	url = https://github.com/navarasu/onedark.nvim
 [submodule ".config/nvim/pack/plugins/opt/plenary"]
 	path = .config/nvim/pack/plugins/opt/plenary
 	url = https://github.com/nvim-lua/plenary.nvim.git

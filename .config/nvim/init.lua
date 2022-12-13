@@ -45,7 +45,8 @@ vim.o.mousemodel     = extend
 require"pack-impatient"
 vim.cmd("packadd plenary")
 
-require"pack-onedark"
+require"theme"
+
 require"pack-dirdiff"
 require"pack-easy-align"
 require"pack-indent-blankline"
