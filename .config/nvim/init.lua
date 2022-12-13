@@ -14,6 +14,7 @@ vim.o.list           = true
 vim.o.number         = true
 vim.o.relativenumber = true
 vim.o.laststatus     = 3
+vim.o.cmdheight      = 0
 
 vim.o.ignorecase     = true
 vim.o.smartcase      = true
