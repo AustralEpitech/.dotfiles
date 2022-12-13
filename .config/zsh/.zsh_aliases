@@ -2,7 +2,7 @@
 alias cls='clear && ls -lah'
 alias startgui='startx'
 alias tmp='cd $(mktemp -d)'
-alias update="sudo apt-get update && sudo apt-get upgrade; sudo npm update -g; pip freeze | cut -f1 -d= | xargs pip install -U; config submodule update --remote --recursive --init"
+alias update="sudo apt-get update && sudo apt-get upgrade; pip freeze | cut -f1 -d= | xargs pip install -U; config submodule update --remote --recursive --init"
 alias vi='$EDITOR'
 
 # conf

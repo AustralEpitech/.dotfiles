@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 KUBE_PS1_KUBECONFIG="${KUBECONFIG:-$HOME/.kube/config}"
 KUBE_PS1_KUBECONFIGMD5=
 KUBE_PS1_CTX=
@@ -20,11 +19,11 @@ precmd() {
     local ns="$KUBE_PS1_NS"
     local symbol='\u2388 '
     local sep='/'
-    local bg='\e[45m'
+    local bg='\e[44m'
     local reset='\e[0m'
-   #local end=" $reset\e[35m\ue0b4" # 
-   #local end=" $reset\e[35m\ue0bc" # 
-    local end=" $reset\e[35m\ue0b0" # 
+   #local end=" $reset\e[34m\ue0b4" # 
+   #local end=" $reset\e[34m\ue0bc" # 
+    local end=" $reset\e[34m\ue0b0" # 
 
     echo "$bg$symbol$ctx$sep$ns$end$reset"
 }
