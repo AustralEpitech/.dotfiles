@@ -13,8 +13,9 @@ _update_KUBE_PS1() {
     KUBE_PS1_NS="$(kubectl config view --minify -o jsonpath='{..namespace}')"
 }
 
-precmd() {
+kube_ps1() {
     _update_KUBE_PS1
+
     local ctx="$KUBE_PS1_CTX"
     local ns="$KUBE_PS1_NS"
     local symbol='\u2388 '
@@ -26,6 +27,10 @@ precmd() {
     local end=" $reset\e[34m\ue0b0" # 
 
     echo "$bg$symbol$ctx$sep$ns$end$reset"
+}
+
+precmd() {
+    kube_ps1
 }
 
 PROMPT='%(?::%{$fg_bold[red]%}%? )%{$fg_bold[cyan]%}%~%{$reset_color%} $(git_prompt_info)'
