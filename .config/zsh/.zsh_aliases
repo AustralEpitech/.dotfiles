@@ -27,9 +27,9 @@ alias minecraft='DRI_PRIME=1 minecraft-launcher'
 
 # alias
 function coloralias() {
-    $1 $(echo - "${@:2}" | sed 's/--color=.\+/--color=force/')
+    $1 $(echo - "${@:2}" | sed 's/--color=\w\+/--color=always/')
 }
 
 alias sudo='sudo '
-alias watch='coloralias watch -c '
+alias watch='coloralias watch -c -- '
 alias xargs='xargs '
