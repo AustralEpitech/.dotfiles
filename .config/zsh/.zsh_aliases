@@ -9,7 +9,7 @@ alias vi='$EDITOR'
 alias config='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 alias viconf='(cd $XDG_CONFIG_HOME/nvim && $EDITOR .)'
 alias wconf='(cd $HOME/.config/awesome && $EDITOR .)'
-alias zshconf='(cd $ZDOTDIR/ && $EDITOR . && . $ZDOTDIR/.zshrc)'
+alias zconf='(cd $ZDOTDIR/ && $EDITOR . && . $ZDOTDIR/.zshrc)'
 
 # dev
 alias epitest='docker run -it --rm -v $PWD:/usr/app/ epitechcontent/epitest-docker bash'
