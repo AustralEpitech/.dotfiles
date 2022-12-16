@@ -8,7 +8,8 @@ export ZSH="$ZDOTDIR/ohmyzsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="simpletheme"
+ZSH_THEME="powerlevel10k/powerlevel10k"
+#ZSH_THEME="mytheme"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -94,3 +95,6 @@ plugins=(vi-mode colored-man-pages git gitignore)
 . "$ZDOTDIR"/.docker_aliases
 . "$ZDOTDIR"/.kubectl_aliases
 . "$ZDOTDIR"/.zsh_aliases
+
+# To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
+! [ -f "$ZDOTDIR/.p10k.zsh" ] || . "$ZDOTDIR/.p10k.zsh"
