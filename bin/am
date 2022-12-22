@@ -1,0 +1,18 @@
+#!/bin/bash
+set -e
+
+# TODO
+# - mount all partitions by selecting disk
+# - hide already mounted partitions
+# - usage
+# - one device per line
+# - support for /mnt
+
+readarray -t LSBLK <<< "$(lsblk -n --paths --list | grep part)"
+
+select dev in "${LSBLK[@]}"; do
+    name="$(cut -f1 -d' ' <<< "$dev")"
+
+    udisksctl mount -b "$name"
+    echo "$name" >> /tmp/automount
+done

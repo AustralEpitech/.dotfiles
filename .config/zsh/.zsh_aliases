@@ -14,11 +14,6 @@ alias zconf='(cd $ZDOTDIR/ && $EDITOR . && . $ZDOTDIR/.zshrc)'
 # dev
 alias epitest='docker run -it --rm -v $PWD:/usr/app/ epitechcontent/epitest-docker bash'
 
-# disk
-alias automount='MNT=$(udisksctl mount -b /dev/sda1 2> /dev/null || udisksctl mount -b /dev/sdb1) && cd ${MNT/* }'
-alias autoumount='umount /media/*/* /run/media/*/*'
-alias umnt='sudo umount /mnt -R'
-
 # compatibility
 alias ssh='TERM=linux ssh'
 
