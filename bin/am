@@ -3,16 +3,35 @@ set -e
 
 # TODO
 # - mount all partitions by selecting disk
-# - hide already mounted partitions
 # - usage
 # - one device per line
 # - support for /mnt
+# - colors ?
 
-readarray -t LSBLK <<< "$(lsblk -n --paths --list | grep part)"
+function clear_output() {
+    local len="$1"
 
-select dev in "${LSBLK[@]}"; do
-    name="$(cut -f1 -d' ' <<< "$dev")"
+    for _ in $(seq 0 "$len"); do
+        printf '\e[1A\e[K'
+    done
+}
 
-    udisksctl mount -b "$name"
-    echo "$name" >> /tmp/automount
+if ! [ -t 1 ]; then
+    exit 1
+fi
+
+while true; do
+    readarray -t LSBLK <<< "$(lsblk -n --paths --list | grep part)"
+
+    select dev in "${LSBLK[@]}"; do
+        name="$(cut -f1 -d' ' <<< "$dev")"
+
+        if mount | grep -q "$name"; then
+            umount "$name"
+        else
+            udisksctl mount -b "$name" > /dev/null
+        fi
+        clear_output "${#LSBLK[@]}"
+        break
+    done || exit
 done
