@@ -4,7 +4,6 @@ set -e
 # TODO
 # - mount all partitions by selecting disk
 # - usage
-# - one device per line
 # - support for /mnt
 # - colors ?
 
@@ -20,6 +19,7 @@ if ! [ -t 1 ]; then
     exit 1
 fi
 
+COLUMNS=1
 while true; do
     readarray -t LSBLK <<< "$(lsblk -n --paths --list | grep part)"
 
