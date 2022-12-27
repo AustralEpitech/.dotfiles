@@ -3,10 +3,10 @@ set -e
 
 usage() {
     echo "USAGE: $0 FILE.pdf"
-    exit 0
+    exit
 }
 
-if [ "$1" == '-h' ] || [[ "$1" != *.pdf ]]; then
+if [ "$1" != *.pdf ]; then
     usage
 fi
 
