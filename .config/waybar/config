@@ -1,7 +1,7 @@
 {
     "modules-left": ["sway/workspaces"],
     "modules-center": ["sway/window"],
-    "modules-right": ["pulseaudio", "cpu", "memory", "temperature", "backlight", "battery", "tray", "clock"],
+    "modules-right": ["custom/crypto", "pulseaudio", "cpu", "memory", "temperature", "backlight", "battery", "tray", "clock"],
     "backlight": {
         "format": "{percent}% {icon}",
         "format-icons": ["", ""],
@@ -71,6 +71,10 @@
         "disable-scroll": true,
         "format": "{name}",
     },
+    "custom/crypto": {
+        "exec": "crypto.sh",
+        "interval": 600,
+    }
 }
 
 // vim: ft=css

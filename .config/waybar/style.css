@@ -78,6 +78,7 @@ window#waybar.chromium {
 #tray,
 #mode,
 #idle_inhibitor,
+#custom-crypto
 #mpd {
     padding: 0 10px;
     margin: 0 4px;
@@ -252,4 +253,9 @@ label:focus {
 
 #keyboard-state > label.locked {
     background: rgba(0, 0, 0, 0.2);
+}
+
+#custom-crypto {
+    background-color: #f1c40f;
+    color: #000000;
 }
