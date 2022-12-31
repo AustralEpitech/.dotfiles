@@ -15,6 +15,4 @@ export ZLE_RPROMPT_INDENT=0
 
 export LESSHISTFILE='-'
 
-export MOZ_ENABLE_WAYLAND=1
-
 export EDITOR='nvim'

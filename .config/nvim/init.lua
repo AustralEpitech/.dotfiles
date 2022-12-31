@@ -49,6 +49,7 @@ require"theme"
 
 require"pack-dirdiff"
 require"pack-easy-align"
+require"pack-grammalecte"
 require"pack-indent-blankline"
 require"pack-lspconfig"
 require"pack-telescope"

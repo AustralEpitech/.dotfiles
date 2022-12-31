@@ -2,10 +2,10 @@
 set -e
 
 # TODO
-# - mount all partitions by selecting disk
-# - usage
-# - support for /mnt
-# - colors ?
+# mount all partitions by selecting disk
+# usage
+# support for /mnt
+# error handling (fs in use...)
 
 function clear_output() {
     local len="$1"
@@ -19,10 +19,30 @@ if ! [ -t 1 ]; then
     exit 1
 fi
 
-COLUMNS=1
+function umount_all() {
+    local disks
+
+    disks=($(mount | grep udisks2 | cut -f1 -d' '))
+    umount "${disks[@]}"
+    echo "unmounted ${disks[@]}"
+}
+
+while getopts a o; do
+    case "$o" in
+        a)
+            umount_all
+            exit
+            ;;
+        *)
+            ;;
+    esac
+done
+
 while true; do
+    #readarray -t LSBLK <<< "$(lsblk -n --paths | grep -v snap)"
     readarray -t LSBLK <<< "$(lsblk -n --paths --list | grep part)"
 
+    COLUMNS=1
     select dev in "${LSBLK[@]}"; do
         name="$(cut -f1 -d' ' <<< "$dev")"
 

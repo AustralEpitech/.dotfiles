@@ -34,3 +34,6 @@
 [submodule ".config/zsh/custom/themes/powerlevel10k"]
 	path = .config/zsh/custom/themes/powerlevel10k
 	url = https://github.com/romkatv/powerlevel10k.git
+[submodule ".config/nvim/pack/plugins/opt/grammalecte"]
+	path = .config/nvim/pack/plugins/opt/grammalecte
+	url = https://github.com/dpelle/vim-Grammalecte.git
