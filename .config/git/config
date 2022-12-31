@@ -1,0 +1,11 @@
+[user]
+	email = ange.duhayon@epitech.eu
+	name = AngeD
+[credential]
+	helper = store
+[diff]
+	tool = nvimdiff
+[difftool "nvimdiff"]
+    cmd = nvim -d -c \"wincmd l\" \"$LOCAL\" \"$REMOTE\"
+[init]
+	defaultBranch = main
