@@ -37,3 +37,6 @@
 [submodule ".config/zsh/custom/themes/powerlevel10k"]
 	path = .config/zsh/custom/themes/powerlevel10k
 	url = https://github.com/romkatv/powerlevel10k.git
+[submodule ".config/suckless"]
+	path = .config/suckless
+	url = https://git.maby.dev/ange/suckless.git
