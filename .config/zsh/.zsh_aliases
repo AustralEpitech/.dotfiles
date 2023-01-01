@@ -1,6 +1,6 @@
 # system
 alias cls='clear && ls -lah'
-alias startgui='sway 2> $HOME/sway.log'
+alias gui='sway 2> $HOME/sway.log'
 alias tmp='cd $(mktemp -d)'
 alias update="paru -Syu; pip freeze | cut -f1 -d= | xargs pip install -U; config submodule update --remote --recursive --init"
 alias vi='$EDITOR'
