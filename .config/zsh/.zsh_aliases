@@ -1,7 +1,7 @@
 # system
 alias cls='clear && ls -lah'
 alias tmp='cd $(mktemp -d)'
-alias update="paru -Syu; pip freeze | cut -f1 -d= | xargs pip install -U; config submodule update --remote --recursive --init"
+alias update='paru -Syu; config submodule update --remote --recursive --init'
 alias vi='$EDITOR'
 
 # conf
