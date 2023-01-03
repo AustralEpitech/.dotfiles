@@ -7,7 +7,7 @@ alias vi='$EDITOR'
 # conf
 alias config='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 alias viconf='(cd $XDG_CONFIG_HOME/nvim && $EDITOR .)'
-alias wconf='(cd $HOME/.config/sway && $EDITOR .)'
+alias wconf='(cd $HOME/.config/suckless/dwm* && $EDITOR .)'
 alias zconf='(cd $ZDOTDIR/ && $EDITOR . && . $ZDOTDIR/.zshrc)'
 
 # dev
