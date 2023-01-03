@@ -24,7 +24,7 @@ function umount_all() {
 
     disks=($(mount | grep udisks2 | cut -f1 -d' '))
     umount "${disks[@]}"
-    echo "unmounted ${disks[@]}"
+    echo "unmounted ${disks[*]}"
 }
 
 while getopts a o; do

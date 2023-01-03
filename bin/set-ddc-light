@@ -1,10 +1,13 @@
 #!/bin/bash
 set -e
 
+command -v sudo > /dev/null && exec SUDO='sudo'
+command -v doas > /dev/null && exec SUDO='doas'
+
 CUR_LIGHT="$(set-light "$@")"
 
-SCREENS="$(sudo ddcutil detect | awk '$1 == "Display" {print $2}')"
+SCREENS="$($SUDO ddcutil detect | awk '$1 == "Display" {print $2}')"
 
 for i in $SCREENS; do
-    sudo ddcutil -d "$i" setvcp 10 "$CUR_LIGHT"
+    $SUDO ddcutil -d "$i" setvcp 10 "$CUR_LIGHT"
 done

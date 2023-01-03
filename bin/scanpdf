@@ -6,7 +6,7 @@ usage() {
     exit
 }
 
-if [ "$1" != *.pdf ]; then
+if [[ "$1" != *.pdf ]]; then
     usage
 fi
 

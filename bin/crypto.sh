@@ -27,7 +27,7 @@ while read -r line; do
     QTY="$(echo "$line" | cut -d "$DELIM" -f 2)"
 
     MARKET="$(get_value "$TO" "$COIN")"
-    VALUE="$(echo "$MARKET* $QTY" | bc)"
+    VALUE="$(echo "$MARKET * $QTY" | bc)"
     TOTAL="$(echo "$TOTAL + $VALUE" | bc)"
 
     printf "${BOLD}${COIN}${NORMAL}=%.2f€ " "$VALUE"
