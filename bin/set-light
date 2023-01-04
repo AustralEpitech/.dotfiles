@@ -40,4 +40,7 @@ for dev in /sys/class/backlight/*; do
 done
 
 echo "$NEW" > "$CUR_FILE"
-echo "$NEW"
+
+if [ -t 1 ]; then
+    echo "$NEW"
+fi

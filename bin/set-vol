@@ -44,4 +44,6 @@ esac
 $CMD "$SINK" "$VOL%" > /dev/null
 pactl set-sink-mute "$PACTL_SINK" 0
 
-echo "$VOL"
+if [ -t 1 ]; then
+    echo "$VOL"
+fi
