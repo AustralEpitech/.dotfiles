@@ -54,7 +54,6 @@ require"pack-indent-blankline"
 require"pack-lspconfig"
 require"pack-telescope"
 require"pack-treesitter"
-require"pack-which-key"
 
 -----------------------
 ----- keybindings -----

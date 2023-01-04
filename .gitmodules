@@ -28,9 +28,6 @@
 [submodule ".config/nvim/pack/plugins/opt/treesitter"]
 	path = .config/nvim/pack/plugins/opt/treesitter
 	url = https://github.com/nvim-treesitter/nvim-treesitter.git
-[submodule ".config/nvim/pack/plugins/opt/which-key"]
-	path = .config/nvim/pack/plugins/opt/which-key
-	url = https://github.com/folke/which-key.nvim.git
 [submodule ".config/zsh/ohmyzsh"]
 	path = .config/zsh/ohmyzsh
 	url = https://github.com/ohmyzsh/ohmyzsh.git
