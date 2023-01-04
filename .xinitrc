@@ -6,11 +6,19 @@ numlockx
 
 # mouse
 (
+    DEV="$(xinput | grep Mouse | grep -Po 'id=\d+' | grep -Po '\d+')"
     PROP='libinput Accel Profile Enabled'
 
-    for id in $(xinput list --id-only); do
-        xinput set-prop "$id" "$PROP" 0, 1 2> /dev/null
-    done
+    xinput set-prop "$DEV" 'libinput Accel Profile Enabled' 0, 1
+)
+
+# touchpad
+(
+    DEV="$(xinput | grep Touchpad | grep -Po 'id=\d+' | grep -Po '\d+')"
+
+    xinput set-prop "$DEV" 'libinput Natural Scrolling Enabled' 1
+    xinput set-prop "$DEV" 'libinput Tapping Enabled'           1
+    xinput set-prop "$DEV" 'libinput Click Method Enabled'      0, 1
 )
 
 # display
