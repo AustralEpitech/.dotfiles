@@ -5,16 +5,11 @@ setxkbmap us altgr-intl
 numlockx
 
 # mouse
-(
-    DEV="$(xinput | grep Mouse | grep -Po 'id=\d+' | grep -Po '\d+')"
-    PROP='libinput Accel Profile Enabled'
-
-    xinput set-prop "$DEV" 'libinput Accel Profile Enabled' 0, 1
-)
+xinput set-prop 'pointer:Logitech G903' 'libinput Accel Profile Enabled' 0, 1
 
 # touchpad
 (
-    DEV="$(xinput | grep Touchpad | grep -Po 'id=\d+' | grep -Po '\d+')"
+    DEV='PNP0C50:0e 06CB:7E7E Touchpad'
 
     xinput set-prop "$DEV" 'libinput Natural Scrolling Enabled' 1
     xinput set-prop "$DEV" 'libinput Tapping Enabled'           1
