@@ -54,6 +54,7 @@ require"pack-indent-blankline"
 require"pack-lspconfig"
 require"pack-telescope"
 require"pack-treesitter"
+vim.cmd("source ~/.config/nvim/epitech_header.vim")
 
 -----------------------
 ----- keybindings -----

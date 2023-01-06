@@ -1,8 +1,9 @@
 function! EpitechHeader()
     let com_arr = {
-        \ 'c':      {'top': '/*', 'mid': '**', 'bot': '*/'},
-        \ 'cpp':    {'top': '/*', 'mid': '**', 'bot': '*/'},
-        \ 'make':   {'top': '##', 'mid': '##', 'bot': '##'}
+        \ 'c':       {'top': '/*', 'mid': '**', 'bot': '*/'},
+        \ 'cpp':     {'top': '/*', 'mid': '**', 'bot': '*/'},
+        \ 'make':    {'top': '##', 'mid': '##', 'bot': '##'},
+        \ 'haskell': {'top': '{-', 'mid': '--', 'bot': '-}'},
     \ }
 
     if (!has_key(com_arr, &filetype))
