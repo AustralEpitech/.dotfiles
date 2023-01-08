@@ -20,7 +20,7 @@ vim.o.smartcase      = true
 
 vim.o.guicursor      = ""
 
-vim.o.suffixes       = vim.o.suffixes .. ",.pyc"
+vim.o.suffixes       = vim.o.suffixes .. ",.pyc,.hi"
 
 vim.o.foldmethod     = "indent"
 vim.o.foldlevel      = 99
