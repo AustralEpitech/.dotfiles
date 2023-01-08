@@ -1,23 +1,20 @@
 # system
 alias cls='clear && ls -lah'
-alias tmp='cd $(mktemp -d)'
+alias tmp='cd "$(mktemp -d)"'
 alias update='sudo pacman -Syu && config submodule update --remote --recursive --init'
 alias vi='$EDITOR'
 
 # conf
-alias config='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
-alias viconf='(cd $XDG_CONFIG_HOME/nvim && $EDITOR .)'
-alias wconf='(cd $HOME/.config/suckless/dwm* && $EDITOR .)'
-alias zconf='(cd $ZDOTDIR/ && $EDITOR .) && . $ZDOTDIR/.zshrc'
+alias config='git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"'
+alias viconf='(cd "$XDG_CONFIG_HOME/nvim" && $EDITOR .)'
+alias wconf='(cd "$HOME"/.config/suckless/dwm* && $EDITOR .)'
+alias zconf='(cd "$ZDOTDIR/" && $EDITOR .) && . "$ZDOTDIR/.zshrc"'
 
 # dev
-alias epitest='docker run -it --rm -v $PWD:/usr/app/ epitechcontent/epitest-docker bash'
+alias epitest='docker run -it --rm -v "$PWD:/usr/app/" epitechcontent/epitest-docker bash'
 
 # compatibility
 alias ssh='TERM=linux ssh'
-
-# gaming
-alias minecraft='DRI_PRIME=1 minecraft-launcher'
 
 # alias
 function coloralias() {
