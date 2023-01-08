@@ -1,5 +1,6 @@
 vim.cmd("packadd onedark")
 require"onedark".setup {
-    style = "dark"
+    style = "dark",
+    transparent = true
 }
 require"onedark".load()
