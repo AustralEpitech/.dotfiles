@@ -5,27 +5,38 @@ set -e
 # mount all partitions by selecting disk
 # usage
 # support for /mnt
-# error handling (fs in use...)
 
+printf '\e[6n'
+read -sdRr ROW
+ROW="${ROW#*[}"
+ROW="${ROW%;*}"
+ROW="$((ROW + 1))"
 function clear_output() {
+    local row
     local len="$1"
 
-    for _ in $(seq 0 "$len"); do
+    printf '\e[6n'
+    read -sdRr row
+    row="${row#*[}"
+    row="${row%;*}"
+
+    for _ in $(seq 0 "$((row - ROW))"); do
         printf '\e[1A\e[K'
     done
 }
-
-if ! [ -t 1 ]; then
-    exit 1
-fi
 
 function umount_all() {
     local disks
 
     disks=($(mount | grep udisks2 | cut -f1 -d' '))
+
     umount "${disks[@]}"
     echo "unmounted ${disks[*]}"
 }
+
+if ! [ -t 1 ]; then
+    exit 1
+fi
 
 while getopts a o; do
     case "$o" in
@@ -46,12 +57,12 @@ while true; do
     select dev in "${LSBLK[@]}"; do
         name="$(cut -f1 -d' ' <<< "$dev")"
 
+        clear_output
         if mount | grep -q "$name"; then
             umount "$name"
         else
             udisksctl mount -b "$name" > /dev/null
         fi
-        clear_output "${#LSBLK[@]}"
         break
     done || exit
 done
