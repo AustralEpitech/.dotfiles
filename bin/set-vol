@@ -11,7 +11,7 @@ done
 touch "$TMP_FILE"
 
 VOL="$(pactl get-sink-volume "$SINK")"
-VOL="$(echo "$VOL" | grep -Po '\d+(?=%)' | head -n 1)"
+VOL="$(grep -Po '\d+(?=%)' <<< "$VOL" | head -n 1)"
 VOL="$((VOL - VOL % "$1"))"
 
 case "${1:0:1}" in
@@ -26,11 +26,11 @@ case "${1:0:1}" in
         ;;
 esac
 
-[ "$VOL" -lt 0 ] && VOL=0
+[ "$VOL" -lt 0   ] && VOL=0
 [ "$VOL" -gt 100 ] && VOL=100
 
 pactl set-sink-volume "$SINK" "$VOL%"
-pactl set-sink-mute "$SINK" 0
+pactl set-sink-mute   "$SINK" 0
 
 rm "$TMP_FILE"
 
