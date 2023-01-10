@@ -24,3 +24,7 @@ function coloralias() {
 alias sudo='doas '
 alias watch='coloralias watch -c -- '
 alias xargs='xargs '
+
+function j() {
+    cd **/"$1"
+}
