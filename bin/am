@@ -6,21 +6,22 @@ set -e
 # usage
 # support for /mnt
 
-printf '\e[6n'
-read -sdRr ROW
-ROW="${ROW#*[}"
-ROW="${ROW%;*}"
-ROW="$((ROW + 1))"
+function get_row() {
+    local pos row
+
+    printf '\e[6n' >&2
+    read -sdRr pos
+    pos="${pos#*[}"
+    row="${pos%;*}"
+    echo "$row"
+}
+
+ROW="$(($(get_row) + 1))"
 function clear_output() {
     local row
-    local len="$1"
 
-    printf '\e[6n'
-    read -sdRr row
-    row="${row#*[}"
-    row="${row%;*}"
-
-    for _ in $(seq 0 "$((row - ROW))"); do
+    row="$(get_row)"
+    for _ in $(seq "$ROW" "$row"); do
         printf '\e[1A\e[K'
     done
 }
@@ -28,7 +29,7 @@ function clear_output() {
 function umount_all() {
     local disks
 
-    disks=($(mount | grep udisks2 | cut -f1 -d' '))
+    readarray -t disks <<< "$(mount | grep udisks2 | cut -f1 -d' ')"
 
     umount "${disks[@]}"
     echo "unmounted ${disks[*]}"
