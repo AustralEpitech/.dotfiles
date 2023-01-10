@@ -10,8 +10,11 @@ export XDG_DATA_DIRS='/usr/local/share:/usr/share'
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export ZSH="$ZDOTDIR/ohmyzsh"
 export ZSH_CUSTOM="$ZDOTDIR/custom"
-export HISTFILE="$XDG_STATE_HOME/zsh/history"
+export HISTFILE="$XDG_STATE_HOME/zsh_history"
 export ZLE_RPROMPT_INDENT=0
+
+mkdir -p "$XDG_CACHE_HOME/zsh"
+compinit -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
 
 export LESSHISTFILE='-'
 
