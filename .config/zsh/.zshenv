@@ -13,9 +13,6 @@ export ZSH_CUSTOM="$ZDOTDIR/custom"
 export HISTFILE="$XDG_STATE_HOME/zsh_history"
 export ZLE_RPROMPT_INDENT=0
 
-mkdir -p "$XDG_CACHE_HOME/zsh"
-compinit -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
-
 export LESSHISTFILE='-'
 
 export EDITOR='nvim'
