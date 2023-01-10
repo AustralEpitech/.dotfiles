@@ -99,3 +99,5 @@ alias dcst='docker-compose restart'
 alias dcb!='docker-compose build --no-cache'
 alias dcb='docker-compose build'
 alias dcl='docker-compose pull'
+
+# vim: ft=zsh
