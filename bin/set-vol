@@ -1,28 +1,16 @@
 #!/bin/bash
 set -e
 
-# TODO: multiple fast invocation cause volume not to be updated
+SINK='@DEFAULT_SINK@'
+TMP_FILE='/tmp/set-vol'
 
-PACTL_SINK='@DEFAULT_SINK@'
-SINK="$PACTL_SINK"
+for _ in 1 2 3; do
+    [ -f "$TMP_FILE" ] || break
+    sleep 0.03
+done
+touch "$TMP_FILE"
 
-function get_vol() {
-    VOL="$(pactl get-sink-volume "$SINK" 2> /dev/null)"
-
-    if [ -n "$VOL" ]; then
-        CMD='pactl set-sink-volume'
-    else
-        CMD='amixer sset'
-        SINK='Master'
-
-        VOL="$(amixer sget "$SINK")"
-    fi
-}
-
-set +e
-get_vol
-set -e
-
+VOL="$(pactl get-sink-volume "$SINK")"
 VOL="$(echo "$VOL" | grep -Po '\d+(?=%)' | head -n 1)"
 VOL="$((VOL - VOL % "$1"))"
 
@@ -41,8 +29,10 @@ esac
 [ "$VOL" -lt 0 ] && VOL=0
 [ "$VOL" -gt 100 ] && VOL=100
 
-$CMD "$SINK" "$VOL%" > /dev/null
-pactl set-sink-mute "$PACTL_SINK" 0
+pactl set-sink-volume "$SINK" "$VOL%"
+pactl set-sink-mute "$SINK" 0
+
+rm "$TMP_FILE"
 
 if [ -t 1 ]; then
     echo "$VOL"
