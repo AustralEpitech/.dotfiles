@@ -26,5 +26,14 @@ alias watch='coloralias watch -c -- '
 alias xargs='xargs '
 
 function j() {
-    cd **/"$1"
+    local dirs=(**/"$1")
+
+    if [ -z "${dirs[2]}" ]; then
+        cd "${dirs[1]}"
+        return
+    fi
+    select d in "${dirs[@]}"; do
+        cd "$d"
+        break
+    done
 }
