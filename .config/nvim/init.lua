@@ -10,6 +10,7 @@ vim.o.shiftwidth     = 4
 vim.o.tabstop        = 4
 
 vim.o.list           = true
+vim.o.listchars      = "tab:> ,trail:-,nbsp:+,leadmultispace:│   "
 
 vim.o.number         = true
 vim.o.relativenumber = true
@@ -50,7 +51,6 @@ require"theme"
 require"pack-dirdiff"
 require"pack-easy-align"
 require"pack-grammalecte"
-require"pack-indent-blankline"
 require"pack-lspconfig"
 require"pack-telescope"
 require"pack-treesitter"

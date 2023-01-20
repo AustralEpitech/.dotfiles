@@ -10,9 +10,6 @@
 [submodule ".config/nvim/pack/plugins/opt/impatient"]
 	path = .config/nvim/pack/plugins/opt/impatient
 	url = https://github.com/lewis6991/impatient.nvim.git
-[submodule ".config/nvim/pack/plugins/opt/indent-blankline"]
-	path = .config/nvim/pack/plugins/opt/indent-blankline
-	url = https://github.com/lukas-reineke/indent-blankline.nvim.git
 [submodule ".config/nvim/pack/plugins/opt/lspconfig"]
 	path = .config/nvim/pack/plugins/opt/lspconfig
 	url = https://github.com/neovim/nvim-lspconfig.git
