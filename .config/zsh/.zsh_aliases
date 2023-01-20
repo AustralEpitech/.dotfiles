@@ -11,7 +11,7 @@ alias wconf='(cd "$HOME"/.config/suckless/dwm* && $EDITOR .)'
 alias zconf='(cd "$ZDOTDIR/" && $EDITOR .) && . "$ZDOTDIR/.zshrc"'
 
 # dev
-alias epitest='docker run -it --rm -v "$PWD:/usr/app/" epitechcontent/epitest-docker bash'
+alias epitest='docker run -it --rm --user $UID:$GID -v "$PWD:/usr/app/" epitechcontent/epitest-docker bash'
 
 # compatibility
 alias ssh='TERM=linux ssh'
