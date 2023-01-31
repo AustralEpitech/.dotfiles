@@ -7,11 +7,11 @@ numlockx
 (
     LAPTOP_SCREEN="$(xrandr --listmonitors | grep eDP | awk '{print $4}')"
 
-    xrandr --output "${LAPTOP_SCREEN}" --mode 1920x1080 --rate 60 --primary
+    xrandr                                                               \
+        --output "${LAPTOP_SCREEN}" --mode 1920x1080 --rate 60 --primary
+#        --output DisplayPort-1-1 --auto --right-of eDP                   \
+#        --output DisplayPort-1-2 --auto --right-of DisplayPort-1-1
 )
-xrandr                                           \
-    --output DisplayPort-1-1 --pos 1920x0 --auto \
-    --output DisplayPort-1-2 --pos 3840x0 --auto
 
 # startup
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
