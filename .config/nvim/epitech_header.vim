@@ -1,4 +1,4 @@
-function! EpitechHeader()
+function! EpitechHeader(ft=&filetype)
     let com_arr = {
         \ 'c':       {'top': '/*', 'mid': '**', 'bot': '*/'},
         \ 'cpp':     {'top': '/*', 'mid': '**', 'bot': '*/'},
@@ -6,14 +6,14 @@ function! EpitechHeader()
         \ 'haskell': {'top': '{-', 'mid': '--', 'bot': '-}'},
     \ }
 
-    if (!has_key(com_arr, &filetype))
-        echoerr "Unsupported filetype: " . &filetype
+    if (!has_key(com_arr, a:ft))
+        echoerr "Unsupported filetype: " . a:ft
         return
     endif
 
-    let top = com_arr[&filetype]['top']
-    let mid = com_arr[&filetype]['mid']
-    let bot = com_arr[&filetype]['bot']
+    let top = com_arr[a:ft]['top']
+    let mid = com_arr[a:ft]['mid']
+    let bot = com_arr[a:ft]['bot']
     let dir_name = fnamemodify(getcwd(), ':t')
     let file_name = expand('%:t:r')
 
