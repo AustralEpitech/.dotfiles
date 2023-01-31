@@ -1,6 +1,5 @@
 if ! [ -w '/var/run/docker.sock' ]; then
     alias docker='sudo docker'
-    alias docker-compose='sudo docker-compose'
 fi
 
 # docker
@@ -76,28 +75,28 @@ alias dkspv='docker system prune --volumes'
 alias dkspva='docker system prune --volumes -a'
 alias dkspvaf='docker system prune --volumes -a -f'
 
-# docker-compose
-alias dc='docker-compose'
-alias dcd='docker-compose down'
-alias dcup='docker-compose up -d'
-alias dcupb='docker-compose up -d --build'
+# compose
+alias dc='docker compose'
+alias dcd='docker compose down'
+alias dcup='docker compose up -d'
+alias dcupb='docker compose up -d --build'
 
 ## container
-alias dccls='docker-compose ps'
-alias dcclsq='docker-compose ps -q'
-alias dcex='docker-compose exec'
-alias dcr='docker-compose run --rm'
-alias dcrd='docker-compose run -d --rm'
-alias dcrm!='docker-compose rm -f'
-alias dcrm='docker-compose rm'
-alias dcrmv!='docker-compose rm -v -f'
-alias dcrmv='docker-compose rm -v'
-alias dcsp='docker-compose stop'
-alias dcst='docker-compose restart'
+alias dccls='docker compose ps'
+alias dcclsq='docker compose ps -q'
+alias dcex='docker compose exec'
+alias dcr='docker compose run --rm'
+alias dcrd='docker compose run -d --rm'
+alias dcrm!='docker compose rm -f'
+alias dcrm='docker compose rm'
+alias dcrmv!='docker compose rm -v -f'
+alias dcrmv='docker compose rm -v'
+alias dcsp='docker compose stop'
+alias dcst='docker compose restart'
 
 ## image
-alias dcb!='docker-compose build --no-cache'
-alias dcb='docker-compose build'
-alias dcl='docker-compose pull'
+alias dcb!='docker compose build --no-cache'
+alias dcb='docker compose build'
+alias dcl='docker compose pull'
 
 # vim: ft=zsh

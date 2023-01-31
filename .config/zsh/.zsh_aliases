@@ -7,11 +7,12 @@ alias vi='$EDITOR'
 # conf
 alias config='git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"'
 alias viconf='(cd "$XDG_CONFIG_HOME/nvim" && $EDITOR .)'
-alias wconf='(cd "$HOME"/.config/suckless/dwm* && $EDITOR .)'
+alias wconf='(cd "$XDG_CONFIG_HOME/suckless/dwm-6.4" && $EDITOR .)'
 alias zconf='(cd "$ZDOTDIR/" && $EDITOR .) && . "$ZDOTDIR/.zshrc"'
 
 # dev
 alias epitest='docker run -it --rm --user $UID:$GID -v "$PWD:/usr/app/" epitechcontent/epitest-docker bash'
+alias make='make -j8'
 
 # compatibility
 alias ssh='TERM=linux ssh'
@@ -21,7 +22,7 @@ function coloralias() {
     $1 $(echo - "${@:2}" | sed 's/--color=\w\+/--color=always/')
 }
 
-alias sudo='doas '
+alias sudo='sudo '
 alias watch='coloralias watch -c -- '
 alias xargs='xargs '
 
