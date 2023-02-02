@@ -53,7 +53,7 @@ while getopts hcCviIna o; do
             ;;
         C)
             CLEAN="$(add_opt "$CLEAN" "$c")"
-            CON_OPT="-f"
+            CON_OPT='-f'
             ;;
         v)
             CLEAN="$(add_opt "$CLEAN" "$v")"
@@ -70,7 +70,7 @@ while getopts hcCviIna o; do
             ;;
         a)
             CLEAN="$(add_opt "$CLEAN" "$c" "$v" "$i" "$n")"
-            CON_OPT="-f"
+            CON_OPT='-f'
             IMG_OPT='-a'
             ;;
         *)
