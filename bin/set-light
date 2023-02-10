@@ -41,6 +41,9 @@ done
 
 echo "$NEW" > "$CUR_FILE"
 
+# update sbar
+kill -35 "$(cat "$HOME/.cache/pidofbar")"
+
 if [ -t 1 ]; then
     echo "$NEW"
 fi

@@ -9,8 +9,8 @@ numlockx
 
     xrandr                                                               \
         --output "${LAPTOP_SCREEN}" --mode 1920x1080 --rate 60 --primary
-#        --output DisplayPort-1-1 --auto --right-of eDP                   \
-#        --output DisplayPort-1-2 --auto --right-of DisplayPort-1-1
+#        --output DisplayPort-1-1 --auto --pos 1920x0                      \
+#        --output DisplayPort-1-2 --auto --pos 3840x0
 )
 
 # startup
@@ -19,11 +19,9 @@ picom &
 redshift &
 feh --bg-tile "$XDG_CONFIG_HOME/wallpapers/landscape.png" --no-fehbg
 dunst &
+sbar &
 
 xset dpms 300 15 # dim 5m, lock 5m15s
 xss-lock lock &
 
-#bar
-(conky | while read LINE; do xsetroot -name "$LINE"; done) &
-
-exec dwm
+exec dbus-launch dwm

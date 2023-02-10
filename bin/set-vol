@@ -1,29 +1,36 @@
 #!/bin/bash
 set -e
 
-SINK='@DEFAULT_SINK@'
+SINK='@DEFAULT_AUDIO_SINK@'
 
-VOL="$(pactl get-sink-volume "$SINK")"
-VOL="$(grep -Po '\d+(?=%)' <<< "$VOL" | head -n 1)"
-VOL="$((VOL - VOL % "$1"))"
+if [ "$1" == 'm' ]; then
+    wpctl set-mute "$SINK" toggle
+else
+    VOL="$((10#$(wpctl get-volume "$SINK" | tr -dc '[0-9]')))"
+    [ -n "$1" ] && VOL="$((VOL - VOL % $1))"
 
-case "${1:0:1}" in
-    '')
-        exit 1
-        ;;
-    '+'|'-')
-        VOL="$((VOL + "$1"))"
-        ;;
-    *)
-        VOL="$1"
-        ;;
-esac
+    case "${1:0:1}" in
+        '')
+            echo "$VOL"
+            exit
+            ;;
+        '+'|'-')
+            VOL="$((VOL + $1))"
+            ;;
+        *)
+            VOL="$1"
+            ;;
+    esac
 
-[ "$VOL" -lt 0   ] && VOL=0
-[ "$VOL" -gt 100 ] && VOL=100
+    [ "$VOL" -lt 0   ] && VOL=0
+    [ "$VOL" -gt 100 ] && VOL=100
 
-pactl set-sink-volume "$SINK" "$VOL%"
-pactl set-sink-mute   "$SINK" 0
+    wpctl set-volume "$SINK" "$VOL%"
+    wpctl set-mute   "$SINK" 0
+fi
+
+# update sbar
+kill -34 "$(cat "$HOME/.cache/pidofbar")"
 
 if [ -t 1 ]; then
     echo "$VOL"

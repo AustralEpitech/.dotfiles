@@ -1,0 +1,84 @@
+#!/bin/bash
+
+# INIT
+printf "$$" > "$HOME/.cache/pidofbar"
+
+# MODULES
+update_crypto() {
+    crypto="$(crypto)"
+}
+
+update_cpu() {
+    cpu=" $(grep -o "^[^ ]*" /proc/loadavg)"
+}
+
+update_memory() {
+    memory=" $(free -h | sed -n '2s/\([^ ]* *\)\{2\}\([^ ]*\).*/\2/p')"
+}
+
+update_bat() {
+    bat="$(grep -q Charging /sys/class/power_supply/BAT1/status && printf '' || printf '')"
+    bat="$bat $(cat /sys/class/power_supply/BAT1/capacity)%"
+}
+
+update_vol() {
+    local v="$(wpctl get-volume '@DEFAULT_AUDIO_SINK@')"
+
+    if grep -q 'MUTED' <<< "$v"; then
+        vol='🔇'
+    else
+        vol=" $((10#$(tr -dc '[0-9]' <<< "$v")))"
+    fi
+}
+
+update_backlight() {
+    local actual_brightness
+    local max_brightness
+
+    read -r actual_brightness </sys/class/backlight/*/actual_brightness
+    read -r max_brightness </sys/class/backlight/*/max_brightness
+    backlight=" $((actual_brightness * 100 / max_brightness))%"
+}
+
+update_time() {
+    time="$(date "+%a %m/%d %R")"
+}
+
+# For calcurse users, refer https://github.com/pystardust/automeet
+#update_event () {
+#   event="$(calcurse -n | sed 1d | \
+#       sed -E "s_^ *\[(.*):(.*)\] ([^\t]*)\t?.*_[\1h \2m->\3]_")"
+#   [ "[]" = "$event" ] && event=""
+#}
+
+
+# modules that don't update on their own need to be run at the start for getting their initial value
+update_vol
+update_backlight
+
+display() {
+    xsetroot -name "$crypto | $cpu | $memory | $vol | $backlight | $bat | $time"
+}
+
+# SIGNALING
+# trap  "<function>;display"        "RTMIN+n"
+trap    "update_vol;display"        "RTMIN"
+trap    "update_backlight;display"  "RTMIN+1"
+trap    "update_bat;display"        "RTMIN+2"
+# to update it from external commands
+## kill -m "$(cat ~/.cache/pidofbar)"
+# where m = 34 + n
+
+sec=0
+while true; do
+    sleep 1 & wait && {
+        [ $((sec % 3600)) -eq 0 ] && update_crypto
+        [ $((sec % 1   )) -eq 0 ] && update_time
+        [ $((sec % 5   )) -eq 0 ] && update_cpu
+        [ $((sec % 5   )) -eq 0 ] && update_memory
+        [ $((sec % 5   )) -eq 0 ] && update_bat
+        [ $((sec % 5   )) -eq 0 ] && display
+
+        sec="$((sec + 1))"
+    }
+done
