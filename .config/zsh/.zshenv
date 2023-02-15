@@ -16,3 +16,6 @@ export ZLE_RPROMPT_INDENT=0
 export LESSHISTFILE='-'
 
 export EDITOR='nvim'
+
+export XDG_CURRENT_DESKTOP=Unity
+export QT_STYLE_OVERRIDE=Materia-dark
