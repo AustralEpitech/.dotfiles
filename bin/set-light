@@ -18,14 +18,13 @@ set +e
 CUR="$(cat "$CUR_FILE" || echo 50)"
 set -e
 
-CUR="$((CUR - CUR % "$1"))"
 
 case "${1:0:1}" in
     '')
         exit 1
         ;;
     '+'|'-')
-        NEW="$((CUR + "$1"))"
+        NEW="$((CUR - CUR % $1 + $1))"
         ;;
     *)
         NEW="$1"

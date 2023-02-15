@@ -6,7 +6,7 @@ SINK='@DEFAULT_AUDIO_SINK@'
 if [ "$1" == 'm' ]; then
     wpctl set-mute "$SINK" toggle
 else
-    VOL="$((10#$(wpctl get-volume "$SINK" | tr -dc '[0-9]')))"
+    VOL="$((10#$(wpctl get-volume "$SINK" | tr -dc '0-9')))"
     [ -n "$1" ] && VOL="$((VOL - VOL % $1))"
 
     case "${1:0:1}" in
