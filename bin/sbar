@@ -51,7 +51,6 @@ update_time() {
 #   [ "[]" = "$event" ] && event=""
 #}
 
-
 # modules that don't update on their own need to be run at the start for getting their initial value
 update_vol
 update_backlight
@@ -73,7 +72,7 @@ sec=0
 while true; do
     sleep 1 & wait && {
         [ $((sec % 3600)) -eq 0 ] && update_crypto
-        [ $((sec % 1   )) -eq 0 ] && update_time
+        [ $((sec % 5   )) -eq 0 ] && update_time
         [ $((sec % 5   )) -eq 0 ] && update_cpu
         [ $((sec % 5   )) -eq 0 ] && update_memory
         [ $((sec % 5   )) -eq 0 ] && update_bat
