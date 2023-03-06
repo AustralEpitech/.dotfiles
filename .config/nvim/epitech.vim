@@ -1,4 +1,4 @@
-function! EpitechHeader(ft=&filetype)
+function! TekHeader(ft=&filetype)
     let com_arr = {
         \ 'c':       {'top': '/*', 'mid': '**', 'bot': '*/'},
         \ 'cpp':     {'top': '/*', 'mid': '**', 'bot': '*/'},
@@ -25,4 +25,29 @@ function! EpitechHeader(ft=&filetype)
     call append(5, bot)
 endfunction
 
-command Header call EpitechHeader()
+function! TekHHeader()
+    call TekHeader('c')
+    call append(6, '')
+    call append(7, '#pragma once')
+    call append(8, '')
+endfunction
+
+function! TekHppHeader()
+    let file_name = expand('%:t:r')
+
+    call TekHHeader()
+    call append(9, 'class ' .. file_name .. ' {')
+    call append(10, '    public:')
+    call append(11, '        '   .. file_name .. '(void);')
+    call append(12, '        ~'  .. file_name .. '(void);')
+    call append(13, '')
+    call append(14, '    protected:')
+    call append(15, '};')
+endfunction
+
+au BufNewFile *.c   call TekHeader()
+au BufNewFile *.cpp call TekHeader()
+au BufNewFile *.h   call TekHHeader()
+au BufNewFile *.hpp call TekHppHeader()
+
+command Header call TekHeader()

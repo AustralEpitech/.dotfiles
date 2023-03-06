@@ -50,12 +50,10 @@ vim.cmd("packadd plenary")
 require"theme"
 
 require"pack-easy-align"
-require"pack-grammalecte"
 require"pack-lspconfig"
 require"pack-telescope"
 require"pack-treesitter"
-vim.cmd("source ~/.config/nvim/epitech_header.vim")
-vim.cmd("source ~/.config/nvim/cpp.vim")
+vim.cmd("source ~/.config/nvim/epitech.vim")
 
 -----------------------
 ----- keybindings -----
