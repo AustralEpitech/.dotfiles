@@ -1,0 +1,4 @@
+#!/bin/bash
+
+systemctl is-active libvirtd | grep -q inactive && pkexec systemctl start libvirtd
+/usr/bin/virt-manager

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+sudo docker run -it --rm                      \
+    --network host                            \
+    -e DISPLAY="$DISPLAY"                     \
+    -v "$PWD:/app/"                           \
+    -v "$XAUTHORITY:/home/app/.Xauthority:ro" \
+    -v '/tmp/.X11-unix/:/tmp/.X11-unix/'      \
+    wine                                      \
+    "$@"
