@@ -45,8 +45,11 @@ function! TekHppHeader()
     call append(15, '};')
 endfunction
 
-au BufNewFile *.c   call TekHeader()
-au BufNewFile *.cpp call TekHeader()
+au BufNewFile *.c      call TekHeader('c')
+au BufNewFile *.cpp    call TekHeader('cpp')
+au BufNewFile *.hs     call TekHeader('haskell')
+au BufNewFile Makefile call TekHeader('make')
+
 au BufNewFile *.h   call TekHHeader()
 au BufNewFile *.hpp call TekHppHeader()
 
