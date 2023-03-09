@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # INIT
-printf "$$" > "$HOME/.cache/pidofbar"
+echo "$$" > "$HOME/.cache/pidofbar"
 
 # MODULES
 update_crypto() {
@@ -22,12 +22,12 @@ update_bat() {
 }
 
 update_vol() {
-    local v="$(wpctl get-volume '@DEFAULT_AUDIO_SINK@')"
+    local v; v="$(wpctl get-volume '@DEFAULT_AUDIO_SINK@')"
 
     if grep -q 'MUTED' <<< "$v"; then
         vol='🔇'
     else
-        vol=" $((10#$(tr -dc '[0-9]' <<< "$v")))"
+        vol=" $((10#$(tr -dc '0-9' <<< "$v")))"
     fi
 }
 
