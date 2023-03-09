@@ -1,5 +1,4 @@
 # system
-alias cls='clear && ls -lah'
 alias tmp='cd "$(mktemp -d)"'
 alias update='sudo pacman -Syu && config submodule update --remote --recursive --init'
 alias vi='$EDITOR'
@@ -12,6 +11,9 @@ alias zconf='(cd "$ZDOTDIR/" && $EDITOR .) && . "$ZDOTDIR/.zshrc"'
 
 # dev
 alias make='make -j8'
+gi() {
+    curl -Lf "https://www.gitignore.io/api/${(j:,:)@}"
+}
 
 # compatibility
 alias ssh='TERM=linux ssh'
@@ -26,7 +28,7 @@ alias watch='coloralias watch -c -- '
 alias xargs='xargs '
 
 function j() {
-    local dirs=(**/"$1")
+    local dirs=(**/"$1"/)
 
     if [ -z "${dirs[2]}" ]; then
         cd "${dirs[1]}"

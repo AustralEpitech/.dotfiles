@@ -72,8 +72,8 @@
         "format": "{name}",
     },
     "custom/crypto": {
-        "exec": "crypto",
-        "interval": 3600,
+        "exec": "crypto.sh",
+        "interval": 600,
     }
 }
 

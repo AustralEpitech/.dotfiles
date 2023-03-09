@@ -19,6 +19,3 @@ export EDITOR='nvim'
 
 export XDG_CURRENT_DESKTOP=Unity
 export QT_STYLE_OVERRIDE=Materia-dark
-
-# Wayland
-export WLR_EGL_NO_MODIFIERS=1

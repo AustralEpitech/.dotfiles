@@ -3,7 +3,7 @@
 function usage() {
     cat << EOF
 Usage: $0 [-hcCviIna]
-Prune Docker resources.
+Prune $RUNTIME resources.
 If no option provided, defaults to -Cvn
 Options:
     -h  Show this help and exits
@@ -30,7 +30,9 @@ function add_opt() {
     echo "$RESULT"
 }
 
-if ! [ -w '/var/run/docker.sock' ] && [ "$EUID" != 0 ]; then
+RUNTIME="$(basename "$(command -v podman || command -v docker)")"
+
+if ! $RUNTIME container ls > /dev/null 2>&1 && [ "$EUID" != 0 ]; then
     exec sudo -- "$0" "$@"
 fi
 
@@ -95,15 +97,15 @@ VALUES=(
 CON='container'
 PRUNE='prune -f'
 COMMANDS=(
-    "docker system  $PRUNE $IMG_OPT --volumes"
-    "docker system  $PRUNE $IMG_OPT"
-    "docker volume  $PRUNE"
-    "docker image   $PRUNE $IMG_OPT"
-    "docker network $PRUNE"
+    "$RUNTIME system  $PRUNE $IMG_OPT --volumes"
+    "$RUNTIME system  $PRUNE $IMG_OPT"
+    "$RUNTIME volume  $PRUNE"
+    "$RUNTIME image   $PRUNE $IMG_OPT"
+    "$RUNTIME network $PRUNE"
 )
 
 if [ "$((CLEAN & "$c"))" == "$c" ]; then
-    docker "$CON" ls -aq | xargs docker "$CON" rm "$CON_OPT" 2> /dev/null
+    $RUNTIME "$CON" ls -aq | xargs "$RUNTIME" "$CON" rm "$CON_OPT" 2> /dev/null
 fi
 
 for idx in "${!VALUES[@]}"; do
