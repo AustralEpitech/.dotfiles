@@ -12,6 +12,7 @@ export ZSH="$ZDOTDIR/ohmyzsh"
 export ZSH_CUSTOM="$ZDOTDIR/custom"
 export HISTFILE="$XDG_STATE_HOME/zsh_history"
 export ZLE_RPROMPT_INDENT=0
+export ZSH_COMPDUMP="$XDG_CACHE_HOME/.zcompdump-$ZSH_VERSION"
 
 export LESSHISTFILE='-'
 

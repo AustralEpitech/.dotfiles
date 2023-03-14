@@ -20,7 +20,7 @@ function kx() {
     kubectx ${ctx:l}
     [ -n "$ns" ] && kubens "${ns:l}"
 }
-compdef -e _kubectx.zsh kx
+compdef -e _kubectx kx
 
 alias kn='kubens'
 alias k='kubectl'
