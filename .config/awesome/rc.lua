@@ -53,14 +53,11 @@ end
 beautiful.init(gears.filesystem.get_configuration_dir() .. "theme.lua")
 
 terminal = "alacritty"
-editor = os.getenv("EDITOR") or "nvim"
-editor_cmd = terminal .. " -e " .. editor
+editor = os.getenv("EDITOR")
 
 browser = "firefox"
 private_browser = "firefox --private-window"
 files = "pcmanfm"
-
-lock = "i3lock -ftni" .. gears.filesystem.get_configuration_dir() .. "wallpapers/debian11.png"
 
 modkey = "Mod4"
 
@@ -86,21 +83,12 @@ local taglist_buttons = gears.table.join(
             t:view_only()
         end
     ),
-    awful.button(
-        {modkey}, 1,
-        function(t)
-            if client.focus then
-                client.focus:move_to_tag(t)
-            end
-        end
-    )
 )
 
 local tasklist_buttons = gears.table.join(
     awful.button(
         {}, 1,
         function(c)
-            c.minimized = false
             c:emit_signal("request::activate", "tasklist", {raise = true})
         end
     ),
@@ -262,7 +250,7 @@ globalkeys = gears.table.join(
     awful.key(
         {modkey}, "l",
         function()
-            awful.spawn(lock)
+            awful.spawn("lock")
         end,
         {description = "lock screen", group = "awesome"}
     ),
@@ -631,17 +619,8 @@ client.connect_signal(
 -- }}}
 
 apps = {
-    "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1",
-    "xset dpms 300 15", -- dim screen after 5 min and lock 15 sec after
-    "xss-lock --  " .. lock,
-    "picom",
-    "redshift",
-    "nm-applet",
-    "numlockx",
     "killall cbatticon",
     "cbatticon BAT0 -i symbolic",
-    "flameshot",
-    "blueman-applet",
 }
 
 for _, app in ipairs(apps) do
