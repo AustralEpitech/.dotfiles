@@ -2,7 +2,6 @@ vim.cmd("packadd lspconfig")
 lspconfig = require"lspconfig"
 
 local servers = {
-    "jedi_language_server",
 }
 
 local on_attach = function(client, bufnr)
