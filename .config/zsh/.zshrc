@@ -4,10 +4,12 @@ zstyle ':omz:update' mode disabled
 
 plugins=(vi-mode colored-man-pages git gitignore)
 
+# doesn't work in .zshenv
+fpath=("$ZDOTDIR/completions" $fpath)
 . "$ZSH"/oh-my-zsh.sh
 
 . "$ZDOTDIR"/.docker_aliases
 . "$ZDOTDIR"/.kubectl_aliases
 . "$ZDOTDIR"/.zsh_aliases
 
-! [ -f "$ZDOTDIR/.p10k.zsh" ] || . "$ZDOTDIR/.p10k.zsh"
+. "$ZDOTDIR/.p10k.zsh"

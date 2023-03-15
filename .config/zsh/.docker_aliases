@@ -1,5 +1,5 @@
-alias docker='podman'
-alias docker-compose='podman-compose'
+alias docker='sudo docker'
+alias docker-compose='sudo docker-compose'
 
 # docker
 alias dk='docker'
