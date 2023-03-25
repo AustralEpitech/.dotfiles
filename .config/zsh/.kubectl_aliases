@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-function kctx() {
+function kxn() {
     1="$(echo - "$1" | tr -c '[:alnum:]-_' '[ *]')"
     local ctx="$(echo - "$1" | awk '{print $1}')"
     local ns="${2-$(echo - "$1" | awk '{print $2}')}"
@@ -20,6 +20,7 @@ function kctx() {
     kubectx ${ctx:l}
     [ -n "$ns" ] && kubens "${ns:l}"
 }
+compdef _kubectx kxn
 
 alias kns='kubens'
 alias k='kubectl'
