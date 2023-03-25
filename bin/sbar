@@ -17,8 +17,9 @@ update_memory() {
 }
 
 update_bat() {
-    bat="$(grep -q Charging /sys/class/power_supply/BAT0/status && printf '' || printf '')"
-    bat="$bat $(cat /sys/class/power_supply/BAT0/capacity)%"
+    local dir="$(echo /sys/class/power_supply/BAT* | sort -n | tail -n1)"
+    bat="$(grep -q Charging "$dir/status" && printf '' || printf '')"
+    bat="$bat $(cat "$dir/capacity")%"
 }
 
 update_vol() {
