@@ -14,6 +14,7 @@ Options:
     -I  Remove unused images
     -n  Remove unused networks
     -a  All of the above, equivalent of -CvIn
+    -r  Run as root
 EOF
     exit 0
 }
@@ -30,11 +31,7 @@ function add_opt() {
     echo "$RESULT"
 }
 
-RUNTIME="$(basename "$(command -v podman || command -v docker)")"
-
-if ! $RUNTIME container ls > /dev/null 2>&1 && [ "$EUID" != 0 ]; then
-    exec sudo -- "$0" "$@"
-fi
+RUNTIME="$(command -v podman || command -v docker)"
 
 c=1
 # C=2
@@ -45,7 +42,7 @@ n=32
 # a="$((c + C + v + I + n))"
 
 CLEAN=0
-while getopts hcCviIna o; do
+while getopts hcCviInar o; do
     case "$o" in
         h)
             usage
@@ -74,6 +71,9 @@ while getopts hcCviIna o; do
             CLEAN="$(add_opt "$CLEAN" "$c" "$v" "$i" "$n")"
             CON_OPT='-f'
             IMG_OPT='-a'
+            ;;
+        r)
+            exec sudo -- "$0" "$(sed 's/r//' <<< "${@:1}")"
             ;;
         *)
             exit 1
