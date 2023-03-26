@@ -5,6 +5,7 @@ alias docker-compose='sudo docker-compose'
 alias dk='docker'
 
 ## container
+alias dkc='docker container'
 alias dkcc='docker container create'
 alias dkci='docker container inspect'
 alias dkcls='docker container ls'

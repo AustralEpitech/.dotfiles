@@ -28,14 +28,11 @@ alias watch='coloralias watch -c -- '
 alias xargs='xargs '
 
 function j() {
-    local dirs=(**/"$1"/)
+    local dests=($(find . -maxdepth 5 -type d -path "*/$1" 2> /dev/null))
+    #local dests=(**/"$1"/)
+    local dest="$dests"
 
-    if [ -z "${dirs[2]}" ]; then
-        cd "${dirs[1]}"
-        return
-    fi
-    select d in "${dirs[@]}"; do
-        cd "$d"
-        break
-    done
+    [ -n "${dests[2]}" ] && dest="$(printf '%s\n' "${dests[@]}" | fzf)"
+    ls -d "$dest"
+    cd "$dest"
 }
