@@ -4,10 +4,8 @@
 numlockx
 
 # display
-xrandr                                           \
-    --output eDP-1           --auto  --primary   \
-    --output DisplayPort-1-1 --auto --pos 1920x0 \
-    --output DisplayPort-1-2 --auto --pos 3840x0
+xrandr \
+    --output HDMI1 --auto --primary
 feh --bg-tile "$XDG_CONFIG_HOME/wallpapers/landscape.png" --no-fehbg
 
 # startup
