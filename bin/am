@@ -51,11 +51,14 @@ while getopts a o; do
 done
 
 while true; do
-    #readarray -t LSBLK <<< "$(lsblk -n --paths | grep -v snap)"
     readarray -t LSBLK <<< "$(lsblk -n --paths --list | grep part)"
 
     COLUMNS=1
     select dev in "${LSBLK[@]}"; do
+        if [ -z "$dev" ]; then
+            clear_output
+            break
+        fi
         name="$(cut -f1 -d' ' <<< "$dev")"
 
         clear_output
