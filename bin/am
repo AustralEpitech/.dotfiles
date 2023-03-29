@@ -1,5 +1,4 @@
-#!/bin/bash
-set -e
+#!/bin/bash -e
 
 # TODO
 # mount all partitions by selecting disk
@@ -12,7 +11,7 @@ function get_row() {
     printf '\e[6n' >&2
     read -sdRr pos
     pos="${pos#*[}"
-    row="${pos%;*}"
+    row="${pos%\;*}"
     echo "$row"
 }
 
