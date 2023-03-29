@@ -57,10 +57,10 @@ alias dknrm!='docker network rm -f'
 alias dknrm='docker network rm'
 
 ## system
-alias dks='docker system'
-alias dksdf='docker system df'
-alias dksp!='docker system prune -f'
-alias dksp='docker system prune'
+alias dksys='docker system'
+alias dksysdf='docker system df'
+alias dksysp!='docker system prune -f'
+alias dksysp='docker system prune'
 
 # compose
 alias dc='docker-compose'
