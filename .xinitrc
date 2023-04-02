@@ -4,7 +4,6 @@
 numlockx
 
 # display
-<<<<<<< HEAD
 xrandr \
     --output HDMI1 --auto --primary
 feh --bg-fill "$XDG_CONFIG_HOME/wallpapers/monerochan.png" --no-fehbg
@@ -19,6 +18,5 @@ dunst                                                           &
 sbar                                                            &
 
 xset dpms 300 # lock 5m
-xss-lock -- lock &
 
 exec dbus-launch dwm
