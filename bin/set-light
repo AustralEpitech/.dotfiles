@@ -1,38 +1,24 @@
-#!/bin/bash
-set -e
+#!/bin/bash -e
 shopt -s extglob nullglob
 
 set_brightness() {
-    MAX="$(cat "$1"/max_brightness)"
-    FILE="$1"/brightness
-    VAL="$(($2 * MAX / 100 + 1))"
+    local max; max="$(cat "$1"/max_brightness)"
+    local file="$1"/brightness
+    local val="$(($2 * max / 100 + 1))"
 
-    [ "$VAL" -lt 0 ] && VAL=0
-    [ "$VAL" -gt "$MAX" ] && VAL="$MAX"
-    echo "$VAL" > "$FILE"
+    [ "$val" -lt 0      ] && val=0
+    [ "$val" -gt "$max" ] && val="$max"
+    echo "$val" > "$file"
 }
 
 CUR_FILE="${XDG_CACHE_HOME:-$HOME/.cache}/current_brightness"
-
-set +e
-CUR="$(cat "$CUR_FILE" || echo 50)"
-set -e
-
+CUR="$(cat "$CUR_FILE" 2> /dev/null || echo 50)"
 
 case "${1:0:1}" in
-    '')
-        exit 1
-        ;;
-    '+'|'-')
-        NEW="$((CUR - CUR % $1 + $1))"
-        ;;
-    *)
-        NEW="$1"
-        ;;
+    '')      echo "$CUR"; exit              ;;
+    '+'|'-') NEW="$((CUR - CUR % $1 + $1))" ;;
+    *)       NEW="$1"                       ;;
 esac
-
-[ "$NEW" -lt 0 ] && NEW=0
-[ "$NEW" -gt 100 ] && NEW=100
 
 for dev in /sys/class/backlight/*; do
     set_brightness "$dev" "$NEW"
@@ -40,9 +26,4 @@ done
 
 echo "$NEW" > "$CUR_FILE"
 
-# update sbar
 kill -35 "$(cat "$HOME/.cache/pidofbar")"
-
-if [ -t 1 ]; then
-    echo "$NEW"
-fi
