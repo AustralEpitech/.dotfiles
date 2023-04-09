@@ -87,6 +87,7 @@ display() {
 # trap  '<function>;display'       'RTMIN+n'
 trap    'reload_bar;display'       'RTMIN'
 trap    'update_vol;display'       'RTMIN+1'
+trap    'update_backlight;display' 'RTMIN+2'
 trap    'update_crypto;display'    'RTMIN+3'
 # to update it from external commands
 ## kill -m "$(cat ~/.cache/pidofbar)"
