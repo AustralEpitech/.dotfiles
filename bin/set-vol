@@ -18,4 +18,4 @@ else
 fi
 
 # update sbar
-kill -34 "$(cat "$HOME/.cache/pidofbar")"
+kill -35 "$(cat "$HOME/.cache/pidofbar")"

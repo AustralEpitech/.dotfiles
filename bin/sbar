@@ -17,7 +17,8 @@ update_memory() {
 }
 
 update_bat() {
-    local dir="$(echo /sys/class/power_supply/BAT* | sort -n | tail -n1)"
+    local dir; dir="$(echo /sys/class/power_supply/BAT*/ | sort -n | tail -n1)"
+
     bat="$(grep -q Charging "$dir/status" && printf '' || printf '')"
     bat="$bat $(cat "$dir/capacity")%"
 }
@@ -41,6 +42,21 @@ update_backlight() {
     backlight=" $((actual_brightness * 100 / max_brightness))%"
 }
 
+update_wlp() {
+    local sig; sig="$(grep wlp /proc/net/wireless | awk '{print $3 * 100}')"
+    local ssid; ssid="$(nmcli -t -f name,device connection show --active | grep wlp | cut -d: -f1)"
+
+    [ -z "$ssid" ] && wlp='⚠' && return
+
+    echo "$sig"
+    # https://gitlab.freedesktop.org/NetworkManager/NetworkManager/-/blob/main/src/libnmc-base/nm-client-utils.c#L628
+    { [ "$sig" -gt 5600 ] && wlp="▂▄▆█ $ssid"; } ||
+    { [ "$sig" -gt 3850 ] && wlp="▂▄▆_ $ssid"; } ||
+    { [ "$sig" -gt 1650 ] && wlp="▂▄__ $ssid"; } ||
+    { [ "$sig" -gt  275 ] && wlp="▂___ $ssid"; } ||
+    {                      wlp="____ $ssid"; }
+}
+
 update_time() {
     time="$(date "+%a %m/%d %R")"
 }
@@ -57,30 +73,36 @@ while [ -z "$(wpctl get-volume '@DEFAULT_AUDIO_SINK@')" ]; do
     sleep 1
 done
 update_vol
+update_backlight
+
+reload_bar() {
+    sec=0
+}
 
 display() {
     xsetroot -name "$crypto | $cpu | $memory | $vol | $time"
 }
 
 # SIGNALING
-# trap  "<function>;display"        "RTMIN+n"
-trap    "update_vol;display"        "RTMIN"
-trap    "update_backlight;display"  "RTMIN+1"
-trap    "update_bat;display"        "RTMIN+2"
+# trap  '<function>;display'       'RTMIN+n'
+trap    'reload_bar;display'       'RTMIN'
+trap    'update_vol;display'       'RTMIN+1'
+trap    'update_crypto;display'    'RTMIN+3'
 # to update it from external commands
 ## kill -m "$(cat ~/.cache/pidofbar)"
 # where m = 34 + n
 
 sec=0
 while true; do
-    sleep 1 & wait && {
-        [ $((sec % 3600)) -eq 0 ] && update_crypto
-        [ $((sec % 5   )) -eq 0 ] && update_time
-        [ $((sec % 5   )) -eq 0 ] && update_cpu
-        [ $((sec % 5   )) -eq 0 ] && update_memory
-        #[ $((sec % 5   )) -eq 0 ] && update_bat
-        [ $((sec % 5   )) -eq 0 ] && display
-
-        sec="$((sec + 1))"
+    [ "$((sec % 3600))" = 0 ] && update_crypto
+    [ "$((sec % 5   ))" = 0 ] && {
+        update_time
+        update_cpu
+        update_memory
+        update_bat
+        display
     }
+
+    sleep 1 & wait
+    sec="$((sec + 1))"
 done
