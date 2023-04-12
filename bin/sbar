@@ -48,7 +48,6 @@ update_wlp() {
 
     [ -z "$ssid" ] && wlp='⚠' && return
 
-    echo "$sig"
     # https://gitlab.freedesktop.org/NetworkManager/NetworkManager/-/blob/main/src/libnmc-base/nm-client-utils.c#L628
     { [ "$sig" -gt 5600 ] && wlp="▂▄▆█ $ssid"; } ||
     { [ "$sig" -gt 3850 ] && wlp="▂▄▆_ $ssid"; } ||
@@ -73,7 +72,6 @@ while [ -z "$(wpctl get-volume '@DEFAULT_AUDIO_SINK@')" ]; do
     sleep 1
 done
 update_vol
-update_backlight
 
 reload_bar() {
     sec=0
@@ -100,7 +98,6 @@ while true; do
         update_time
         update_cpu
         update_memory
-        update_bat
         display
     }
 
