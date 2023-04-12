@@ -48,7 +48,6 @@ update_wlp() {
 
     [ -z "$ssid" ] && wlp='⚠' && return
 
-    echo "$sig"
     # https://gitlab.freedesktop.org/NetworkManager/NetworkManager/-/blob/main/src/libnmc-base/nm-client-utils.c#L628
     { [ "$sig" -gt 5600 ] && wlp="▂▄▆█ $ssid"; } ||
     { [ "$sig" -gt 3850 ] && wlp="▂▄▆_ $ssid"; } ||
