@@ -13,8 +13,8 @@ else
         *)       CUR="$1"                       ;;
     esac
 
-    wpctl set-volume -l 1 "$SINK" "$CUR%"
-    wpctl set-mute        "$SINK" 0
+    wpctl set-volume -l 1.5 "$SINK" "$CUR%"
+    wpctl set-mute          "$SINK" 0
 fi
 
 # update sbar
