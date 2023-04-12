@@ -18,7 +18,7 @@ feh --bg-fill "$XDG_CONFIG_HOME/wallpapers/monerochan.png" --no-fehbg &
     cycle=15                         # lock 15 sec after stimeout
     dpms="$((stimeout + cycle + 1))" # turn off screen 1 sec after lock
 
-    xss-lock -n "feh --fullscreen $lockimg" -- "i3lock -ftni $lockimg"
+    xss-lock -n "feh --fullscreen $lockimg" -- lock
     xset s "$stimeout" "$cycle"
     xset dpms "$dpms" "$dpms" "$dpms"
 ) &
@@ -28,7 +28,7 @@ feh --bg-fill "$XDG_CONFIG_HOME/wallpapers/monerochan.png" --no-fehbg &
 #/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 & # debian
 #/usr/libexec/polkit-gnome-authentication-agent-1               & # fedora
 picom                                                           &
-redshift                                                        &
+gammastep                                                       &
 dunst                                                           &
 sbar                                                            &
 
