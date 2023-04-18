@@ -1,12 +1,12 @@
 #!/bin/bash -e
 
+readarray -t NET <<<                                              \
+    "$(nmcli -f SSID,CHAN,RATE,SIGNAL,BARS,SECURITY dev wifi list \
+    | awk '!seen[$1]++')"
+
 if [ -n "$1" ]; then
     nmcli device wifi con "$1"
 else
-    readarray -t NET <<<                                              \
-        "$(nmcli -f SSID,CHAN,RATE,SIGNAL,BARS,SECURITY dev wifi list \
-            | awk '!seen[$1]++')"
-
     COLUMNS=1
     select net in "${NET[@]}"; do
         nmcli device wifi con "$(awk '{print $1}' <<< "$net")" && break
