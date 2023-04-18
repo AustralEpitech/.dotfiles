@@ -1,8 +1,8 @@
 vim.cmd("packadd telescope")
 require"telescope".setup {
-    pickers = {
-        find_files = {
-            find_command = {"find", ".", "-type", "f"}
+    defaults = {
+        file_ignore_patterns = {
+            ".o$", ".d$"
         }
     }
 }

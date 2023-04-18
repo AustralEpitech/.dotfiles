@@ -20,7 +20,7 @@ dpms="$((stimeout + cycle + 1))" # turn off screen 1 sec after lock
 
 xset s "$stimeout" "$cycle"                                                 &
 xset dpms "$dpms" "$dpms" "$dpms"                                           &
-feh --bg-fill "$XDG_CONFIG_HOME/wallpapers/monerochan.png" --no-fehbg       &
+feh --bg-fill "$XDG_CONFIG_HOME/wallpapers/mount_cook.png" --no-fehbg       &
 xss-lock -n "feh --fullscreen $XDG_CONFIG_HOME/wallpapers/lock.png" -- lock &
 
 # startup
