@@ -1,8 +1,5 @@
 #!/bin/sh
 
-# keyboard
-numlockx &
-
 # display
 ## laptop
 if ls -d /sys/class/power_supply/BAT*/ > /dev/null 2>&1; then

@@ -47,13 +47,14 @@ update_wlp() {
     local ssid; ssid="$(nmcli -t -f name,device connection show --active | grep wlp | cut -d: -f1)"
 
     [ -z "$ssid" ] && wlp='⚠' && return
+    [ -z "$sig"  ] && sig=0
 
     # https://gitlab.freedesktop.org/NetworkManager/NetworkManager/-/blob/main/src/libnmc-base/nm-client-utils.c#L628
     { [ "$sig" -gt 5600 ] && wlp="▂▄▆█ $ssid"; } ||
     { [ "$sig" -gt 3850 ] && wlp="▂▄▆_ $ssid"; } ||
     { [ "$sig" -gt 1650 ] && wlp="▂▄__ $ssid"; } ||
     { [ "$sig" -gt  275 ] && wlp="▂___ $ssid"; } ||
-    {                      wlp="____ $ssid"; }
+    {                        wlp="____ $ssid"; }
 }
 
 update_time() {
@@ -68,7 +69,7 @@ update_time() {
 #}
 
 # modules that don't update on their own need to be run at the start for getting their initial value
-while [ -z "$(wpctl get-volume '@DEFAULT_AUDIO_SINK@')" ]; do
+while [ -z "$(wpctl get-volume '@DEFAULT_AUDIO_SINK@' 2> /dev/null)" ]; do
     sleep 1
 done
 update_vol
