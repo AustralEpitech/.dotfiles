@@ -2,7 +2,7 @@ vim.cmd("packadd telescope")
 require"telescope".setup {
     defaults = {
         file_ignore_patterns = {
-            ".o$", ".d$"
+            "\\.o$", "\\.d$", "\\.gc..$"
         }
     }
 }
