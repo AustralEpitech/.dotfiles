@@ -38,7 +38,7 @@ vim.wo.colorcolumn     = "80"
 vim.g.black_linelength = 79
 
 vim.g.netrw_banner     = 0
-vim.g.netrw_list_hide  = "\\.o$,\\.d$"
+vim.g.netrw_list_hide  = "\\.o$,\\.d$,\\.gc..$"
 
 vim.o.lazyredraw       = true
 

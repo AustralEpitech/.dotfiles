@@ -1,12 +1,20 @@
 #!/bin/bash -e
 
 SINK='@DEFAULT_AUDIO_SINK@'
+WPCUR="$(wpctl get-volume "$SINK")"
+CUR="$((10#$(tr -dc '0-9' <<< "$WPCUR")))"
+
+grep -q MUTED <<< "$WPCUR" && MUTE=1 || MUTE=0
 
 if [ "$1" == 'm' ]; then
-    wpctl set-mute "$SINK" toggle
+    if [ "$MUTE" = 1 ]; then
+        wpctl set-mute "$SINK" 0
+        dunstify -a 'changeVolume' -u low -i audio-volume-high -h string:x-dunst-stack-tag:vol -h int:value:"$CUR" "$CUR%"
+    else
+        wpctl set-mute "$SINK" 1
+        dunstify -a "changeVolume" -u low -i audio-volume-muted -h string:x-dunst-stack-tag:vol "Mute"
+    fi
 else
-    CUR="$((10#$(wpctl get-volume "$SINK" | tr -dc '0-9')))"
-
     case "${1:0:1}" in
         '')      echo "$CUR"; exit              ;;
         '+'|'-') CUR="$((CUR - CUR % $1 + $1))" ;;
@@ -14,7 +22,10 @@ else
     esac
 
     wpctl set-volume -l 1.5 "$SINK" "$CUR%"
-    wpctl set-mute          "$SINK" 0
+    if [ "$MUTE" = 1 ]; then
+        wpctl set-mute "$SINK" 0
+    fi
+    dunstify -a 'changeVolume' -u low -i audio-volume-high -h string:x-dunst-stack-tag:vol -h int:value:"$CUR" "$CUR%"
 fi
 
 # update sbar
