@@ -1,0 +1,34 @@
+#!/bin/bash -e
+
+function get_current() {
+    local d="$1"
+    local cur; cur="$(cat "$1/brightness")"
+    local max; max="$(cat "$1/max_brightness")"
+
+    echo "$((cur * 100 / max))"
+}
+
+function set-light() {
+    local d="$1"
+    local max; max="$(cat "$d/max_brightness")"
+
+    echo "$((CUR * max / 100))" > "$d/brightness"
+}
+
+NOTIFY='notify-send -t 1000 -a changeVolume -u low'
+NOTIFYVOL="$NOTIFY -i audio-volume-high"
+
+DIRS=(/sys/class/backlight/*)
+CUR="$(get_current "${DIRS[0]}")"
+
+case "${1:0:1}" in
+    '')      echo "$CUR"; exit   ;;
+    '+'|'-') CUR="$((CUR + $1))" ;;
+    *)       CUR="$1"            ;;
+esac
+
+for d in "${DIRS[@]}"; do
+    set-light "$d" "$CUR"
+done
+
+$NOTIFYVOL -h string:synchronous:vol -h int:value:"$CUR" "$CUR%"

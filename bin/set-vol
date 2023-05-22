@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
-DUNSTIFY='dunstify -t 1000 -a changeVolume -u low'
-DUNSTIFYVOL="$DUNSTIFY -i audio-volume-high"
+NOTIFY='notify-send -t 1000 -a changeVolume -u low'
+NOTIFYVOL="$NOTIFY -i audio-volume-high"
 
 SINK='@DEFAULT_AUDIO_SINK@'
 WPCUR="$(wpctl get-volume "$SINK")"
@@ -12,10 +12,10 @@ grep -q MUTED <<< "$WPCUR" && MUTE=1 || MUTE=0
 if [ "$1" == 'm' ]; then
     if [ "$MUTE" = 1 ]; then
         wpctl set-mute "$SINK" 0
-        $DUNSTIFYVOL -h string:x-dunst-stack-tag:vol -h int:value:"$CUR" "$CUR%"
+        $NOTIFYVOL -h string:synchronous:vol -h int:value:"$CUR" "$CUR%"
     else
         wpctl set-mute "$SINK" 1
-        $DUNSTIFY -i audio-volume-muted -h string:x-dunst-stack-tag:vol "Mute"
+        $NOTIFY -i audio-volume-muted -h string:synchronous:vol "Mute"
     fi
 else
     case "${1:0:1}" in
@@ -28,7 +28,7 @@ else
     if [ "$MUTE" = 1 ]; then
         wpctl set-mute "$SINK" 0
     fi
-    $DUNSTIFYVOL -h string:x-dunst-stack-tag:vol -h int:value:"$CUR" "$CUR%"
+    $NOTIFYVOL -h string:synchronous:vol -h int:value:"$CUR" "$CUR%"
 fi
 
 # update sbar

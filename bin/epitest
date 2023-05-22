@@ -1,3 +1,16 @@
-#!/bin/bash
+#!/bin/bash -e
 
-sudo docker run -it --rm --user "$UID:$GID" -v "$PWD:/usr/app/" docker.io/epitechcontent/epitest-docker bash "$@"
+DBUS_SESSION_BUS_ADDRESS= # https://wiki.archlinux.org/title/Podman#Permission_denied:_OCI_permission_denied
+CRI=(podman)
+
+IMG=docker.io/epitechcontent/epitest-docker
+TAG=latest
+
+if ! "${CRI[@]}" container start epitest > /dev/null 2>&1; then
+    "${CRI[@]}" run --rm -d \
+        --name epitest      \
+        -v "$HOME:$HOME"    \
+        "$IMG:$TAG" sleep infinity > /dev/null
+fi
+
+"${CRI[@]}" exec -it -w "$PWD" epitest "$@"

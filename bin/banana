@@ -1,0 +1,19 @@
+#!/bin/bash -e
+
+DBUS_SESSION_BUS_ADDRESS= # https://wiki.archlinux.org/title/Podman#Permission_denied:_OCI_permission_denied
+CRI=(podman)
+
+IMG=ghcr.io/epitech/coding-style-checker
+TAG=latest
+
+REPORTS="$(mktemp -d)"
+LOGS="$REPORTS/coding-style-reports.log"
+
+"${CRI[@]}" run --rm           \
+    -v "$PWD:/mnt/delivery"    \
+    -v "$REPORTS:/mnt/reports" \
+    "$IMG:$TAG"                \
+    /mnt/delivery /mnt/reports
+
+cat "$LOGS"
+echo "$(grep -c ': MAJOR:' "$LOGS") major, $(grep -c ': MINOR:' "$LOGS") minor, $(grep -c ': INFO:'  "$LOGS") info coding style error(s) reported in $LOGS"

@@ -33,15 +33,6 @@ update_vol() {
     fi
 }
 
-update_backlight() {
-    local actual_brightness
-    local max_brightness
-
-    read -r actual_brightness </sys/class/backlight/*/actual_brightness
-    read -r max_brightness </sys/class/backlight/*/max_brightness
-    backlight=" $((actual_brightness * 100 / max_brightness))%"
-}
-
 update_wlp() {
     local sig; sig="$(grep wlp /proc/net/wireless | awk '{print $3 * 100}')"
     local ssid; ssid="$(nmcli -t -f name,device connection show --active | grep wlp | cut -d: -f1)"
@@ -73,22 +64,20 @@ while [ -z "$(wpctl get-volume '@DEFAULT_AUDIO_SINK@' 2> /dev/null)" ]; do
     sleep 1
 done
 update_vol
-update_backlight
 
 reload_bar() {
     sec=0
 }
 
 display() {
-    xsetroot -name "$crypto | $cpu | $memory | $vol | $backlight | $wlp | $bat | $time"
+    xsetroot -name "$crypto | $cpu | $memory | $vol | $wlp | $bat | $time"
 }
 
 # SIGNALING
 # trap  '<function>;display'       'RTMIN+n'
 trap    'reload_bar;display'       'RTMIN'
 trap    'update_vol;display'       'RTMIN+1'
-trap    'update_backlight;display' 'RTMIN+2'
-trap    'update_crypto;display'    'RTMIN+3'
+trap    'update_crypto;display'    'RTMIN+2'
 # to update it from external commands
 ## kill -m "$(cat ~/.cache/pidofbar)"
 # where m = 34 + n

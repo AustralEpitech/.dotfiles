@@ -1,9 +1,9 @@
-#!/bin/bash
-set -e
+#!/bin/bash -e
 
 # counts target = 8182 ~ 25cm
 
 sleep 3
 for _ in {0..1023}; do
     xdotool mousemove_relative 8 0
+    #ydotool mousemove -x 8 -y 0
 done

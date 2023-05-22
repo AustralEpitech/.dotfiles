@@ -14,6 +14,6 @@ fi
 (set -e
 
 asciiquarium &
-cmatrix -ab &
+cmatrix -abo &
 while true; do sl; done &
 ) | lolcat > "$1"
