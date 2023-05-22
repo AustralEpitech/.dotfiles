@@ -28,7 +28,7 @@ alias watch='coloralias watch -c -- '
 alias xargs='xargs '
 
 function j() {
-    local dests=($(find . -maxdepth 5 -type d -path "*/$1" 2> /dev/null))
+    local dests=($(find . -mount -maxdepth 5 -type d -path "*/$1" 2> /dev/null))
     local dest="${dests:-$1}"
 
     [ -n "${dests[2]}" ] && dest="$(printf '%s\n' "${dests[@]}" | fzf)"
