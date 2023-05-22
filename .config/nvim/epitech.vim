@@ -1,7 +1,6 @@
 function! TekHeader(ft=&filetype)
     let com_arr = {
         \ 'c':       {'top': '/*', 'mid': '**', 'bot': '*/'},
-        \ 'cpp':     {'top': '/*', 'mid': '**', 'bot': '*/'},
         \ 'make':    {'top': '##', 'mid': '##', 'bot': '##'},
         \ 'haskell': {'top': '{-', 'mid': '--', 'bot': '-}'},
     \ }
@@ -35,18 +34,18 @@ endfunction
 function! TekHppHeader()
     let file_name = expand('%:t:r')
 
-    call TekHHeader()
-    call append(9, 'class ' .. file_name .. ' {')
-    call append(10, '    public:')
-    call append(11, '        '   .. file_name .. '(void);')
-    call append(12, '        ~'  .. file_name .. '(void);')
-    call append(13, '')
-    call append(14, '    protected:')
-    call append(15, '};')
+    call append(0, '#pragma once')
+    call append(1, '')
+    call append(2, 'class ' .. file_name .. ' {')
+    call append(3, '    public:')
+    call append(4, '        '   .. file_name .. '(void);')
+    call append(5, '        ~'  .. file_name .. '(void);')
+    call append(6, '')
+    call append(7, '    protected:')
+    call append(8, '};')
 endfunction
 
 au BufNewFile *.c      call TekHeader('c')
-au BufNewFile *.cpp    call TekHeader('cpp')
 au BufNewFile *.hs     call TekHeader('haskell')
 au BufNewFile Makefile call TekHeader('make')
 
