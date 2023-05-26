@@ -1,0 +1,43 @@
+#!/bin/bash -e
+
+NMCLI=(nmcli -f 'SSID,RATE,BARS,SECURITY' dev wifi)
+CON=("${NMCLI[@]}" connect)
+
+RESCAN=0
+function rescan() {
+    if [ "$RESCAN" = 0 ]; then
+        RESCAN=1
+        "${NMCLI[@]}" list --rescan yes > /dev/null
+    fi
+    readarray -t NET <<< "$("${NMCLI[@]}" list | awk '!w[$1]++' | tail -n+2)"
+}
+
+function connect() {
+    if ! (
+        "${CON[@]}" "$1" || ([ "$?" = 4 ] && "${CON[@]}" "$1" password "$(zenity --entry --text "Enter password for $1")")
+    ) 2> /dev/null; then
+        rescan || return 1
+        if ! "${CON[@]}" "$1"; then
+            return 1
+        fi
+    fi
+    kill -36 "$(cat "$HOME/.cache/pidofbar")"
+    exit
+}
+
+if [ -n "$1" ]; then
+    connect "$1"
+fi
+
+readarray -t NET <<< "$("${NMCLI[@]}" list | awk '!w[$1]++' | tail -n+2)"
+while true; do
+    n="$(printf '%s\n' "${NET[@]}" reload | dmenu -i -l 10)"
+    if [ -z "$n" ]; then
+        exit
+    fi
+    if [ "$n" = reload ]; then
+        rescan
+    else
+        connect "$(awk '{print $1}' <<< "$n")"
+    fi
+done
