@@ -10,7 +10,6 @@ alias wconf='(cd "$XDG_CONFIG_HOME/suckless/dwm-6.4" && $EDITOR .)'
 alias zconf='(cd "$ZDOTDIR/" && $EDITOR .) && . "$ZDOTDIR/.zshrc"'
 
 # dev
-alias make='make -j8'
 gi() {
     curl -Lf "https://www.gitignore.io/api/${(j:,:)@}"
 }
