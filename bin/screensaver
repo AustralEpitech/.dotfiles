@@ -1,0 +1,3 @@
+#!/bin/bash
+
+feh --fullscreen "$XDG_CONFIG_HOME/wallpapers/lock.png"

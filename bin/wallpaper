@@ -1,0 +1,18 @@
+#!/bin/bash
+
+feh --bg-fill "$XDG_CONFIG_HOME/wallpapers/mount_cook.jpg" --no-fehbg
+
+NBMON="$(xrandr | grep -c connected)"
+BAT="$(ls /sys/class/power_supply/BAT*/ 2> /dev/null)"
+
+if [ "$NBMON" = 1 ] && [ -n "$BAT" ]; then
+    stimeout=300 # laptop
+else
+    stimeout=1800 # desktop
+fi
+
+cycle=15                         # lock 15 sec after stimeout
+dpms="$((stimeout + cycle + 1))" # turn off screen 1 sec after lock
+
+xset s "$stimeout" "$cycle"
+xset dpms "$dpms" "$dpms" "$dpms"
