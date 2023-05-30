@@ -1,4 +1,5 @@
 #!/bin/bash -e
+# shellcheck disable=SC2034
 
 DBUS_SESSION_BUS_ADDRESS= # https://wiki.archlinux.org/title/Podman#Permission_denied:_OCI_permission_denied
 CRI=(podman)

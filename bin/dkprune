@@ -73,7 +73,7 @@ while getopts hcCviInar o; do
             IMG_OPT='-a'
             ;;
         r)
-            exec sudo -- "$0" "$(sed 's/r//' <<< "${@:1}")"
+            echo exec sudo -- "$0" "${@/r/}"
             ;;
         *)
             exit 1
