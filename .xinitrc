@@ -4,7 +4,7 @@
 #(i3status | while read line; do xsetroot -name "$line"; done) &
 
 # startup
-set-display                                          &
+wallpaper                                            &
 xss-lock -n screensaver -- lock                      &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1          || # arch
     /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 || # debian

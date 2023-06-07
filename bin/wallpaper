@@ -2,7 +2,7 @@
 
 feh --bg-fill "$XDG_CONFIG_HOME/wallpapers/mount_cook.jpg" --no-fehbg
 
-NBMON="$(xrandr | grep -c connected)"
+NBMON="$(xrandr | grep -cw connected)"
 BAT="$(ls /sys/class/power_supply/BAT*/ 2> /dev/null)"
 
 if [ "$NBMON" = 1 ] && [ -n "$BAT" ]; then
