@@ -2,8 +2,8 @@
 
 function usage() {
     cat << EOF
-Usage: $0 [-hcCviIna]
-Prune $RUNTIME resources.
+Usage: ${0##*/} [-hcCviInar]
+Prune ${CRI##*/} resources.
 If no option provided, defaults to -Cvn
 Options:
     -h  Show this help and exits
@@ -14,7 +14,7 @@ Options:
     -I  Remove unused images
     -n  Remove unused networks
     -a  All of the above, equivalent of -CvIn
-    -r  Run as root
+    -r  Run docker as root
 EOF
     exit 0
 }
@@ -31,7 +31,7 @@ function add_opt() {
     echo "$RESULT"
 }
 
-RUNTIME="$(command -v podman || command -v docker)"
+CRI="${CRI-"$(command -v podman || command -v docker)"}"
 
 c=1
 # C=2
@@ -73,7 +73,7 @@ while getopts hcCviInar o; do
             IMG_OPT='-a'
             ;;
         r)
-            echo exec sudo -- "$0" "${@/r/}"
+            exec sudo CRI="$(command -v docker)" -- "$0" "${@/r/}"
             ;;
         *)
             exit 1
@@ -97,15 +97,15 @@ VALUES=(
 CON='container'
 PRUNE='prune -f'
 COMMANDS=(
-    "$RUNTIME system  $PRUNE $IMG_OPT --volumes"
-    "$RUNTIME system  $PRUNE $IMG_OPT"
-    "$RUNTIME volume  $PRUNE"
-    "$RUNTIME image   $PRUNE $IMG_OPT"
-    "$RUNTIME network $PRUNE"
+    "$CRI system  $PRUNE $IMG_OPT --volumes"
+    "$CRI system  $PRUNE $IMG_OPT"
+    "$CRI volume  $PRUNE"
+    "$CRI image   $PRUNE $IMG_OPT"
+    "$CRI network $PRUNE"
 )
 
 if [ "$((CLEAN & "$c"))" == "$c" ]; then
-    $RUNTIME "$CON" ls -aq | xargs "$RUNTIME" "$CON" rm "$CON_OPT" 2> /dev/null
+    $CRI "$CON" ls -aq | xargs "$CRI" "$CON" rm "$CON_OPT" 2> /dev/null || true
 fi
 
 for idx in "${!VALUES[@]}"; do
