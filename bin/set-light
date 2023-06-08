@@ -1,5 +1,17 @@
 #!/bin/bash -e
 
+function round() {
+    local nb="$1"
+    local closest="${2#-}"
+    local mod; mod="$((nb % closest))"
+
+    if [ "$mod" -lt "$((closest / 2))" ]; then
+        echo "$((nb - mod))"
+        return
+    fi
+    echo "$((nb + closest - mod))"
+}
+
 function get_current() {
     local d="$1"
     local cur; cur="$(cat "$1/brightness")"
@@ -8,27 +20,30 @@ function get_current() {
     echo "$((cur * 100 / max))"
 }
 
-function set-light() {
+function set_light() {
     local d="$1"
     local max; max="$(cat "$d/max_brightness")"
 
     echo "$((CUR * max / 100))" > "$d/brightness"
 }
 
-NOTIFY='notify-send -t 1000 -a changeVolume -u low'
+NOTIFY='notify-send -t 1000 -a changeBrightness -u low'
 NOTIFYVOL="$NOTIFY -i audio-volume-high"
 
 DIRS=(/sys/class/backlight/*)
 CUR="$(get_current "${DIRS[0]}")"
 
 case "${1:0:1}" in
-    '')      echo "$CUR"; exit   ;;
-    '+'|'-') CUR="$((CUR + $1))" ;;
-    *)       CUR="$1"            ;;
+    '')      echo "$CUR"; exit                   ;;
+    '+'|'-') CUR="$(round $((CUR + "$1")) "$1")" ;;
+    *)       CUR="$1"                            ;;
 esac
 
+[ "$CUR" -lt   0 ] && CUR=0
+[ "$CUR" -gt 100 ] && CUR=100
+
 for d in "${DIRS[@]}"; do
-    set-light "$d" "$CUR"
+    set_light "$d"
 done
 
 $NOTIFYVOL -h string:synchronous:vol -h int:value:"$CUR" "$CUR%"

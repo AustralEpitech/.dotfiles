@@ -19,12 +19,20 @@ if [ "$1" == 'm' ]; then
     fi
 else
     case "${1:0:1}" in
-        '')      echo "$CUR"; exit              ;;
-        '+'|'-') CUR="$((CUR - CUR % $1 + $1))" ;;
-        *)       CUR="$1"                       ;;
+        '')
+            echo "$CUR"; exit
+            ;;
+        '+'|'-')
+            CUR="$((CUR - CUR % $1 + $1))"
+            [ "$CUR" -lt 0   ] && CUR=0
+            [ "$CUR" -gt 150 ] && CUR=150
+            ;;
+        *)
+            CUR="$1"
+            ;;
     esac
 
-    wpctl set-volume -l 1.5 "$SINK" "$CUR%"
+    wpctl set-volume "$SINK" "$CUR%"
     if [ "$MUTE" = 1 ]; then
         wpctl set-mute "$SINK" 0
     fi
