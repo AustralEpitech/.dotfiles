@@ -13,3 +13,5 @@ fpath=("$ZDOTDIR/completions" $fpath)
 . "$ZDOTDIR"/.zsh_aliases
 
 . "$ZDOTDIR/.p10k.zsh"
+
+# vim: ft=zsh

@@ -33,3 +33,5 @@ function j() {
     [ -n "${dests[2]}" ] && dest="$(printf '%s\n' "${dests[@]}" | fzf)"
     cd "$dest"
 }
+
+# vim: ft=zsh
