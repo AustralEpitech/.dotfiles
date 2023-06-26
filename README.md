@@ -4,7 +4,7 @@ To clone the repo :
 ```console
 pacman -Syu --needed zsh sway firefox alacritty neovim
 
-git clone --bare https://github.com/AustralEpitech/.dotfiles.git ~/.dotfiles
+git clone --bare https://git.maby.dev/ange/.dotfiles.git ~/.dotfiles
 alias config='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 
 config checkout # remove conflicted files and re-run the command
