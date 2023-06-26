@@ -5,21 +5,27 @@ CON=("${NMCLI[@]}" connect)
 
 RESCAN=0
 function rescan() {
-    if [ "$RESCAN" = 0 ]; then
-        RESCAN=1
-        "${NMCLI[@]}" list --rescan yes > /dev/null
+    if [ "$RESCAN" = 1 ]; then
+        return 1
     fi
+    RESCAN=1
+    "${NMCLI[@]}" list --rescan yes > /dev/null
     readarray -t NET <<< "$("${NMCLI[@]}" list | awk '!w[$1]++' | tail -n+2)"
 }
 
 function connect() {
-    if ! (
-        "${CON[@]}" "$1" || ([ "$?" = 4 ] && "${CON[@]}" "$1" password "$(zenity --entry --text "Enter password for $1")")
-    ) 2> /dev/null; then
-        rescan || return 1
-        if ! "${CON[@]}" "$1"; then
-            return 1
-        fi
+    local pass
+
+    if ! "${CON[@]}" "$1"; then
+        case "$?" in
+            4)
+                pass="$(zenity --entry --text "Enter password for $1")"
+                "${CON[@]}" "$1" password "$pass"
+                ;;
+            10)
+                rescan && connect "$@"
+                ;;
+        esac
     fi
     kill -36 "$(cat "$HOME/.cache/pidofbar")"
     exit
@@ -31,11 +37,12 @@ fi
 
 readarray -t NET <<< "$("${NMCLI[@]}" list | awk '!w[$1]++' | tail -n+2)"
 while true; do
-    n="$(printf '%s\n' "${NET[@]}" reload | dmenu -i -l 10)"
+    n="$(printf '%s\n' "${NET[@]}" rescan | dmenu -i -l 10)"
     if [ -z "$n" ]; then
         exit
     fi
-    if [ "$n" = reload ]; then
+    if [ "$n" = rescan ]; then
+        RESCAN=0
         rescan
     else
         connect "$(awk '{print $1}' <<< "$n")"

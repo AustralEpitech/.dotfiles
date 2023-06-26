@@ -84,8 +84,8 @@ trap    'update_crypto;display'    'RTMIN+2'
 
 sec=0
 while true; do
-    [ "$((sec % 3600))" = 0 ] && update_crypto
-    [ "$((sec % 5   ))" = 0 ] && {
+    [ "$((sec % 300))" = 0 ] && update_crypto
+    [ "$((sec % 5  ))" = 0 ] && {
         update_time
         update_cpu
         update_memory

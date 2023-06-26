@@ -2,6 +2,7 @@ vim.cmd("packadd lspconfig")
 lspconfig = require"lspconfig"
 
 local servers = {
+    "pyright",
 }
 
 local on_attach = function(client, bufnr)
