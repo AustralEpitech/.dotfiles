@@ -72,9 +72,9 @@
         "format": "{name}",
     },
     "custom/crypto": {
-        "exec": "crypto.sh",
-        "interval": 600,
+        "exec": "crypto",
+        "interval": 3600,
     }
 }
 
-// vim: ft=css
+// vim: ft=json
