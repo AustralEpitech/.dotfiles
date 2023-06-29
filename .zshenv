@@ -19,5 +19,5 @@ path=("$HOME/bin" "$HOME/.local/bin" $path)
 export EDITOR='nvim'
 export MAKEFLAGS='-j'
 
-export XDG_CURRENT_DESKTOP=Unity
 export QT_STYLE_OVERRIDE=Materia-dark
+export MOZ_ENABLE_WAYLAND=1

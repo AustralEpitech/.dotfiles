@@ -70,7 +70,7 @@ reload_bar() {
 }
 
 display() {
-    xsetroot -name "$crypto | $cpu | $memory | $vol | $wlp | $bat | $time"
+    ${DISPLAYCMD[@]} "$crypto | $cpu | $memory | $vol | $wlp | $bat | $time"
 }
 
 # SIGNALING
@@ -81,6 +81,12 @@ trap    'update_crypto;display'    'RTMIN+2'
 # to update it from external commands
 ## kill -m "$(cat ~/.cache/pidofbar)"
 # where m = 34 + n
+
+if [ "$XDG_SESSION_TYPE" = wayland ]; then
+    DISPLAYCMD=(echo)
+else
+    DISPLAYCMD=(xsetroot -name)
+fi
 
 sec=0
 while true; do
