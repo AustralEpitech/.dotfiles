@@ -50,7 +50,8 @@ vim.o.mousemodel       = extend
 ----- packages -----
 --------------------
 
-require"pack-impatient"
+vim.loader.enable()
+
 vim.cmd("packadd plenary")
 
 require"theme"
