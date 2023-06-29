@@ -1,0 +1,16 @@
+#!/bin/bash -e
+
+CRI=(podman)
+
+mkdir -p "$HOME/Games/lutris/"
+
+"${CRI[@]}" run --rm --name lutris         \
+    --userns=keep-id                       \
+    --device /dev/dri/                     \
+    -e DISPLAY                             \
+    -e XDG_RUNTIME_DIR                     \
+    -v /dev/shm/:/dev/shm/                 \
+    -v /tmp/.X11-unix/:/tmp/.X11-unix/     \
+    -v "$XDG_RUNTIME_DIR:$XDG_RUNTIME_DIR" \
+    -v "$HOME/Games/lutris/:/app/"         \
+    git.maby.dev/ange/docker-lutris:0.1
