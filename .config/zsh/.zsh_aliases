@@ -13,6 +13,8 @@ alias zconf='(cd "$ZDOTDIR/" && $EDITOR .) && . "$ZDOTDIR/.zshrc"'
 gi() {
     curl -Lf "https://www.gitignore.io/api/${(j:,:)@}"
 }
+# https://wiki.archlinux.org/title/Podman#Permission_denied:_OCI_permission_denied
+alias podman='DBUS_SESSION_BUS_ADDRESS= podman'
 
 # compatibility
 alias ssh='TERM=linux ssh'
