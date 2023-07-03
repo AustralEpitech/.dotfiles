@@ -1,0 +1,15 @@
+#!/bin/bash -e
+
+CRI=(podman)
+
+${CRI[@]} run --rm --name minecraft        \
+    --device /dev/dri/                     \
+    -e DISPLAY                             \
+    -e XDG_RUNTIME_DIR                     \
+    -v /dev/shm:/dev/shm                   \
+    -v /tmp/.X11-unix/:/tmp/.X11-unix/     \
+    -v "$XDG_RUNTIME_DIR:$XDG_RUNTIME_DIR" \
+    -v "home:/app/"                        \
+    -it                                    \
+    git.maby.dev/ange/docker-gui:0.1       \
+    bash

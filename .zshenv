@@ -14,7 +14,7 @@ export ZSH_COMPDUMP="$XDG_CACHE_HOME/.zcompdump-$ZSH_VERSION"
 
 export LESSHISTFILE='-'
 
-path=("$HOME/bin" "$HOME/.local/bin" $path)
+path=("$HOME/bin" "$HOME/bin/containers" "$HOME/.local/bin" $path)
 
 export EDITOR='nvim'
 export MAKEFLAGS='-j'

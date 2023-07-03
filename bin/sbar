@@ -70,7 +70,7 @@ reload_bar() {
 }
 
 display() {
-    ${DISPLAYCMD[@]} "$crypto | $cpu | $memory | $vol | $wlp | $bat | $time"
+    "${DISPLAYCMD[@]}" "$crypto | $cpu | $memory | $vol | $wlp | $bat | $time"
 }
 
 # SIGNALING
