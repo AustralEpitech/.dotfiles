@@ -20,4 +20,3 @@ export EDITOR='nvim'
 export MAKEFLAGS='-j'
 
 export QT_STYLE_OVERRIDE=Materia-dark
-export MOZ_ENABLE_WAYLAND=1
