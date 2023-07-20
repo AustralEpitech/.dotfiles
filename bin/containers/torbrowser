@@ -2,14 +2,14 @@
 
 CRI=(podman)
 
-mkdir -p "/tmp/torbrowser/"
+mkdir -p /tmp/torbrowser/
 
-${CRI[@]} run --rm --name torbrowser       \
+"${CRI[@]}" run --rm --name torbrowser     \
     --userns=keep-id                       \
     --device /dev/dri/                     \
     -e DISPLAY                             \
     -e XDG_RUNTIME_DIR                     \
-    -v /dev/shm:/dev/shm                   \
+    -v /dev/shm/:/dev/shm/                 \
     -v /tmp/.X11-unix/:/tmp/.X11-unix/     \
     -v "$XDG_RUNTIME_DIR:$XDG_RUNTIME_DIR" \
     -v "/tmp/torbrowser/:/app/"            \

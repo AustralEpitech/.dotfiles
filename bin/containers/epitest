@@ -1,16 +1,13 @@
 #!/bin/bash -e
-# shellcheck disable=SC2034
 
-DBUS_SESSION_BUS_ADDRESS= # https://wiki.archlinux.org/title/Podman#Permission_denied:_OCI_permission_denied
 CRI=(podman)
 
-IMG=docker.io/epitechcontent/epitest-docker
+IMG='docker.io/epitechcontent/epitest-docker'
 TAG=latest
 
 if ! "${CRI[@]}" container start epitest > /dev/null 2>&1; then
-    "${CRI[@]}" run --rm -d \
-        --name epitest      \
-        -v "$HOME:$HOME"    \
+    "${CRI[@]}" run --rm -d --name epitest \
+        -v "$HOME:$HOME"                   \
         "$IMG:$TAG" sleep infinity > /dev/null
 fi
 

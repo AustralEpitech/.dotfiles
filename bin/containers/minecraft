@@ -2,14 +2,14 @@
 
 CRI=(podman)
 
-mkdir -p "$HOME/Games/minecraft/"
+mkdir -p "$HOME/GUI/minecraft/"
 
-${CRI[@]} run --rm --name minecraft        \
+"${CRI[@]}" run --rm --name minecraft      \
     --userns=keep-id                       \
     --device /dev/dri/                     \
     -e DISPLAY                             \
     -e XDG_RUNTIME_DIR                     \
-    -v /dev/shm:/dev/shm                   \
+    -v /dev/shm/:/dev/shm/                 \
     -v /tmp/.X11-unix/:/tmp/.X11-unix/     \
     -v "$XDG_RUNTIME_DIR:$XDG_RUNTIME_DIR" \
     -v "$HOME/Games/minecraft/:/app/"      \

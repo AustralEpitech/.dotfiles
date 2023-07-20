@@ -2,4 +2,4 @@
 
 CRI=(podman)
 
-${CRI[@]} run --rm -it -v "$PWD:/mnt" -w /mnt debian:12-slim
+"${CRI[@]}" run --rm -it -v "$PWD:/mnt/" -w /mnt/ debian:12-slim

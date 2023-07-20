@@ -2,7 +2,7 @@
 
 CRI=(podman)
 
-mkdir -p "$HOME/Games/lutris/"
+mkdir -p "$HOME/GUI/lutris/"
 
 "${CRI[@]}" run --rm --name lutris         \
     --userns=keep-id                       \
