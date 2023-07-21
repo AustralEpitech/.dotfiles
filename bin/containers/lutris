@@ -1,16 +1,20 @@
 #!/bin/bash -e
 
+DBUS_SESSION_BUS_ADDRESS=
 CRI=(podman)
 
 mkdir -p "$HOME/GUI/lutris/"
 
 "${CRI[@]}" run --rm --name lutris         \
+    --network host                         \
     --userns=keep-id                       \
     --device /dev/dri/                     \
     -e DISPLAY                             \
     -e XDG_RUNTIME_DIR                     \
+    -e XAUTHORITY=/app/.Xauthority         \
     -v /dev/shm/:/dev/shm/                 \
     -v /tmp/.X11-unix/:/tmp/.X11-unix/     \
+    -v "$XAUTHORITY:/app/.Xauthority:ro"   \
     -v "$XDG_RUNTIME_DIR:$XDG_RUNTIME_DIR" \
-    -v "$HOME/Games/lutris/:/app/"         \
+    -v "$HOME/GUI/lutris/:/app/"           \
     git.maby.dev/ange/docker-lutris:0.1

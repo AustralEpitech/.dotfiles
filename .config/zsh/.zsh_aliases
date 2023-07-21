@@ -1,6 +1,7 @@
 # system
 alias tmp='cd "$(mktemp -d)"'
 alias update='sudo pacman -Syu && config submodule update --remote --recursive --init'
+alias pac='sudo pacman'
 alias vi='$EDITOR'
 
 # conf
@@ -15,6 +16,7 @@ gi() {
 }
 # https://wiki.archlinux.org/title/Podman#Permission_denied:_OCI_permission_denied
 alias podman='DBUS_SESSION_BUS_ADDRESS= podman'
+alias valgrind='epitest valgrind'
 
 # compatibility
 alias ssh='TERM=linux ssh'

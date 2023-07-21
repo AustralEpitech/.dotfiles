@@ -1,0 +1,25 @@
+#!/bin/bash -e
+
+CRI=(podman)
+
+IMG='docker.io/epitechcontent/epitest-docker'
+TAG=latest
+
+if ! "${CRI[@]}" container start epitest > /dev/null 2>&1; then
+    "${CRI[@]}" run --rm -d --name epitest   \
+        --network host                       \
+        --device /dev/dri/                   \
+        -e DISPLAY                           \
+        -e XDG_RUNTIME_DIR                   \
+        -e XAUTHORITY=/app/.Xauthority       \
+        -e MAKEFLAGS                         \
+        -e CFLAGS=-g3                        \
+        -e CXXFLAGS=-g3                      \
+        -v /dev/shm/:/dev/shm/               \
+        -v "$XAUTHORITY:/app/.Xauthority:ro" \
+        -v "$XDG_RUNTIME_DIR"                \
+        -v "$HOME:$HOME"                     \
+        "$IMG:$TAG" sleep infinity > /dev/null
+fi
+
+"${CRI[@]}" exec -it -w "$PWD" epitest "$@"

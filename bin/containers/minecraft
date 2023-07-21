@@ -1,16 +1,20 @@
 #!/bin/bash -e
 
+DBUS_SESSION_BUS_ADDRESS=
 CRI=(podman)
 
 mkdir -p "$HOME/GUI/minecraft/"
 
 "${CRI[@]}" run --rm --name minecraft      \
+    --network host                         \
     --userns=keep-id                       \
     --device /dev/dri/                     \
     -e DISPLAY                             \
     -e XDG_RUNTIME_DIR                     \
+    -e XAUTHORITY=/app/.Xauthority         \
     -v /dev/shm/:/dev/shm/                 \
     -v /tmp/.X11-unix/:/tmp/.X11-unix/     \
+    -v "$XAUTHORITY:/app/.Xauthority:ro"   \
     -v "$XDG_RUNTIME_DIR:$XDG_RUNTIME_DIR" \
-    -v "$HOME/Games/minecraft/:/app/"      \
-    git.maby.dev/ange/docker-mc:0.1
+    -v "$HOME/GUI/minecraft/:/app/"        \
+    git.maby.dev/ange/docker-minecraft:0.1
