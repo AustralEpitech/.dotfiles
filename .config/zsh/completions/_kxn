@@ -1,0 +1,12 @@
+#compdef kxn
+
+case "$#words" in
+    2)
+        _arguments "1: :(- $(kubectl config get-contexts -oname))"
+        ;;
+    3)
+        _arguments "2: :($(kubectl --context "${words[2]}" get namespaces -o=jsonpath='{range .items[*].metadata.name}{@}{"\n"}{end}'))"
+        ;;
+    *)
+        ;;
+esac

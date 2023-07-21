@@ -14,13 +14,17 @@
 
 function kxn() {
     1="$(echo - "$1" | tr -c '[:alnum:]-_' '[ *]')"
-    local ctx="$(echo - "$1" | awk '{print $1}')"
-    local ns="${2-$(echo - "$1" | awk '{print $2}')}"
+    local ctx="$(echo - "$1" | awk '{print $1}')"; ctx="${ctx:l}"
+    local ns="${2-$(echo - "$1" | awk '{print $2}')}"; ns="${ns:l}"
 
-    kubectx ${ctx:l}
-    [ -n "$ns" ] && kubens "${ns:l}"
+    [ "$ctx" = hrmn ]                                   \
+        && ln -sf /usr/local/bin/k1.18 /var/tmp/kubectl \
+        || ln -sf /usr/bin/kubectl     /var/tmp/kubectl
+
+    kubectx "$ctx"
+    [ -n "$ns" ] && kubens "$ns"
 }
-compdef _kubectx kxn
+alias kubectl='/var/tmp/kubectl'
 
 alias kns='kubens'
 alias k='kubectl'
